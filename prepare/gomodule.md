@@ -38,6 +38,9 @@ module my-hello
     ![](/images/gomodule2.png)
 
     其中`Proxy`请输入代理地址下载依赖包，如果选择`direct`表示不使用代理。可选择的反向代理地址有：`https://goproxy.io`、`https://goproxy.cn`、`https://mirrors.aliyun.com/goproxy/`，详见Go官网说明：https://github.com/golang/go/wiki/Modules#are-there-always-on-module-repositories-and-enterprise-proxies
+    
+    国内推荐代理 `https://goproxy.cn`
+
 
 1. 手动修改`go.mod`文件如下：
     ```
