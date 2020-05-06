@@ -20,7 +20,7 @@ https://godoc.org/github.com/gogf/gf/os/gcache
 
 `gcache`存储的键值类型是`interface{}`，也就是说可以存储任意的数据类型，当获取数据时返回的也是`interface{}`类型，若需要转换为其他的类型可以通过`gcache`的`Get*`方法便捷获取常见类型。
 
-另外需要注意的是，`gcache`的缓存过期时间参数`duration`的类型为`time.Duration`类型，在`Set`缓存变量时，如果缓存时间参数`duration <= 0`表示不过期，`duration > 0`表示超时过期。
+另外需要注意的是，`gcache`的缓存过期时间参数`duration`的类型为`time.Duration`类型，在`Set`缓存变量时，如果缓存时间参数`duration = 0`表示不过期，`duration < 0`表示立即过期，`duration > 0`表示超时过期。
 
 
 
