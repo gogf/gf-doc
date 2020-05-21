@@ -280,4 +280,4 @@
     * [v1.2 2018-11-26](release/v1.2.md)
     * [v1.0 2018-10-24](release/v1.0.md)
     * [v0.x beta](release/0.x_beta.md)
-<!-- * [FAQ常见问题](faq.md) -->
+* [FAQ常见问题](faq.md)
