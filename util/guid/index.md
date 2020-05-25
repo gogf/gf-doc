@@ -45,6 +45,22 @@ func S(data ...[]byte) string
         - 如果给定`2`个自定义参数，那么剩余的字节将会使用随机数占位，长度为`10`个字节；
         - 如果给定`3`个自定义参数，那么随机数的成都为`3`个字节；
 
+## 基准测试
+```
+goos: darwin
+goarch: amd64
+pkg: github.com/gogf/gf/util/guid
+Benchmark_S
+Benchmark_S-4          	 1525240	       737 ns/op
+Benchmark_S_Data_1
+Benchmark_S_Data_1-4   	 1294222	       920 ns/op
+Benchmark_S_Data_2
+Benchmark_S_Data_2-4   	 1344630	       889 ns/op
+Benchmark_S_Data_3
+Benchmark_S_Data_3-4   	 1367017	       869 ns/op
+PASS
+```
+
 ## 示例1，基本使用
 ```go
 package main
