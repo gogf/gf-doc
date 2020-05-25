@@ -55,7 +55,7 @@ import (
 )
 
 func main() {
-	fmt.Printf("TraceId: %s\n", guid.S())
+	fmt.Printf("TraceId: %s", guid.S())
 }
 ```
 执行后，输出结果为：
@@ -76,9 +76,9 @@ func CreateSessionId(r *ghttp.Request) string {
 	return guid.S([]byte(agent), []byte(address), []byte(cookie))
 }
 ```
-可以看到，`SessionId`需要依靠自定义的三个输入参数来生成`Agent`, `RemoteAddr`, `Cookie`，这三个参数在业务上具有一定的唯一识别性，且通过`guid.S`方法的设计构成，生成的唯一数将会非常随机和唯一，既满足了业务需要也保证了安全。
+可以看到，`SessionId`需要依靠自定义的三个输入参数`Agent`, `RemoteAddr`, `Cookie`来生成，这三个参数在业务上具有一定的唯一识别性，且通过`guid.S`方法的设计构成，生成的唯一数将会非常随机且唯一，既满足了业务需要也保证了安全。
 
-此外，当输入的参数中带有空值时，例如该例子中的`Cookie`参数可能为空，`guid.S`方法将会忽略此参数。
+此外，当输入的参数中带有空值时，例如该例子中的`Cookie`参数可能为空，`guid.S`方法将会忽略此参数并采用随机数占位。
 
 
 
