@@ -144,7 +144,7 @@ r, err := db.Table("user u").LeftJoin("user_detail ud", "u.uid=ud.uid").Fields("
 r, err := db.Table("user u").RightJoin("user_detail ud", "u.uid=ud.uid").Fields("ud.site").Where("u.uid", 1).Value()
 
 // 分组及排序
-// SELECT u.*,ud.site FROM user u INNER JOIN user_detail ud ON u.uid=ud.uid GROUP BY city ORDER BY register_time asc
+// SELECT u.*,ud.city FROM user u INNER JOIN user_detail ud ON u.uid=ud.uid GROUP BY city ORDER BY register_time asc
 r, err := db.Table("user u").InnerJoin("user_detail ud", "u.uid=ud.uid").Fields("u.*,ud.city").Group("city").Order("register_time asc").All()
 
 // 不使用join的联表查询
