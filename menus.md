@@ -249,7 +249,7 @@
         * [gvalid (数据/表单校验)](util/gvalid/index2.md)
         * [grand (随机数管理)](util/grand/index.md)
         * [gpage (分页管理)](util/gpage/index2.md)
-        <!-- * [guid (唯一数生成)](util/guid/index.md) -->
+        * [guid (唯一数生成)](util/guid/index.md)
         * [guuid (UUID)](util/guuid/index.md)
     * [单元测试模块](#)
         * [gtest (单元测试)](test/gtest/index.md)
