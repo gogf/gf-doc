@@ -43,7 +43,7 @@ type Mutex
 `gmutex.Mutex`与标准库的`sync.Mutex`及`sync.RWMutex`的基准测试对比结果：
 [gmutex_bench_test.go](https://github.com/gogf/gf/blob/master/os/gmutex/gmutex_bench_test.go)
 ```html
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/gogf/gf/os/gmutex
 Benchmark_Mutex_LockUnlock-4           50000000            31.5 ns/op

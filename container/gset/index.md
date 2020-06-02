@@ -201,7 +201,7 @@ func main() {
 https://github.com/gogf/gf/blob/master/container/gset/gset_z_bench_test.go
 
 ```html
-goos: darwin
+goos: linux
 goarch: amd64
 Benchmark_IntSet_Add-4                  10000000               277 ns/op               8 B/op          0 allocs/op
 Benchmark_IntSet_Contains-4             20000000              60.6 ns/op               0 B/op          0 allocs/op

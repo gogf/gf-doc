@@ -49,7 +49,7 @@ func S(data ...[]byte) string
 
 ## 基准测试
 ```
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/gogf/gf/util/guid
 Benchmark_S

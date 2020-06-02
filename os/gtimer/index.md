@@ -92,7 +92,7 @@ https://godoc.org/github.com/gogf/gf/os/gtimer
 ## 性能基准测试
 
 ```
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/gogf/gf/os/gtimer
 Benchmark_Add-4               3000000             484 ns/op         152 B/op           5 allocs/op

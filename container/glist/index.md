@@ -22,7 +22,7 @@ https://godoc.org/github.com/gogf/gf/container/glist
 https://github.com/gogf/gf/blob/master/container/glist/glist_z_bench_test.go
 
 ```
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/gogf/gf/container/glist
 Benchmark_PushBack-4             5000000               268 ns/op              56 B/op          2 allocs/op

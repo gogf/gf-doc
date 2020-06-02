@@ -13,7 +13,7 @@ https://godoc.org/github.com/gogf/gf/encoding/ghash
 
 性能基准测试：
 ```html
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/gogf/gf/encoding/ghash
 BenchmarkBKDRHash-4     	50000000	        30.2 ns/op

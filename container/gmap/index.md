@@ -239,7 +239,7 @@ m := gmap.New(true)
 https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_safe_test.go
 
 ```shell
-goos: darwin
+goos: linux
 goarch: amd64
 Benchmark_IntIntMap_Set-4               10000000               202 ns/op              15 B/op          0 allocs/op
 Benchmark_IntAnyMap_Set-4               10000000               262 ns/op              29 B/op          1 allocs/op
@@ -261,7 +261,7 @@ Benchmark_StrStrMap_Get-4               20000000              91.9 ns/op        
 https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_unsafe_test.go
 
 ```shell
-goos: darwin
+goos: linux
 goarch: amd64
 Benchmark_Unsafe_IntIntMap_Set-4        10000000               318 ns/op              62 B/op          0 allocs/op
 Benchmark_Unsafe_IntAnyMap_Set-4         5000000               282 ns/op              57 B/op          1 allocs/op
@@ -284,7 +284,7 @@ Benchmark_Unsafe_StrStrMap_Get-4         5000000               229 ns/op        
 https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_maps_test.go
 
 ```shell
-goos: darwin
+goos: linux
 goarch: amd64
 Benchmark_HashMap_Set-4                  5000000               349 ns/op              40 B/op          2 allocs/op
 Benchmark_ListMap_Set-4                  3000000               455 ns/op              87 B/op          3 allocs/op
@@ -301,7 +301,7 @@ go语言从`1.9`版本开始引入了并发安全的`sync.Map`，但`gmap`比较
 
 我们来看看基准测试对比结果：https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_syncmap_test.go
 ```shell
-goos: darwin
+goos: linux
 goarch: amd64
 Benchmark_GMapSet-4                     10000000               209 ns/op              15 B/op          0 allocs/op
 Benchmark_SyncMapSet-4                   3000000               451 ns/op              67 B/op          3 allocs/op

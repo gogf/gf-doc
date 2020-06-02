@@ -119,7 +119,7 @@ func main() {
 ## gqueue与channel
 `gqueue`与标准库`channel`的性能测试，其中每一次基准测试的`b.N`值均为`20000000`，以保证动态队列存取一致防止`deadlock`:
 ```html
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/gogf/gf/container/gqueue
 Benchmark_Gqueue_StaticPushAndPop-4       20000000            84.2 ns/op
