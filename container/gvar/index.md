@@ -21,7 +21,7 @@ https://godoc.org/github.com/gogf/gf/container/gvar
 
  
 
-## 示例1，基本使用
+## 基本使用
 
 ```go
 package main
@@ -71,7 +71,7 @@ func main() {
 &{123}
 ```
 
-## 示例2，JSON序列化/反序列
+## `JSON`序列化/反序列
 `gvar.Var`容器实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go

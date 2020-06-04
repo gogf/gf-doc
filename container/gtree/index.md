@@ -27,46 +27,9 @@ import "github.com/gogf/gf/container/gtree"
 
 https://godoc.org/github.com/gogf/gf/container/gtree
 
-几种容器的API方法都非常类似，特点是需要在初始化时提供用于排序的方法，以下是红黑树的方法列表。
+几种容器的API方法都非常类似，特点是需要在初始化时提供用于排序的方法。
 
-```go
-func NewRedBlackTree(comparator func(v1, v2 interface{}) int, unsafe ...bool) *RedBlackTree
-func NewRedBlackTreeFrom(comparator func(v1, v2 interface{}) int, data map[interface{}]interface{}, unsafe ...bool) *RedBlackTree
-func (tree *RedBlackTree) Ceiling(key interface{}) (ceiling *RedBlackTreeNode)
-func (tree *RedBlackTree) Clear()
-func (tree *RedBlackTree) Clone(unsafe ...bool) *RedBlackTree
-func (tree *RedBlackTree) Contains(key interface{}) bool
-func (tree *RedBlackTree) Flip(comparator ...func(v1, v2 interface{}) int)
-func (tree *RedBlackTree) Floor(key interface{}) (floor *RedBlackTreeNode)
-func (tree *RedBlackTree) Get(key interface{}) (value interface{})
-func (tree *RedBlackTree) GetOrSet(key interface{}, value interface{}) interface{}
-func (tree *RedBlackTree) GetOrSetFunc(key interface{}, f func() interface{}) interface{}
-func (tree *RedBlackTree) GetOrSetFuncLock(key interface{}, f func() interface{}) interface{}
-func (tree *RedBlackTree) GetVar(key interface{}) *gvar.Var
-func (tree *RedBlackTree) GetVarOrSet(key interface{}, value interface{}) *gvar.Var
-func (tree *RedBlackTree) GetVarOrSetFunc(key interface{}, f func() interface{}) *gvar.Var
-func (tree *RedBlackTree) GetVarOrSetFuncLock(key interface{}, f func() interface{}) *gvar.Var
-func (tree *RedBlackTree) IsEmpty() bool
-func (tree *RedBlackTree) Iterator(f func(key, value interface{}) bool)
-func (tree *RedBlackTree) IteratorAsc(f func(key, value interface{}) bool)
-func (tree *RedBlackTree) IteratorDesc(f func(key, value interface{}) bool)
-func (tree *RedBlackTree) Keys() []interface{}
-func (tree *RedBlackTree) Left() *RedBlackTreeNode
-func (tree *RedBlackTree) Map() map[interface{}]interface{}
-func (tree *RedBlackTree) Print()
-func (tree *RedBlackTree) Remove(key interface{}) (value interface{})
-func (tree *RedBlackTree) Removes(keys []interface{})
-func (tree *RedBlackTree) Right() *RedBlackTreeNode
-func (tree *RedBlackTree) Search(key interface{}) (value interface{}, found bool)
-func (tree *RedBlackTree) Set(key interface{}, value interface{})
-func (tree *RedBlackTree) SetIfNotExist(key interface{}, value interface{}) bool
-func (tree *RedBlackTree) SetIfNotExistFunc(key interface{}, f func() interface{}) bool
-func (tree *RedBlackTree) SetIfNotExistFuncLock(key interface{}, f func() interface{}) bool
-func (tree *RedBlackTree) Sets(data map[interface{}]interface{})
-func (tree *RedBlackTree) Size() int
-func (tree *RedBlackTree) String() string
-func (tree *RedBlackTree) Values() []interface{}
-```
+
 在`gutil`模块中提供了常用的一些基本类型比较方法，可以直接在程序中直接使用，后续也有示例。
 ```go
 func ComparatorByte(a, b interface{}) int
@@ -89,7 +52,7 @@ func ComparatorUint8(a, b interface{}) int
 
 ## 使用示例
 
-### 示例1，基本使用
+### 基本使用
 
 ```go
 package main
@@ -171,7 +134,7 @@ true
 true
 ```
 
-### 示例2，前序/后续遍历
+### 前序/后续遍历
 
 ```go
 package main
