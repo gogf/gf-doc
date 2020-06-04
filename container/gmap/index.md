@@ -28,10 +28,18 @@ import "github.com/gogf/gf/container/gmap"
 https://godoc.org/github.com/gogf/gf/container/gmap
 
 
+## 并发安全
+
+`gmap`支持并发安全选项开关，在默认情况下是`非并发安全`的，开发者可以选择开启`gmap`的并发安全特性(传递初始化开关参数`safe`参数值为`true`, 必须在初始化时设定，不能运行时动态设定)。如：
+```go
+m := gmap.New(true)
+```
+
+不仅仅是`gmap`模块，`gf`框架的其他并发安全数据结构也支持并发安全特性开关。
 
 ## 使用示例
 
-### 示例1，基本使用
+### 基本使用
 
 ```go
 package main
@@ -126,7 +134,7 @@ true
 true
 ```
 
-### 示例2，有序遍历
+### 有序遍历
 
 我们来看一下三种不同类型`map`的有序性遍历示例。
 
@@ -172,7 +180,176 @@ TreeMap   Keys: [1 2 3 4 5 6 7 8 9]
 TreeMap Values: [1 2 3 4 5 6 7 8 9]
 ```
 
-### 示例3，JSON序列化/反序列
+### `FilterEmpty/FilterNil`空值过滤
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gmap"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	m1 := gmap.NewFrom(g.MapAnyAny{
+		"k1": "",
+		"k2": nil,
+		"k3": 0,
+		"k4": 1,
+	})
+	m2 := gmap.NewFrom(g.MapAnyAny{
+		"k1": "",
+		"k2": nil,
+		"k3": 0,
+		"k4": 1,
+	})
+	m1.FilterEmpty()
+	m2.FilterNil()
+	fmt.Println(m1.Map())
+	fmt.Println(m2.Map())
+
+	// Output:
+	// map[k4:1]
+	// map[k1: k3:0 k4:1]
+}
+```
+
+### `Flip`键值对反转
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gmap"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var m gmap.Map
+	m.Sets(g.MapAnyAny{
+		"k1": "v1",
+		"k2": "v2",
+	})
+	m.Flip()
+	fmt.Println(m.Map())
+
+	// May Output:
+	// map[v1:k1 v2:k2]
+}
+```
+
+## `Keys/Values`键名/数值列表
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gmap"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var m gmap.Map
+	m.Sets(g.MapAnyAny{
+		"k1": "v1",
+		"k2": "v2",
+		"k3": "v3",
+		"k4": "v4",
+	})
+	fmt.Println(m.Keys())
+	fmt.Println(m.Values())
+
+	// May Output:
+	// [k1 k2 k3 k4]
+	// [v2 v3 v4 v1]
+}
+```
+
+### `Pop/Pops`随机出栈
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gmap"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var m gmap.Map
+	m.Sets(g.MapAnyAny{
+		"k1": "v1",
+		"k2": "v2",
+		"k3": "v3",
+		"k4": "v4",
+	})
+	fmt.Println(m.Pop())
+	fmt.Println(m.Pops(2))
+	fmt.Println(m.Size())
+
+	// May Output:
+	// k1 v1
+	// map[k2:v2 k4:v4]
+	// 1
+}
+```
+
+### `SetIfNotExist*`判断性写入
+
+判断性写入是指当指定的键名不存在时则写入并且方法返回`true`，否则忽略并且方法返回`false`。相关方法如下：
+- `SetIfNotExist`
+- `SetIfNotExistFunc`
+- `SetIfNotExistFuncLock`
+
+具体描述请查看接口文档或源码注释。
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gmap"
+)
+
+func main() {
+	var m gmap.Map
+	fmt.Println(m.SetIfNotExist("k1", "v1"))
+	fmt.Println(m.SetIfNotExist("k1", "v1"))
+	fmt.Println(m.Map())
+
+	// Output:
+	// true
+	// false
+	// map[k1:v1]
+}
+```
+
+### `Merge`哈希表合并
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gmap"
+)
+
+func main() {
+	var m1, m2 gmap.Map
+	m1.Set("key1", "val1")
+	m2.Set("key2", "val2")
+	m1.Merge(&m2)
+	fmt.Println(m1.Map())
+
+	// May Output:
+	// map[key1:val1 key2:val2]
+}
+```
+
+### `JSON`序列化/反序列
 `gmap`模块下的所有容器类型均实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go
@@ -222,14 +399,7 @@ TreeMap Values: [1 2 3 4 5 6 7 8 9]
     map[name:john score:100]
     ```
 
-## 并发安全
 
-`gmap`支持并发安全选项开关，在默认情况下是`非并发安全`的，开发者可以选择开启`gmap`的并发安全特性(传递初始化开关参数`safe`参数值为`true`, 必须在初始化时设定，不能运行时动态设定)。如：
-```go
-m := gmap.New(true)
-```
-
-不仅仅是`gmap`模块，`gf`框架的其他并发安全数据结构也支持并发安全特性开关。
 
 
 ## 性能测试
@@ -295,7 +465,7 @@ Benchmark_TreeMap_Get-4                 20000000               189 ns/op        
 ```
 
 
-### gmap与sync.Map性能比较
+### `gmap`与`sync.Map`性能比较
 
 go语言从`1.9`版本开始引入了并发安全的`sync.Map`，但`gmap`比较于标准库的`sync.Map`性能更加优异，并且功能更加丰富。 
 
