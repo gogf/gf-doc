@@ -53,18 +53,12 @@ func Register(name string, driver Driver) error
 1. https://github.com/gogf/gf/blob/master/database/gdb/gdb_driver_sqlite.go
 1. 更多： https://github.com/gogf/gf/blob/master/database/gdb
 
-## 开发自定义驱动
-我们来看一个自定义驱动的示例，我们需要将所有执行的`SQL`语句记录到`monitor`表中，以方便于进行`SQL`审计。
+## 自定义回调处理
+我们来看一个自定义回调处理的示例，我们需要将所有执行的`SQL`语句记录到`monitor`表中，以方便于进行`SQL`审计。
 
 为简化示例编写，我们这里实现了一个自定义的`MySQL`驱动，该驱动继承于`gdb`模块中已经实现的`DriverMysql`，并按照需要修改覆盖相应的接口方法。由于所有的`SQL`语句执行必定会通过`DoQuery`或者`DoExec`接口，因此我们在自定义的驱动中实现并覆盖这两个接口方法即可。
 
 ```go
-// Copyright 2017 gf Author(https://github.com/gogf/gf). All Rights Reserved.
-//
-// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/gogf/gf.
-
 package driver
 
 import (

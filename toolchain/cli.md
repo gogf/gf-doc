@@ -9,7 +9,7 @@
 
 > 工具运行初始化时将会自动打开`Go Modules`特性并设置反向代理地址为 `https://goproxy.cn`。
 
-> 当前帮助文档以`gf cli v0.5.0`版本为例进行简单的介绍，详细的介绍信息请查看命令行帮助信息。本章内容信息可能会有滞后，最新的具体详细介绍请查看工具帮助信息。
+> 当前帮助文档以`gf cli v0.7.5`版本为例进行简单的介绍，详细的介绍信息请查看命令行帮助信息。本章内容信息可能会有滞后，最新的具体详细介绍请查看工具帮助信息。
 
 ```
 $ gf
@@ -17,19 +17,23 @@ USAGE
     gf COMMAND [ARGUMENT] [OPTION]
 
 COMMAND
+    env        show current Golang environment variables
     get        install or update GF to system in default...
     gen        automatically generate go files for ORM models...
+    mod        extra features for go modules...
     run        running go codes with hot-compiled-like feature...
     init       initialize an empty GF project at current working directory...
     help       show more information about a specified command
-    pack       packing any file/directory to a resource file, or a go file
+    pack       packing any file/directory to a resource file, or a go file...
     build      cross-building go project for lots of platforms...
     docker     create a docker image for current GF project...
+    swagger    swagger feature for current project...
     update     update current gf binary to latest one (might need root/admin permission)
     install    install gf binary to system (might need root/admin permission)
     version    show current binary version info
 
 OPTION
+    -y         all yes for all command without prompt ask
     -?,-h      show this help or detail for specified command
     -v,-i      show version information
 
@@ -47,7 +51,7 @@ ADDITIONAL
 
 > 部分系统需要管理员权限支持。
 
-> 如果是`MacOS`下使用`zsh`的小伙伴可能会遇到别名冲突问题，可以通过`alias gf=gf`来解决。
+> 如果是`MacOS`下使用`zsh`的小伙伴可能会遇到别名冲突问题，可以通过`alias gf=gf`来解决，运行一次之后`gf`工具会自动修改`profile`中的别名设置，用户重新登录就好了。
 
 ## `version` 工具版本查看
 
@@ -59,12 +63,12 @@ ADDITIONAL
 用以查看当前`gf`命令行工具编译时的版本信息。例如：
 ```
 $ gf -v
-GoFrame CLI Tool v0.4.5, https://goframe.org
+GoFrame CLI Tool v0.7.5, https://goframe.org
 Built Detail:
   Go Version:  go1.13.5
-  GF Version:  v1.10.1
+  GF Version:  v1.13.0
   Git Commit:  0ab2a4a9e753f4f5fae1e96ecf40cae94895d494
-  Built Time:  2020-01-05 11:30:39
+  Built Time:  2020-06-05 23:30:39
 ```
 
 ## `init` 项目初始化
@@ -79,7 +83,7 @@ Built Detail:
 
 使用方式：`gf build FILE [OPTION]`
 
-仅限于交叉编译使用到`GF`框架的项目，支持绝大部分常见系统的直接交叉编译。并且支持配置文件管理编译选项、嵌入编译时变量，默认嵌入的编译时变量包括（参考`gf -v`）：
+仅限于交叉编译使用到`GF`框架的项目，支持绝大部分常见系统的直接交叉编译。并且支持配置文件管理编译选项、嵌入编译时变量。使用`gf build`的项目将会默认嵌入以下变量（参考`gf -v`）：
 1. 当前`Go`版本。
 1. 当前`GF`版本。
 1. 当前编译时间。
@@ -151,6 +155,13 @@ Built Detail:
 使用方式：`gf pack SRC DST`
 
 该命令用以将任意的文件打包为二进制文件，或者`Go`代码文件，可将任意文件打包后随着可执行文件一同发布。此外，在`build`命令中支持打包+编译一步进行，具体请查看`build`命令帮助信息。
+
+## `mod` 包管理扩展功能
+
+使用方式：`gf mod path`
+
+该命令用于将当前`go modules`包拷贝到`GOPATH`中，以便使用原始的`GOPATH`方式开发，往往为了方便调试本地开发的依赖包。
+
 
 ## `help` 命令行帮助
 

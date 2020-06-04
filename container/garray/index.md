@@ -17,10 +17,18 @@ import "github.com/gogf/gf/container/garray"
 
 https://godoc.org/github.com/gogf/gf/container/garray
 
+简要说明：
+1. `garray`模块下的对象及方法较多，建议仔细看看接口文档。
+1. `garray`支持`int`/`string`/`interface{}`三种常用的数据类型。
+1. `garray`支持普通数组和排序数组，普通数组的结构体名称定义为`*Array`格式，排序数组的结构体名称定义为`Sorted*Array`格式，如下：
+    - `Array`, `intArray`, `StrArray`
+    - `SortedArray`, `SortedIntArray`, `SortedStrArray`
+    - 其中排序数组`SortedArray`，需要给定排序比较方法，在工具包`gutil`中也定义了很多`Comparator*`比较方法
 
-由于`garray`模块下的对象及方法较多，支持`int`/`string`/`interface{}`三种数据类型，这里便不一一列举。`garray`下包含了多种数据类型的`slice`，可以使用 `garray.New*Array`/`garray.NewSorted*Array` 方法来创建，其中`garray.New*Array`为普通不排序数组，`garray.NewSorted*Array`为排序数组(当创建`interface{}`类型的数组时，创建时可以指定自定义的排序函数)。
 
-## 示例1，普通数组
+> 以下示例主要展示一些常见数组用法，更多的方法请参考接口文档或源码。
+
+## 普通数组
 ```go
 package main
 
@@ -96,7 +104,7 @@ func main () {
 []
 ```
 
-## 示例2，排序数组
+## 排序数组
 
 排序数组的方法与普通数组类似，但是带有自动排序功能及唯一性过滤功能。
 
@@ -151,8 +159,266 @@ func main () {
 [3 2 1]
 ```
 
+## `Iterate/IterateAsc/IterateDesc`数组遍历
+```go
+package main
 
-## 示例3，JSON序列化/反序列
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array := garray.NewStrArrayFrom(g.SliceStr{"a", "b", "c"})
+	// Iterator is alias of IteratorAsc, which iterates the array readonly in ascending order
+	//  with given callback function <f>.
+	// If <f> returns true, then it continues iterating; or false to stop.
+	array.Iterator(func(k int, v string) bool {
+		fmt.Println(k, v)
+		return true
+	})
+	// IteratorDesc iterates the array readonly in descending order with given callback function <f>.
+	// If <f> returns true, then it continues iterating; or false to stop.
+	array.IteratorDesc(func(k int, v string) bool {
+		fmt.Println(k, v)
+		return true
+	})
+
+	// Output:
+	// 0 a
+	// 1 b
+	// 2 c
+	// 2 c
+	// 1 b
+	// 0 a
+}
+```
+
+## `PopLeft/PopLefts/PopRight/PopRights`数组项出栈
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+)
+
+func main() {
+	array := garray.NewFrom([]interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	// Any Pop* functions pick, delete and return the item from array.
+
+	fmt.Println(array.PopLeft())
+	fmt.Println(array.PopLefts(2))
+	fmt.Println(array.PopRight())
+	fmt.Println(array.PopRights(2))
+
+	// Output:
+	// 1 true
+	// [2 3]
+	// 9 true
+	// [7 8]
+}
+```
+
+## `Rand/PopRand`数组项随机获取/出栈
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array := garray.NewFrom(g.Slice{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	// Randomly retrieve and return 2 items from the array.
+	// It does not delete the items from array.
+	fmt.Println(array.Rands(2))
+
+	// Randomly pick and return one item from the array.
+	// It deletes the picked up item from array.
+	fmt.Println(array.PopRand())
+}
+```
+
+
+## `Contains/ContainsI`包含判断
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+)
+
+func main() {
+	var array garray.StrArray
+	array.Append("a")
+	fmt.Println(array.Contains("a"))
+	fmt.Println(array.Contains("A"))
+	fmt.Println(array.ContainsI("A"))
+
+	// Output:
+	// true
+	// false
+	// true
+}
+```
+
+## `FilterEmpty/FilterNil`空值过滤
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array1 := garray.NewFrom(g.Slice{0, 1, 2, nil, "", g.Slice{}, "john"})
+	array2 := garray.NewFrom(g.Slice{0, 1, 2, nil, "", g.Slice{}, "john"})
+	fmt.Printf("%#v\n", array1.FilterNil().Slice())
+	fmt.Printf("%#v\n", array2.FilterEmpty().Slice())
+
+	// Output:
+	// []interface {}{0, 1, 2, "", []interface {}{}, "john"}
+	// []interface {}{1, 2, "john"}
+}
+```
+
+## `Reverse`数组翻转
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array := garray.NewFrom(g.Slice{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	// Reverse makes array with elements in reverse order.
+	fmt.Println(array.Reverse().Slice())
+
+	// Output:
+	// [9 8 7 6 5 4 3 2 1]
+}
+```
+
+## `Shuffle`随机排序
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array := garray.NewFrom(g.Slice{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	// Shuffle randomly shuffles the array.
+	fmt.Println(array.Shuffle().Slice())
+}
+```
+
+## `Walk`数组遍历
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var array garray.StrArray
+	tables := g.SliceStr{"user", "user_detail"}
+	prefix := "gf_"
+	array.Append(tables...)
+	// Add prefix for given table names.
+	array.Walk(func(value string) string {
+		return prefix + value
+	})
+	fmt.Println(array.Slice())
+
+	// Output:
+	// [gf_user gf_user_detail]
+}
+```
+
+## `Chunk`数组拆分
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array := garray.NewFrom(g.Slice{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	// Chunk splits an array into multiple arrays,
+	// the size of each array is determined by <size>.
+	// The last chunk may contain less than size elements.
+	fmt.Println(array.Chunk(2))
+
+	// Output:
+	// [[1 2] [3 4] [5 6] [7 8] [9]]
+}
+```
+
+## `Merge`数组合并
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array1 := garray.NewFrom(g.Slice{1, 2})
+	array2 := garray.NewFrom(g.Slice{3, 4})
+	slice1 := g.Slice{5, 6}
+	slice2 := []int{7, 8}
+	slice3 := []string{"9", "0"}
+	fmt.Println(array1.Slice())
+	array1.Merge(array1)
+	array1.Merge(array2)
+	array1.Merge(slice1)
+	array1.Merge(slice2)
+	array1.Merge(slice3)
+	fmt.Println(array1.Slice())
+
+	// Output:
+	// [1 2]
+	// [1 2 1 2 3 4 5 6 7 8 9 0]
+}
+```
+
+
+## JSON序列化/反序列
 `garray`模块下的所有容器类型均实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go
