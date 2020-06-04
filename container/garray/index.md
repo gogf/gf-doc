@@ -159,7 +159,7 @@ func main () {
 [3 2 1]
 ```
 
-## `Iterate/IterateAsc/IterateDesc`数组遍历
+## `Iterate*`数组遍历
 ```go
 package main
 
@@ -195,7 +195,7 @@ func main() {
 }
 ```
 
-## `PopLeft/PopLefts/PopRight/PopRights`数组项出栈
+## `Pop*`数组项出栈
 
 ```go
 package main
@@ -418,7 +418,7 @@ func main() {
 ```
 
 
-## JSON序列化/反序列
+## `JSON`序列化/反序列
 `garray`模块下的所有容器类型均实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go
