@@ -299,12 +299,12 @@ func main() {
 
 ### `SetIfNotExist*`判断性写入
 
-判断性写入是指当指定的键名不存在时则写入并且方法返回`true`，否则忽略并且方法返回`false`。相关方法如下：
+判断性写入是指当指定的键名不存在时则写入并且方法返回`true`，否则忽略吸入并且方法返回`false`。相关方法如下：
 - `SetIfNotExist`
 - `SetIfNotExistFunc`
 - `SetIfNotExistFuncLock`
 
-具体描述请查看接口文档或源码注释。
+方法具体描述请查看接口文档或源码注释。
 
 ```go
 package main
