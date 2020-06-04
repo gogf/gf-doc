@@ -21,7 +21,8 @@ https://godoc.org/github.com/gogf/gf/container/gset
 
 
 ## 使用示例
-### 示例1，基本使用
+
+### 基本使用
 ```go
 package main
 
@@ -88,7 +89,7 @@ map[1:{} 2:{} 4:{}]
 0
 ```
 
-### 示例2，交差并补集
+### 交差并补集
 
 我们可以使用以下方法实现交差并补集，并返回一个新的结果集合，
 ```go
@@ -136,7 +137,157 @@ func main() {
 [7 4 5 6]
 ```
 
-### 示例3，JSON序列化/反序列
+## `Contains/ContainsI`包含判断
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gset"
+)
+
+func main() {
+	var set gset.StrSet
+	set.Add("a")
+	fmt.Println(set.Contains("a"))
+	fmt.Println(set.Contains("A"))
+	fmt.Println(set.ContainsI("A"))
+
+	// Output:
+	// true
+	// false
+	// true
+}
+```
+
+## `Pop/Pops`集合项出栈
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gset"
+)
+
+func main() {
+	var set gset.Set
+	set.Add(1, 2, 3, 4)
+	fmt.Println(set.Pop())
+	fmt.Println(set.Pops(2))
+	fmt.Println(set.Size())
+
+	// May Output:
+	// 1
+	// [2 3]
+	// 1
+}
+```
+
+### `Join`集合项串连
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gset"
+)
+
+func main() {
+	var set gset.Set
+	set.Add("a", "b", "c", "d")
+	fmt.Println(set.Join(","))
+
+	// May Output:
+	// a,b,c,d
+}
+```
+
+### `IsSubsetOf`子集判断
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gset"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var s1, s2 gset.Set
+	s1.Add(g.Slice{1, 2, 3}...)
+	s2.Add(g.Slice{2, 3}...)
+	fmt.Println(s1.IsSubsetOf(&s2))
+	fmt.Println(s2.IsSubsetOf(&s1))
+
+	// Output:
+	// false
+	// true
+}
+```
+
+### `AddIfNotExist*`判断性写入
+
+判断性写入是指当指定的数据项不存在时则写入并且方法返回`true`，否则忽略吸入并且方法返回`false`。相关方法如下：
+- `AddIfNotExist`
+- `AddIfNotExistFunc`
+- `AddIfNotExistFuncLock`
+
+方法具体描述请查看接口文档或源码注释。
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gset"
+)
+
+func main() {
+	var set gset.Set
+	fmt.Println(set.AddIfNotExist(1))
+	fmt.Println(set.AddIfNotExist(1))
+	fmt.Println(set.Slice())
+
+	// Output:
+	// true
+	// false
+	// [1]
+}
+```
+
+
+## `Walk`遍历修改
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gset"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var (
+		set    gset.StrSet
+		names  = g.SliceStr{"user", "user_detail"}
+		prefix = "gf_"
+	)
+	set.Add(names...)
+	// Add prefix for given table names.
+	set.Walk(func(item string) string {
+		return prefix + item
+	})
+	fmt.Println(set.Slice())
+
+	// May Output:
+	// [gf_user gf_user_detail]
+}
+```
+
+### `JSON`序列化/反序列
 `gset`模块下的所有容器类型均实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go

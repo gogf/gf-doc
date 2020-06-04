@@ -336,7 +336,7 @@ func main() {
 }
 ```
 
-## `Walk`数组遍历
+## `Walk`遍历修改
 
 ```go
 package main
@@ -360,6 +360,26 @@ func main() {
 
 	// Output:
 	// [gf_user gf_user_detail]
+}
+```
+
+
+## `Join`数组项串连
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	array := garray.NewFrom(g.Slice{"a", "b", "c", "d"})
+	fmt.Println(array.Join(","))
+
+	// Output:
+	// a,b,c,d
 }
 ```
 
