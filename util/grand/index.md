@@ -16,13 +16,15 @@ https://godoc.org/github.com/gogf/gf/util/grand
 常用方法：
 ```go
 func N(min, max int) int
+func B(n int) []byte
 func S(n int, symbols ...bool) string
 func Str(s string, n int) string
 func Intn(max int) int
-func Meet(num, total int) bool
-func MeetProb(prob float32) bool
 func Digits(n int) string
 func Letters(n int) string
+func Meet(num, total int) bool
+func MeetProb(prob float32) bool
+func Perm(n int) []int
 func Symbols(n int) string
 ```
 
@@ -41,6 +43,7 @@ func Symbols(n int) string
 
 ## 随机字符串
 
+1. `B`方法用于返回指定长度的二进制`[]byte`数据。
 1. `S`方法用于返回指定长度的数字、字符，第二个参数`symbols`用于指定知否返回的随机字符串中包含特殊字符。
 1. `Str`方法是一个比较高级的方法，用于从给定的字符列表中选择指定长度的随机字符串返回，并且支持`unicode`字符，例如中文。例如，`Str("中文123abc", 3)`将可能会返回`1a文`的随机字符串。
 1. `Digits`方法用于返回指定长度的随机数字字符串。
