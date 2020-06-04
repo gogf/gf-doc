@@ -6,7 +6,7 @@
 
 **使用场景**：
 
-默认情况下为非并发安全，也可以开启并发安全特性来使用到并发安全场景中。
+双向链表。
 
 **使用方式**：
 ```go
@@ -32,9 +32,8 @@ Benchmark_PopFront-4            20000000              71.1 ns/op               0
 Benchmark_PopBack-4             30000000              70.1 ns/op               0 B/op          0 allocs/op
 PASS
 ```
-## 使用示例
 
-### 示例1，简单使用
+## 基础使用
 ```go
 package main
 
@@ -68,7 +67,7 @@ func main() {
 [0,"a",1]
 ```
 
-### 示例2，链表遍历
+## 链表遍历
 
 该示例中我们将通过读锁和写锁遍历一个并发安全的链表，分别通过`RLockFunc`和`LockFunc`实现。
 
@@ -145,7 +144,54 @@ func main() {
 [1,2,3,4,5,"M",7,8,9,10]
 ```
 
-### 示例3，JSON序列化/反序列
+## `Pop*`元素项出栈
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/glist"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	l := glist.NewFrom(g.Slice{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	fmt.Println(l.PopBack())
+	fmt.Println(l.PopBacks(2))
+	fmt.Println(l.PopFront())
+	fmt.Println(l.PopFronts(2))
+
+	// Output:
+	// 9
+	// [8 7]
+	// 1
+	// [2 3]
+}
+```
+
+## `Join`元素项串连
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/glist"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var l glist.List
+	l.PushBacks(g.Slice{"a", "b", "c", "d"})
+
+	fmt.Println(l.Join(","))
+
+	// Output:
+	// a,b,c,d
+}
+```
+
+## `JSON`序列化/反序列
 `glist`容器实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go
