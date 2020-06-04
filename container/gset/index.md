@@ -137,7 +137,7 @@ func main() {
 [7 4 5 6]
 ```
 
-## `Contains/ContainsI`包含判断
+### `Contains/ContainsI`包含判断
 
 ```go
 package main
@@ -161,7 +161,7 @@ func main() {
 }
 ```
 
-## `Pop/Pops`集合项出栈
+### `Pop/Pops`集合项出栈
 
 ```go
 package main
@@ -258,7 +258,7 @@ func main() {
 ```
 
 
-## `Walk`遍历修改
+### `Walk`遍历修改
 
 ```go
 package main
