@@ -2,9 +2,7 @@
 
 可以看到通过客户端方法`Do/Receive`获取的数据都是二进制形式`[]byte`的，需要开发者手动进行数据转换。
 
-当然，`gredis`模块也提供了`DoVar/ReceiveVar`方法，用以获取可供方便转换的`gvar.Var`通用变量结果。
-
-通过`gvar.Var`的强大转换功能可以转换为任意的数据类型，如基本数据类型`Int`,`String`,`Strings`，或者结构体`Struct`等等。
+当然，`gredis`模块也提供了`DoVar/ReceiveVar`方法，用以获取可供方便转换的`gvar.Var`通用变量结果。通过`gvar.Var`的强大转换功能可以转换为任意的数据类型，如基本数据类型`Int`,`String`,`Strings`，或者结构体`Struct`等等。
 
 ## 示例1，`DoVar`
 

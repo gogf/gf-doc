@@ -181,7 +181,7 @@
     * [NoSQL Redis](#)
         * [基本介绍](database/gredis/index.md)
         * [使用配置](database/gredis/config.md)
-        * [使用介绍](database/gredis/usage.md)
+        * [基本使用](database/gredis/usage.md)
         * [结果处理](database/gredis/result.md)
 * [功能模块设计](#)
     * [数据结构容器](#)
