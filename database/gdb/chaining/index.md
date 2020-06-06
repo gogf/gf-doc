@@ -32,9 +32,9 @@ func (m *Model) Struct(pointer interface{}) error
 func (m *Model) Structs(pointer interface{}) error
 func (m *Model) Scan(pointer interface{}) error
 
-func (m *Model) LeftJoin(joinTable string, on string) *Model
-func (m *Model) RightJoin(joinTable string, on string) *Model
-func (m *Model) InnerJoin(joinTable string, on string) *Model
+func (m *Model) LeftJoin(table ...string) *Model
+func (m *Model) RightJoin(table ...string) *Model
+func (m *Model) InnerJoin(table ...string) *Model
 
 func (m *Model) Where(where interface{}, args...interface{}) *Model
 func (m *Model) WherePri(where interface{}, args ...interface{}) *Model

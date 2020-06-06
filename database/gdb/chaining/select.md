@@ -163,13 +163,12 @@ r, err := db.Table("user").Fields("COUNT(*) total,age").Group("age").All()
 r, err := db.Table("student").Order("class asc,course asc,score desc").All()
 ```
 
-## `As`数据表别名
+## 自定义数据表别名
 
-`As`方法用于指定模型别名。使用示例：
 ```go
-user := db.Table("user").Safe()
 // SELECT * FROM `user` AS u LEFT JOIN `user_detail` as ud ON(ud.id=u.id) WHERE u.id=1 LIMIT 1
-r, err := user.As("u").LeftJoin("user_detail as ud", "ud.id=u.id").Where("u.id", 1).One()
+r, err := db.Table("user", "u").LeftJoin("user_detail", "ud", "ud.id=u.id").Where("u.id", 1).One()
+r, err := db.Table("user").As("u").LeftJoin("user_detail", "ud", "ud.id=u.id").Where("u.id", 1).One()
 ```
 
 ## 示例1, 基本使用

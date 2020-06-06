@@ -14,21 +14,22 @@
 ```toml
 [database]
     [[database.分组名称]]
-        host         = "地址"
-        port         = "端口"
-        user         = "账号"
-        pass         = "密码"
-        name         = "数据库名称"
-        type         = "数据库类型(目前支持mysql/pgsql/sqlite)"
-        role         = "(可选)数据库主从角色(master/slave)，不使用应用层的主从机制请均设置为master"
-        debug        = "(可选)开启调试模式"
-        prefix       = "(可选)表名前缀"
-        charset      = "(可选)数据库编码(如: utf8/gbk/gb2312)，一般设置为utf8"
-        weight       = "(可选)负载均衡权重，用于负载均衡控制，不使用应用层的负载均衡机制请置空"
-        linkinfo     = "(可选)自定义数据库链接信息，当该字段被设置值时，以上链接字段(Host,Port,User,Pass,Name)将失效，但是type必须有值"
-        maxIdle      = "(可选)连接池最大闲置的连接数"
-        maxOpen      = "(可选)连接池最大打开的连接数"
-        maxLifetime  = "(可选，单位秒)连接对象可重复使用的时间长度"
+        Host         = "地址"
+        Port         = "端口"
+        User         = "账号"
+        Pass         = "密码"
+        Name         = "数据库名称"
+        Type         = "数据库类型(目前支持mysql/pgsql/sqlite)"
+        Role         = "(可选)数据库主从角色(master/slave)，不使用应用层的主从机制请均设置为master"
+        Debug        = "(可选)开启调试模式"
+        Prefix       = "(可选)表名前缀"
+        DryRun       = "(可选)ORM空跑(只读不写)"
+        Charset      = "(可选)数据库编码(如: utf8/gbk/gb2312)，一般设置为utf8"
+        Weight       = "(可选)负载均衡权重，用于负载均衡控制，不使用应用层的负载均衡机制请置空"
+        Linkinfo     = "(可选)自定义数据库链接信息，当该字段被设置值时，以上链接字段(Host,Port,User,Pass,Name)将失效，但是type必须有值"
+        MaxIdle      = "(可选)连接池最大闲置的连接数"
+        MaxOpen      = "(可选)连接池最大打开的连接数"
+        MaxLifetime  = "(可选，单位秒)连接对象可重复使用的时间长度"
 ```
 完整的数据库配置项示例(TOML)：
 ```toml
@@ -42,6 +43,7 @@
         type         = "mysql"
         role         = "master"
         debug        = "true"
+        dryrun       = 1
         weight       = "100"
         prefix       = "gf_"
         charset      = "utf8"
