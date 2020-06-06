@@ -163,6 +163,17 @@ r, err := db.Table("user").Fields("COUNT(*) total,age").Group("age").All()
 r, err := db.Table("student").Order("class asc,course asc,score desc").All()
 ```
 
+## `Having`条件过滤
+
+`Having`方法用于查询结果的条件过滤。使用示例：
+```go
+// SELECT COUNT(*) total,age FROM `user` GROUP BY age HAVING total>100
+r, err := db.Table("user").Fields("COUNT(*) total,age").Group("age").Having("total>100").All()
+
+// SELECT * FROM `student` ORDER BY class HAVING score>60
+r, err := db.Table("student").Order("class").Having("score>60").All()
+```
+
 ## 自定义数据表别名
 
 ```go

@@ -1,0 +1,1 @@
+`Redis`的功能由`gredis`模块实现，具体请参考【[NoSQL Redis](database/gredis/index.md)】章节。
