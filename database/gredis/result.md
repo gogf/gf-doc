@@ -1,10 +1,11 @@
+[TOC]
 # 结果处理
 
 可以看到通过客户端方法`Do/Receive`获取的数据都是二进制形式`[]byte`的，需要开发者手动进行数据转换。
 
 当然，`gredis`模块也提供了`DoVar/ReceiveVar`方法，用以获取可供方便转换的`gvar.Var`通用变量结果。通过`gvar.Var`的强大转换功能可以转换为任意的数据类型，如基本数据类型`Int`,`String`,`Strings`，或者结构体`Struct`等等。
 
-## 示例1，`DoVar`
+## `DoVar`示例
 
 ```go
 package main
@@ -28,7 +29,7 @@ func main() {
 v
 ```
 
-## 示例2，`ReceiveVar`
+## `ReceiveVar`示例
 
 ```go
 package main
@@ -67,3 +68,48 @@ $ redis-cli
 ```html
 [message channel test]
 ```
+
+## 处理哈希结果
+
+`HashSet`是我们比较常用的`Redis`数据结构，我们可以非常方便地将`Redis`中的`HashSet`获取并转换为`Golang Map`。
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/container/gvar"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	var (
+		err    error
+		result *gvar.Var
+		key    = "user"
+	)
+	_, err = g.Redis().Do("HSET", key, "id", 10000)
+	if err != nil {
+		panic(err)
+	}
+	_, err = g.Redis().Do("HSET", key, "name", "john")
+	if err != nil {
+		panic(err)
+	}
+	result, err = g.Redis().DoVar("HGETALL", key)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(result.Map())
+
+	// May Output:
+	// map[id:10000 name:john]
+}
+```
+
+
+
+
+
+
+
