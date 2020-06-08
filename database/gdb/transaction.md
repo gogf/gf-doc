@@ -66,6 +66,8 @@ func (db DB) Transaction(f func(tx *TX) error) (err error)
 ```
 当给定的闭包方法返回的`error`为`nil`时，那么闭包执行结束后当前事务自动执行`Commit`提交操作；否则自动执行`Rollback`回滚操作。
 
+> 如果闭包内部操作产生`panic`中断，该事务也将进行回滚。
+
 使用示例：
 ```go
 db.Transaction(func(tx *gdb.TX) error {
