@@ -69,7 +69,7 @@ $ redis-cli
 [message channel test]
 ```
 
-## 处理哈希结果
+## `HashSet`示例
 
 `HashSet`是我们比较常用的`Redis`数据结构，我们可以非常方便地将`Redis`中的`HashSet`获取并转换为`Golang Map`。
 
