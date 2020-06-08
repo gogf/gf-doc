@@ -11,9 +11,20 @@ https://godoc.org/github.com/gogf/gf/os/gsession
 
 `SessionId`默认通过`Cookie`来传递，并且也支持客户端通过`Header`传递`SessionId`，`SessionId`的识别名称可以通过`ghttp.Server`的`SetSessionIdName`进行修改。
 
-此外，需要说明的是，`Session`的操作是支持`并发安全`的，这也是框架在对`Session`的设计上不采用直接以`map`的形式操作数据的原因。在`HTTP`请求流程中，我们可以通过`ghttp.Request`对象来获取`Session`对象，并执行相应的数据操作。
+`Session`的操作是支持`并发安全`的，这也是框架在对`Session`的设计上不采用直接以`map`的形式操作数据的原因。在`HTTP`请求流程中，我们可以通过`ghttp.Request`对象来获取`Session`对象，并执行相应的数据操作。
 
-
+`ghttp.Server`中的`SessionId`使用的是客户端的 `RemoteAddr + Header` 请求信息通过`guid`模块来生成的，保证随机及唯一性：https://github.com/gogf/gf/blob/master/net/ghttp/ghttp_request.go
+```go
+// Custom session id creating function.
+err := request.Session.SetIdFunc(func(ttl time.Duration) string {
+    var (
+        address = request.RemoteAddr
+        header  = fmt.Sprintf("%v", request.Header)
+    )
+    intlog.Print(address, header)
+    return guid.S([]byte(address), []byte(header))
+})
+```
 
 # `gsession`模块
 

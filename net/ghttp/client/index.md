@@ -71,9 +71,13 @@ type Client
 ```go
 func (r *ClientResponse) GetCookie(key string) string
 func (r *ClientResponse) GetCookieMap() map[string]string
+func (r *ClientResponse) Raw() string
+func (r *ClientResponse) RawDump()
+func (r *ClientResponse) RawRequest() string
+func (r *ClientResponse) RawResponse() string
 func (r *ClientResponse) ReadAll() []byte
 func (r *ClientResponse) ReadAllString() string
-func (r *ClientResponse) Close()
+func (r *ClientResponse) Close() error
 ```
 这里也要提醒的是，`ClientResponse`需要手动调用`Close`方法关闭，也就是说，不管你使用不使用返回的`ClientResponse`对象，你都需要将该返回对象赋值给一个变量，并且手动调用其`Close`方法进行关闭（往往使用`defer r.Close()`）。
 

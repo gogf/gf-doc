@@ -56,9 +56,11 @@ s.Run()
 
 # 配置文件
 
-从`GF v1.10`版本开始，`Server`对象也支持通过配置文件进行便捷的配置。支持的配置选项以及配置说明请查看接口文档说明，文档中有详细说明，以下章节不会对配置选项作介绍。
+`Server`对象也支持通过配置文件进行便捷的配置。支持的配置选项以及配置说明请查看接口文档说明，文档中有详细说明，以下章节不会对配置选项作介绍。
 
 当使用`g.Server(单例名称)`获取`Server`单例对象时，将会自动通过默认的配置管理对象获取对应的`Server`配置。默认情况下会读取`server.单例名称`配置项，当该配置项不存在时，将会读取`server`配置项。
+
+支持的配置文件配置项请参考`Server`配置管理对象属性：https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 
 ## 示例1，默认配置项
 ```toml
@@ -125,6 +127,16 @@ s4 := g.Server()
     DumpRouterMap    = false
 ```
 
+## 上传限制
 
+`Server`对于客户端提交的数据是由大小限制的，主要有两个配置参数控制：
+- `MaxHeaderBytes`：请求头大小限制，请求头包括客户端提交的`Cookie`数据，默认设置为`10KB`。
+- `ClientMaxBodySize`：客户端提交的`Body`大小限制，同时也影响文件上传大小，默认设置为`8MB`。
 
-
+由于安全性的考虑，默认的上传限制都不是很高，特别是`ClientMaxBodySize`的大小限制，在需要文件上传的场景可适当考虑调整，通过配置文件配置即可，例如：
+```toml
+[server]
+    MaxHeaderBytes    = "20KB"
+    ClientMaxBodySize = "200MB"
+```
+这样便修改请求头大小限制为`20KB`，文件上传大小限制为`200MB`。
