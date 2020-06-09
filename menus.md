@@ -143,7 +143,7 @@
         * [单数据校验](util/gvalid/check.md)
         * [多数据校验](util/gvalid/checkmap.md)
         * [结构体校验](util/gvalid/checkstruct.md)
-        * [自定义错误](util/gvalid/defaultmsg.md)
+        * [自定义错误](util/gvalid/message.md)
     * [模板引擎](#)
         * [基本介绍](os/gview/index.md)
         * [配置管理](os/gview/config.md)
