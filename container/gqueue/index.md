@@ -2,7 +2,7 @@
 
 # gqueue
 
-**动态大小**的并发安全队列。同时，`gqueue`也支持固定队列大小，固定队列大小时队列效率和标准库的`channel`无异。
+动态大小的并发安全队列。同时，`gqueue`也支持固定队列大小，固定队列大小时队列效率和标准库的`channel`无异。
 
 **使用场景**：
 
@@ -18,7 +18,7 @@ import "github.com/gogf/gf/container/gqueue"
 https://godoc.org/github.com/gogf/gf/container/gqueue
 
 
-## 使用示例1，基本使用
+## 示例1，基本使用
 
 ```go
 package main
@@ -63,7 +63,7 @@ Push: 2018-09-07 14:03:01
  Pop: 2018-09-07 14:03:01
 ```
 
-## 使用示例2，结合`select`语法使用
+## 示例2，结合`select`语法使用
 
 使用队列对象公开的`Queue.C`属性，结合`select`IO复用语法实现对队列的读取。
 
@@ -109,15 +109,15 @@ func main() {
 ...
 ```
 
-## gqueue与glist
+## `gqueue`与`glist`
 
-`gqueue`的底层基于`list`链表实现动态大小特性，但是`gqueue`的使用场景都是多`goroutine`下的并发安全通信场景。在队列满时存储(限制队列大小时)，或者在队列空时读取数据会产生类似`channel`那样的阻塞效果。
+`gqueue`的底层基于`glist`链表实现动态大小特性，在队列满或者在队列空时读取数据会产生阻塞。
 
 `glist`是一个并发安全的链表，并可以允许在关闭并发安全特性的时和一个普通的`list`链表无异，在存储和读取数据时不会发生阻塞。
 
 
-## gqueue与channel
-`gqueue`与标准库`channel`的性能测试，其中每一次基准测试的`b.N`值均为`20000000`，以保证动态队列存取一致防止`deadlock`:
+## `gqueue`与`channel`
+`gqueue`与标准库`channel`的性能基准测试，其中每一次基准测试的`b.N`值均为`20000000`，以保证动态队列存取一致防止`deadlock`:
 ```html
 goos: linux
 goarch: amd64
@@ -128,6 +128,4 @@ Benchmark_Gqueue_DynamicPop-4             20000000             121 ns/op
 Benchmark_Channel_PushAndPop-4            20000000            70.0 ns/op
 PASS
 ```
-可以看到标准库的`channel`的读写性能是非常高的，但是创建的时候由于需要初始化内存，因此创建`channel`的时候效率非常非常低（初始化即分配内存），并且受到队列大小的限制，写入的数据不能超过指定的队列大小。
-
-`gqueue`使用起来比`channel`更加灵活，不仅创建效率高（动态分配内存），不受队列大小限制(也可限定大小)。
+可以看到标准库的`channel`的读写性能是非常高的，但是创建的时候由于需要初始化内存，因此创建`channel`的时候效率非常非常低（初始化即分配内存），并且受到队列大小的限制，写入的数据不能超过指定的队列大小。`gqueue`使用起来比`channel`更加灵活，不仅创建效率高（动态分配内存），不受队列大小限制(也可限定大小)。

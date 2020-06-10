@@ -196,7 +196,6 @@
         * [gvar (通用变量)](container/gvar/index.md)
         * [gpool (对象复用池)](container/gpool/index.md)
         * [gtype (并发安全类型)](container/gtype/index.md)
-        <!-- * [gchan (优雅的chan操作)](container/gchan/index.md) -->
         * [gring (并发安全环结构)](container/gring/index.md)
     * [文本处理模块](#)
         * [gstr (字符串处理)](text/gstr/index.md)
