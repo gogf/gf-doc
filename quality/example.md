@@ -11,7 +11,7 @@
 
 > `GF`源码文件中有时为了文件排序更优雅，往往会在测试文件命名中加上`z`的字符便于将所有的测试文件排序到所有包文件末尾，例如：`gset_example_z_any_test`。
 
-<img src="/images/WX20200610-231714@2x.png" width="300"/>
+<img src="/images/WX20200610-231714@2x.png" width="500"/>
 
 
 ## 代码格式
@@ -69,7 +69,7 @@ func ExampleSet_IsSubsetOf() {
 
 当`Output`断言注释存在时，`Goland`会自动识别该方法可直接运行，方法左侧出现运行图标：
 
-<img src="/images/WX20200610-233056@2x.png" width="300"/>
+<img src="/images/WX20200610-233056@2x.png" width="500"/>
 
 ## 示例展示
 
@@ -81,13 +81,13 @@ func ExampleSet_IsSubsetOf() {
 
 https://godoc.org/github.com/gogf/gf/container/gset#Set.IsSubsetOf
 
-<img src="/images/WX20200610-233845@2x.png" width="300"/>
+<img src="/images/WX20200610-233845@2x.png" width="500"/>
 
 ### `Goland`代码示例
 
 鼠标移动到指定方法上即刻便有代码提示框：
 
-<img src="/images/WX20200610-234127@2x.png" width="300"/>
+<img src="/images/WX20200610-234127@2x.png" width="500"/>
 
 
 
