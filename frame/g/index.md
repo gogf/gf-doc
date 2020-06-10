@@ -61,6 +61,11 @@ type ArrayInt = []int
 
 常用对象通过`单例模式`进行管理，可以根据不同的单例名称获取对应的对象实例。并在对象初始化时会自动检索获取配置文件中的对应配置项，具体配置项请查看对应对象的章节介绍。
 
+### `HTTP`客户端对象
+```go
+func Client() *ghttp.Client
+```
+
 ### (单例) 配置管理对象
 ```go
 func Config(name...string) *gcfg.Config
@@ -80,27 +85,27 @@ func Log(name ...string) *glog.Logger
 func View(name ...string) *gview.View
 ```
 
-### (单例) WEB Server
+### (单例) `WEB Server`
 ```go
 func Server(name ...interface{}) *ghttp.Server
 ```
 
-### (单例) TCP Server
+### (单例) `TCP Server`
 ```go
 func TcpServer(name ...interface{}) *gtcp.Server
 ```
 
-### (单例) UDP Server
+### (单例) `UDP Server`
 ```go
 func UdpServer(name ...interface{}) *gudp.Server
 ```
 
-### (单例) 数据库ORM对象
+### (单例) 数据库`ORM`对象
 ```go
 func DB(name ...string) *gdb.Db
 ```
 
-### (单例) Redis客户端对象
+### (单例) `Redis`客户端对象
 ```go
 func Redis(name ...string) *gredis.Redis
 ```
