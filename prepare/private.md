@@ -26,3 +26,11 @@ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main main.go
 ```
 
 > 该特性需要`Go v1.13`以上版本支持。
+
+
+在`Goland`中这么设置：
+
+
+![](/images/WX20200611-185757@2x.png) 
+
+

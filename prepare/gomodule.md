@@ -28,10 +28,6 @@ module my-hello
 
 ## 使用Goland IDE vgo（推荐）
 `vgo`是基于`Go Module`规范的包管理工具，同官方的`go mod`命令工具类似。
-
-<!-- 1. 设置Goland关闭`GOPATH`
-
-    ![](/images/gomodule5.png) -->
     
 1. 设置Goland启用`vgo`
 
