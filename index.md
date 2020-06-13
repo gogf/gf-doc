@@ -56,7 +56,7 @@ golang版本 >= 1.11
     
 # 架构
 <div align=center>
-<img src="/images/arch.png?v=1"/>
+<a href="/images/arch.png?v=2" target="_blank"><img src="/images/arch.png?v=2" width="800"/></a>
 </div>
 
 # 性能
