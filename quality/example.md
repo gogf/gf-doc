@@ -74,7 +74,7 @@ func ExampleSet_IsSubsetOf() {
 
 ## 示例展示
 
-代码示例写完后，如果是带有`Output`断言注释的方法将会在`go test`单元测试运行时同时运行该示例代码并执行对应的断言判断。如果是单纯的代码示例，将会展示在`Godoc`文档上，并且在`Goland`的方法注释中也会带有该代码注释。
+代码示例写完后，如果是带有`Output`断言注释的方法将会在`go test`单元测试运行时同时运行该示例代码并执行对应的断言判断。如果是单纯的代码示例，将会展示在`Godoc`文档上，并且在`Goland`的代码提示中也会带有该代码示例。
 
 我们仍然使用`gset`包来举例。
 
@@ -84,7 +84,7 @@ https://godoc.org/github.com/gogf/gf/container/gset#Set.IsSubsetOf
 
 <img src="/images/WX20200610-233845@2x.png" width="500"/>
 
-### `Goland`代码示例
+### `Goland`代码提示
 
 鼠标移动到指定方法上即刻便有代码提示框：
 
