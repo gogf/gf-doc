@@ -55,9 +55,11 @@ Windows如何修改系统环境变量，以及修改环境变量`PATH`，请参�
 由于这三个工具是`Goland`自带的，因此配置比较简单，参考以下图文操作示例：
 
 1. 在`Goland`的设置中，选择`Tools` - `File Watchers`，随后选择添加
+
     ![](/images/WX20190619-092825@2x.jpg)
 
 1. 依次点击添加这3个工具，使用默认的配置即可
+
     ![](/images/WX20190619-093508@2x.jpg)
 
 1. 随后在撸代码的过程中保存代码文件时将会自动触发这3个工具的自动检测。
@@ -82,9 +84,11 @@ go install
 ### `golint`的配置
 
 1. 随后在`Goland`的`Tools` - `File Watchers`配置下，通过复制`go fmt`的配置
+
     ![](/images/WX20190619-201818@2x.jpg)
 
 1. 修改`Name`, `Program`, `Arguments`三项配置，其中`Arguments`需要加上`-set_exit_status`参数，如图所示：
+
     ![](/images/WX20190619-201304@2x.jpg)
 
 1. 保存即可，随后在代码编写中执行保存操作时将会自动触发`golint`工具检测。
