@@ -1,8 +1,9 @@
-
+[TOC]
 # 服务性能分析
 
 `GF`框架的`Web Server`提供了非常强大和简便的服务性能分析功能，内部完美集成了`pprof`性能分析工具，可以在任何时候通过`EnablePProf`方法启用性能分析特性，并可自定义性能分析工具页面路由地址，不传递路由地址时，默认URI地址为`/debug/pprof`。
 
+## 启用`PProf`
 我们来看一个简单的例子：
 ```go
 package main
@@ -29,8 +30,11 @@ func main() {
 /debug/pprof/symbol
 /debug/pprof/trace
 ```
-其中`/debug/pprof/*action`为页面访问的路由，其他几个地址为`go tool pprof`命令准备的。简单的性能分析我们直接访问`/debug/pprof`地址即可，内容如下：
-1. pprof页面
+其中`/debug/pprof/*action`为页面访问的路由，其他几个地址为`go tool pprof`命令准备的。
+
+## `PProf`页面
+简单的性能分析我们直接访问`/debug/pprof`地址即可，内容如下：
+1. `pprof`页面
 
     ![](/images/Selection_005.png)
 
@@ -38,12 +42,13 @@ func main() {
 
     ![](/images/Selection_006.png)
 
-1. 当前进程中的goroutine详情
+1. 当前进程中的`goroutine`详情
 
     ![](/images/Selection_007.png)
 
+## 性能采集分析
 
-如果想要进行详细的性能分析，基本上离不开```go tool pprof```命令行工具的支持，在开启性能分析支持后，我们可以使用以下命令执行性能采集分析：
+如果想要进行详细的性能分析，基本上离不开`go tool pprof`命令行工具的支持，在开启性能分析支持后，我们可以使用以下命令执行性能采集分析：
 ```
 go tool pprof "http://127.0.0.1:8199/debug/pprof/profile"
 ```
