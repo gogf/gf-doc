@@ -1,7 +1,7 @@
 
 # 服务性能分析
 
-ghttp包提供了非常强大和简便的服务性能分析功能，内部完美集成了```pprof```性能分析工具，可以在任何时候通过```EnablePProf```方法启用性能分析特性，并可自定义性能分析工具页面路由地址，不传递路由地址时，默认URI地址为```/debug/pprof```。
+`GF`框架的`Web Server`提供了非常强大和简便的服务性能分析功能，内部完美集成了`pprof`性能分析工具，可以在任何时候通过`EnablePProf`方法启用性能分析特性，并可自定义性能分析工具页面路由地址，不传递路由地址时，默认URI地址为`/debug/pprof`。
 
 我们来看一个简单的例子：
 ```go
@@ -21,7 +21,7 @@ func main() {
     s.Run()
 }
 ```
-这个例子使用了```s.EnablePProf()```启用了性能分析，默认会自动注册以下几个路由规则：
+这个例子使用了`s.EnablePProf()`启用了性能分析，默认会自动注册以下几个路由规则：
 ```html
 /debug/pprof/*action
 /debug/pprof/cmdline
@@ -29,7 +29,7 @@ func main() {
 /debug/pprof/symbol
 /debug/pprof/trace
 ```
-其中```/debug/pprof/*action```为页面访问的路由，其他几个地址为```go tool pprof```命令准备的。简单的性能分析我们直接访问```/debug/pprof```地址即可，内容如下：
+其中`/debug/pprof/*action`为页面访问的路由，其他几个地址为`go tool pprof`命令准备的。简单的性能分析我们直接访问`/debug/pprof`地址即可，内容如下：
 1. pprof页面
 
     ![](/images/Selection_005.png)
@@ -47,7 +47,7 @@ func main() {
 ```
 go tool pprof "http://127.0.0.1:8199/debug/pprof/profile"
 ```
-执行后pprof工具经过约30秒左右的接口信息采集（这30秒期间WebServer应当有流量进入，我们这里不停地访问hello world页面以作测试），然后生成性能分析报告，随后可以通过```top10```/```web```等pprof命令查看报告结果，更多命令可使用```go tool pprof```查看。关于pprof的详细使用介绍，请查看golang官方：[blog.golang.org/profiling-go-programs](https://blog.golang.org/profiling-go-programs)
+执行后`pprof`工具经过约30秒左右的接口信息采集（这30秒期间`WebServer`应当有流量进入，我们这里不停地访问hello world页面以作测试），然后生成性能分析报告，随后可以通过`top10`/`web`等pprof命令查看报告结果，更多命令可使用```go tool pprof```查看。关于`pprof`的详细使用介绍，请查看golang官方：[blog.golang.org/profiling-go-programs](https://blog.golang.org/profiling-go-programs)
 
 本示例中的命令行性能分析结果如下：
 ```html
@@ -78,6 +78,6 @@ Failed to execute dot. Is Graphviz installed? Error: exec: "dot": executable fil
 (pprof) web
 (pprof)
 ```
-其中```web```命令用以图形展示接口之间的调用关系以及性能情况，但是需要安装```Graphviz```图形化工具，以我目前的系统为ubuntu为例，直接执行```sudo apt-get install graphviz```命令即可安装完成图形化工具，随后再次使用web命令，最终生成以下图表：
+其中`web`命令用以图形展示接口之间的调用关系以及性能情况，但是需要安装`Graphviz`图形化工具，以我目前的系统为`Ubuntu`为例，直接执行`sudo apt-get install graphviz`命令即可安装完成图形化工具，随后再次使用`web`命令，最终生成以下图表：
 
 ![](/images/pprof001.png)
