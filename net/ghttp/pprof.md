@@ -3,7 +3,7 @@
 
 `GF`框架的`Web Server`提供了非常强大和简便的服务性能分析功能，内部完美集成了`pprof`性能分析工具，可以在任何时候通过`EnablePProf`方法启用性能分析特性，并可自定义性能分析工具页面路由地址，不传递路由地址时，默认URI地址为`/debug/pprof`。
 
-## 启用`PProf`
+## `PProf`启用
 我们来看一个简单的例子：
 ```go
 package main
