@@ -14,7 +14,7 @@
     Path    = "/var/log/my-app"
     Level   = "all"
     Stdout  = false
-    CtxKeys = ["Trace-Id", "Span-Id"]
+    CtxKeys = ["Trace-Id"]
 ```
 其中`CtxKeys`用于配置需要从`context.Context`接口对象中读取并输出的键名。
 
@@ -30,7 +30,6 @@ g.Log().Ctx(ctx).Error("runtime error")
 // Stack:
 // ...
 ```
-我们推荐使用`g.Log()`方法获取单例对象，该方法内部会自动读取配置文件并初始化单例对象，该初始化操作仅会执行一次。
 
 
 
