@@ -75,21 +75,25 @@ func Config(name...string) *gcfg.Config
 ```go
 func Cfg(name ...string) *gcfg.Config
 ```
+该单例对象将会自动读取默认配置文件`config.toml`并缓存，配置文件在外部被修改时将会自动刷新缓存。
 
 ### (单例) 日志管理对象
 ```go
 func Log(name ...string) *glog.Logger
 ```
+该单例对象将会自动读取默认配置文件中的`logger`配置项，并只会初始化一次日志对象。
 
 ### (单例) 模板引擎对象
 ```go
 func View(name ...string) *gview.View
 ```
+该单例对象将会自动读取默认配置文件中的`viewer`配置项，并只会初始化一次模板引擎对象。
 
 ### (单例) `WEB Server`
 ```go
 func Server(name ...interface{}) *ghttp.Server
 ```
+该单例对象将会自动读取默认配置文件中的`server`配置项，并只会初始化一次模板引擎对象。
 
 ### (单例) `TCP Server`
 ```go
@@ -105,11 +109,13 @@ func UdpServer(name ...interface{}) *gudp.Server
 ```go
 func DB(name ...string) *gdb.Db
 ```
+该单例对象将会自动读取默认配置文件中的`database`配置项，并只会初始化一次模板引擎对象。
 
 ### (单例) `Redis`客户端对象
 ```go
 func Redis(name ...string) *gredis.Redis
 ```
+该单例对象将会自动读取默认配置文件中的`redis`配置项，并只会初始化一次模板引擎对象。
 
 ### (单例) 资源管理对象
 ```go
