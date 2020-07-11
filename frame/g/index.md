@@ -111,6 +111,11 @@ func DB(name ...string) *gdb.Db
 ```
 该单例对象将会自动读取默认配置文件中的`database`配置项，并只会初始化一次模板引擎对象。
 
+此外，可以通过以下方法在默认数据库上创建一个`Model`对象：
+```go
+func Model(tables string, db ...string) *gdb.Model
+```
+
 ### (单例) `Redis`客户端对象
 ```go
 func Redis(name ...string) *gredis.Redis

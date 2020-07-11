@@ -38,6 +38,11 @@ https://godoc.org/github.com/gogf/gf/os/gview
 
 
 ### 示例1，解析模板文件
+`index.tpl`
+```html
+id:{{.id}}, name:{{.name}}
+```
+`main.go`
 ```go
 package main
 
@@ -58,6 +63,8 @@ func main() {
 	s.Run()
 }
 ```
+执行后，访问 http://127.0.0.1:8199/template 可以看到解析后的内容为：`id:123, name:john`
+
 ### 示例2，解析模板内容
 ```go
 package main
