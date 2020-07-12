@@ -44,6 +44,12 @@ require github.com/gogf/gf latest
 golang版本 >= 1.11
 ```
 
+
+# 架构
+<div align=center>
+<a href="/images/arch.png?v=2" target="_blank"><img src="/images/arch.png?v=2" width="800"/></a>
+</div>
+
 # 模块
 
 1. **核心模块**
@@ -54,11 +60,7 @@ golang版本 >= 1.11
 
     社区模块主要由社区贡献并维护，大部分也是由`gf`主仓库的贡献者提供及维护，存放于`gogf`空间下，与`gf`主仓库处于同一级别。有的社区模块是从`gf`主仓库中剥离出来单独维护的模块，这些模块并不是特别常用，或者对外部依赖较重。
     
-# 架构
-<div align=center>
-<a href="/images/arch.png?v=2" target="_blank"><img src="/images/arch.png?v=2" width="800"/></a>
-</div>
-
+    
 # 性能
 
 以下是目前最流行的`WEB Server` Golang框架/类库性能测试结果。
