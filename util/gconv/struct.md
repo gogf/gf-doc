@@ -2,7 +2,7 @@
 
 # Struct转换
 
-项目中我们经常会遇到大量`struct`的使用，以及各种数据类型到`struct`的转换/赋值（特别是`json`/`xml`/各种协议编码转换的时候）。为提高编码及项目维护效率，`gconv`模块为各位开发者带来了极大的福利，为数据解析提供了更高的灵活度。
+项目中我们经常会遇到大量`struct`的使用，以及各种数据类型到`struct`的转换/赋值（特别是`json`/`xml`/各种协议编码转换）。为提高编码及项目维护效率，`gconv`模块为各位开发者带来了极大的福利，为数据解析提供了更高的灵活度。
 
 `gconv`模块执行`struct`转换的方法仅有两个，定义如下：
 ```go
@@ -25,7 +25,7 @@ func StructDeep(params interface{}, pointer interface{}, mapping ...map[string]s
     - 此外，如果`struct`的属性为复杂数据类型如`slice`,`map`,`strcut`那么会进行递归匹配赋值； 
 3. 如果匹配成功，那么将键值赋值给属性，如果无法匹配，那么忽略该键值；
 
-以下是几个匹配的示例：
+以下是几个`map`键名与`struct`属性名称的示例：
 ```html
 map键名    struct属性     是否匹配
 name       Name           match
@@ -41,9 +41,9 @@ nick_name  Nick_Name      match
 nick name  Nick_Name      match
 ```
 
-## 自动初始化
+## 自动创建对象
 
-当给定的`pointer`参数类型为`**struct`时，`Struct`方法内部将会自动进行初始化创建对象，并修改传递变量指向的指针地址。这种自动对象初始化的方式，对于Golang的`GC`来说比较友好，防止开发者创建过多无意义的临时对象。
+当给定的`pointer`参数类型为`**struct`时，`Struct`方法内部将会自动创建该`struct`对象，并修改传递变量指向的指针地址。
 
 ```go
 package main
@@ -58,13 +58,12 @@ func main() {
 		Uid  int
 		Name string
 	}
-	user := (*User)(nil)
 	params := g.Map{
 		"uid":  1,
 		"name": "john",
 	}
-	err := gconv.Struct(params, &user)
-	if err != nil {
+	var user *User
+	if err := gconv.Struct(params, &user); err != nil {
 		panic(err)
 	}
 	g.Dump(user)
@@ -122,7 +121,7 @@ func main() {
 ```
 
 执行后，终端输出结果为：
-```html
+```json
 {
 	"Base": {
 		"id": 1,
@@ -189,7 +188,7 @@ func main() {
 可以看到，我们可以直接通过```Struct```方法将map按照默认规则绑定到struct上，也可以使用```struct tag```的方式进行灵活的设置。此外，```Struct```方法有第三个map参数，用于指定自定义的参数名称到属性名称的映射关系。
 
 执行后，输出结果为：
-```shell
+```json
 {
 	"Uid": 1,
 	"Name": "john",
@@ -208,9 +207,9 @@ func main() {
 }
 ```
 
-## 示例2，复杂类型
+## 示例2，复杂属性类型
 
-### 1. `struct`属性为`struct`/`*struct`
+### 1. 属性为`struct`/`*struct`
 
 属性支持struct对象或者struct对象指针(目标为指针时，转换时会自动初始化)转换。
 
@@ -259,7 +258,7 @@ func main() {
 
 执行后，输出结果为：
 
-```html
+```json
 {
 	"Scores": {
 		"Name": "john",
@@ -276,7 +275,7 @@ func main() {
 
 
 
-### 2. `struct`属性为`slice`，数值为`slice`
+### 2. 属性为`slice`，数值为`slice`
 
 ```go
 package main
@@ -321,7 +320,7 @@ func main() {
 
 执行后，输出结果为：
 
-```html
+```json
 {
 	"Scores": [
 		{
@@ -336,7 +335,7 @@ func main() {
 }
 ```
 
-### 3. `struct`属性为`slice`，数值为`非slice`
+### 3. 属性为`slice`，数值为`非slice`
 
 ```go
 package main
@@ -374,7 +373,7 @@ func main() {
 ```
 执行后，输出结果为：
 
-```html
+```json
 {
 	"Scores": [
 		{
@@ -385,7 +384,7 @@ func main() {
 }
 ```
 
-### 4. `struct`属性为`[]*struct`
+### 4. 属性为`[]*struct`
 
 ```go
 package main
@@ -428,7 +427,7 @@ func main() {
 }
 ```
 执行后，输出结果为：
-```
+```json
 {
 	"Scores": [
 		{
