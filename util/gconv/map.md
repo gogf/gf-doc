@@ -13,6 +13,8 @@ func MapDeep(value interface{}, tags ...string) map[string]interface{}
 ```
 其中，`MapDeep`支持递归转换，即会递归转换属性中的`struct`/`*struct`对象。
 
+> 更多的`map`相关转换方法请参考接口文档：https://godoc.org/github.com/gogf/gf/util/gconv
+
 ### 示例1，基本示例
 ```go
 package main

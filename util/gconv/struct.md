@@ -16,6 +16,8 @@ func StructDeep(params interface{}, pointer interface{}, mapping ...map[string]s
 1. `mapping`为自定义的`map键名`到`strcut属性`之间的映射关系，此时`params`参数必须为map类型，否则该参数无意义；
 1. `StructDeep`相比较于`Struct`方法，区别是支持递归转换，即会同时递归转换其属性中的结构体对象，特别用于转换带有继承结构的自定义`struct`，详见后续示例；
 
+> 更多的`struct`相关转换方法请参考接口文档：https://godoc.org/github.com/gogf/gf/util/gconv
+
 ## 转换规则
 `gconv`模块的`struct`转换特性非常强大，支持任意数据类型到`struct`属性的映射转换。在没有提供自定义`mapping`转换规则的情况下，默认的转换规则如下：
 1. `struct`中需要匹配的属性必须为**`公开属性`**(首字母大写)；

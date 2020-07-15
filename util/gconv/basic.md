@@ -1,6 +1,9 @@
 # 基本类型
 
 常用基本类型的转换方法比较简单，我们这里使用一个例子来演示转换方法的使用及效果。
+
+> 更多的类型转换方法请参考接口文档：https://godoc.org/github.com/gogf/gf/util/gconv
+
 ```go
 package main
 
