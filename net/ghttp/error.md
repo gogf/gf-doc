@@ -22,14 +22,15 @@
 
 `HTTP`执行流程中产生`panic`异常时，默认处理是记录到`Server`的日志文件中。当然，开发者也可以通过注册中间件方式手动捕获，然后自定义相关的错误处理。这一操作其实在中间件章节的示例中也有介绍，我们这里来再仔细说明下。
 
-### 获取异常
+### 相关方法
 
-获取异常我们通过`Request`对象中的`GetError`方法获取：
+异常的捕获我们通过`Request`对象中的`GetError`方法获取：
 ```go
 // GetError returns the error occurs in the procedure of the request.
 // It returns nil if there's no error.
 func (r *Request) GetError() error
 ```
+该方法往往使用在流程控制组件中，如后置中间件或者`HOOK`钩子方法中。
 
 ### 使用示例
 
