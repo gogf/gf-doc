@@ -62,6 +62,7 @@
         * [内存存储](os/gsession/memory.md)
         * [Redis存储](os/gsession/redis.md)
     * [配置管理](net/ghttp/config.md)
+    * [错误处理](net/ghttp/error.md)
     * [HTTP客户端](#)
         * [Client](net/ghttp/client/index.md)
         * [工具方法](net/ghttp/client/function.md)
