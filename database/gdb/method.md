@@ -47,8 +47,6 @@ Begin() (*TX, error)
 
 // 设置管理
 SetDebug(debug bool)
-GetQueriedSqls() []*Sql
-PrintQueriedSqls()
 SetMaxIdleConns(n int)
 SetMaxOpenConns(n int)
 SetConnMaxLifetime(n int)
