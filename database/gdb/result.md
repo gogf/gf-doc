@@ -15,7 +15,7 @@ type Result   []Record               // 返回数据表记录列表
 1. `Result`表示数据表记录列表，`Record`表示一条数据表记录，`Value`表示记录中的一条键值数据。
 1. `Value`是`*gvar.Var`类型的别名类型，方便于后续的数据类型转换。
 
-# Record记录处理
+# `Record`记录处理
 
 接口文档：
 https://godoc.org/github.com/gogf/gf/database/gdb
@@ -94,7 +94,7 @@ Nick-Name  Nick_Name      match
 
 
 
-# Result结果集处理
+# `Result`结果集处理
 
 `Result/Record`数据类型根据数据结果集操作的需要，往往需要根据记录中**特定的字段**作为键名进行数据检索，因此它包含多个用于转换`Map/List`的方法，同时也包含了常用数据结构`JSON/XML`的转换方法。
 
