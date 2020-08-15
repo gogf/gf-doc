@@ -45,13 +45,13 @@ package packed
 import "github.com/gogf/gf/os/gres"
 
 func init() {
-	if err := gres.Add("1f8b08000000000002ffb45a095c4cebfb7f51d2284a515"); err != nil {
+	if err := gres.Add("H4sIAAAAAAAC/5y8c5Bl0Zbuu9O2bVaq0rZZ6Urbtm3bNnfatipto9"); err != nil {
 		panic(err)
 	}
 }
 ```
 
-可以看到，生成的`Go`文件中通过`gres.Add`方法将资源文件的二进制内容添加到默认的资源管理器中，该方法的参数是压缩过后的十六进制字符串，将会在程序启动的时候做解压并在内存中生成一个文件树对象，便于在运行时快速操作文件。
+可以看到，生成的`Go`文件中通过`gres.Add`方法将资源文件的二进制内容添加到默认的资源管理器中，该方法的参数是压缩过后的BASE6字符串，将会在程序启动的时候做解压并在内存中生成一个文件树对象，便于在运行时快速操作文件。
 
 ## 2. 使用打包的`Go`文件
 
