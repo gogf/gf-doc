@@ -34,13 +34,13 @@ EXAMPLES
 
 比较推荐的方式是将`Go`文件直接生成到`boot`启动目录，并设置生成`Go`文件的包名为`boot`，这样该资源文件将会被自动引入到项目中。我们将项目的`config,public,template`三个目录的文件打包到`Go`文件，打包命令为：
 ```
-gf pack config,public,template packed/data.go -n boot
+gf pack config,public,template packed/data.go -n packed
 ```
 
 
 生成的`Go`文件内容类似于：
 ```go
-package boot
+package packed
 
 import "github.com/gogf/gf/os/gres"
 
@@ -55,12 +55,28 @@ func init() {
 
 ## 2. 使用打包的`Go`文件
 
-由于项目的`main`入口程序文件会引入`boot`包，例如像这样（`module`名称为`my-app`）：
+### 1) 在`boot`包中优先引入`packed`资源包
+在项目的`boot`程序启动设置包中自动引入`packed`资源包，并且应当作为第一个引入的包，以便于其他引入的包在初始化时（`init`方法中）便能使用到资源内容，例如像这样（`module`名称为`my-app`）：
 ```go
 import (
-	_ "my-app/boot"
+    _ "my-app/packed"
+    
+    // 其他包
 )
 ```
+这里建议引入`packed`包和其他包之间加入一个空行以作区分，特别是`Goland` IDE的`import`插件不会将引入包进行自动排序。
+
+### 2) 在`main`包中优先引入`boot`包
+由于项目的`main`入口程序文件会引入`boot`包，并且应当作为第一个引入的包：
+```go
+import (
+    _ "my-app/boot"
+    
+    // 其他包
+)
+```
+这里建议引入`boot`包和其他包之间加入一个空行以作区分，特别是`Goland` IDE的`import`插件不会将引入包进行自动排序。
+
 随后可以在项目的任何地方使用`gres`模块来访问打包的资源文件。
 
 > 如果使用`GF`推荐的[项目目录结构](start/index.md)，在目录结构中会存在`boot`目录（对应包名也是`boot`），用于程序启动设置。因此如果将`Go`文件生成到`boot`目录下，那么将会被自动编译进可执行文件中。

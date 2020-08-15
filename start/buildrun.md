@@ -20,7 +20,8 @@ package main
 
 import (
 	_ "github.com/gogf/gf-demos/boot"
-	_ "github.com/gogf/gf-demos/router"
+  _ "github.com/gogf/gf-demos/router"
+  
 	"github.com/gogf/gf/frame/g"
 )
 
@@ -30,6 +31,8 @@ func main() {
 ```
 
 需要非常注意：`boot`包的引入往往需要在`main`包中的最顶层位置，以保证应用的初始化最开始进行。特别是一些单例对象的初始化/配置管理操作往往放在`boot`包中，这样其他包才能正常使用到这些单例对象。
+
+这里建议引入`boot`包、`router`包和其他包之间加入一个空行以作区分，特别是`Goland` IDE的`import`插件不会将引入包进行自动排序。
 
 # 编译运行
 我们可以使用`IDE`执行运行，也可以使用以下命令编译运行。
