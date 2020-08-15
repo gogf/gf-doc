@@ -8,25 +8,25 @@
 `gf pack`的命令介绍如下：
 ```
 $ gf pack -h
-USAGE
+USAGE 
     gf pack SRC DST
 
 ARGUMENT
     SRC  source path for packing, which can be multiple source paths.
-    DST  destination file path for packed file. if extension of the filename is ".go" and "-n" option is given,
+    DST  destination file path for packed file. if extension of the filename is ".go" and "-n" option is given, 
          it enables packing SRC to go file, or else it packs SRC into a binary file.
 
 OPTION
-    -n, --name      package name for output go file
+    -n, --name      package name for output go file, it's set as its directory name if no name passed
     -p, --prefix    prefix for each file packed into the resource file
 
 EXAMPLES
     gf pack public data.bin
     gf pack public,template data.bin
-    gf pack public,template boot/data.go -n=boot
-    gf pack public,template,config resource/resource.go -n=resource
-    gf pack public,template,config resource/resource.go -n=resource -p=/var/www/my-app
-    gf pack /var/www/public resource/resource.go -n=resource
+    gf pack public,template packed/data.go
+    gf pack public,template,config packed/data.go
+    gf pack public,template,config packed/data.go -n=packed -p=/var/www/my-app
+    gf pack /var/www/public packed/data.go -n=packed
 ```
 
 
@@ -34,7 +34,7 @@ EXAMPLES
 
 比较推荐的方式是将`Go`文件直接生成到`boot`启动目录，并设置生成`Go`文件的包名为`boot`，这样该资源文件将会被自动引入到项目中。我们将项目的`config,public,template`三个目录的文件打包到`Go`文件，打包命令为：
 ```
-gf pack config,public,template boot/data.go -n boot
+gf pack config,public,template packed/data.go -n boot
 ```
 
 
