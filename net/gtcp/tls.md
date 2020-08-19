@@ -11,8 +11,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/gtcp"
-	"github.com/gogf/gf/os/glog"
 	"github.com/gogf/gf/util/gconv"
 	"time"
 )
@@ -31,7 +31,7 @@ func main() {
 			}
 			if err != nil {
 				// if client closes, err will be: EOF
-				glog.Error(err)
+				g.Log().Error(err)
 				break
 			}
 		}
@@ -47,7 +47,7 @@ func main() {
 	defer conn.Close()
 	for i := 0; i < 10; i++ {
 		if err := conn.Send([]byte(gconv.String(i))); err != nil {
-			glog.Error(err)
+			g.Log().Error(err)
 		}
 		time.Sleep(time.Second)
 		if i == 5 {
@@ -71,7 +71,6 @@ package main
 import (
 	"fmt"
 	"github.com/gogf/gf/net/gtcp"
-	"github.com/gogf/gf/os/glog"
 	"github.com/gogf/gf/util/gconv"
 	"time"
 )
@@ -90,7 +89,7 @@ func main() {
 			}
 			if err != nil {
 				// if client closes, err will be: EOF
-				glog.Error(err)
+				g.Log().Error(err)
 				break
 			}
 		}
@@ -112,7 +111,7 @@ func main() {
 	defer conn.Close()
 	for i := 0; i < 10; i++ {
 		if err := conn.Send([]byte(gconv.String(i))); err != nil {
-			glog.Error(err)
+			g.Log().Error(err)
 		}
 		time.Sleep(time.Second)
 		if i == 5 {

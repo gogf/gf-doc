@@ -1,4 +1,4 @@
-`gudp`模块提供了非常简便易用的```gudp.Conn```链接操作对象。
+`gudp`模块提供了非常简便易用的`gudp.Conn`链接操作对象。
 
 **使用方式**：
 ```go
@@ -37,7 +37,7 @@ type Conn
 
 # 基本介绍
 
-`gudp.Conn`的操作绝大部分类似于gtcp的操作方式（大部分的方法名称也相同），但由于UDP是面向非连接的协议，因此`gudp.Conn`（底层通信端口）也只能完成最多一次数据写入和读取，客户端下一次再与目标服务端进行通信的时候，将需要创建新的连接进行通信。
+`gudp.Conn`的操作绝大部分类似于`gtcp`的操作方式（大部分的方法名称也相同），但由于`UDP`是面向非连接的协议，因此`gudp.Conn`（底层通信端口）也只能完成最多一次数据写入和读取，客户端下一次再与目标服务端进行通信的时候，将需要创建新的`Conn`对象进行通信。
 
 # 使用示例
 
@@ -45,49 +45,49 @@ type Conn
 package main
 
 import (
-    "fmt"
-    "time"
-    "github.com/gogf/gf/os/glog"
-    "github.com/gogf/gf/os/gtime"
-    "github.com/gogf/gf/net/gudp"
+	"fmt"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/gudp"
+	"github.com/gogf/gf/os/gtime"
+	"time"
 )
 
 func main() {
-    // Server
-    go gudp.NewServer("127.0.0.1:8999", func(conn *gudp.Conn) {
-        defer conn.Close()
-        for {
-            data, err := conn.Recv(-1)
-            if len(data) > 0 {
-                if err := conn.Send(append([]byte("> "), data...)); err != nil {
-                    glog.Error(err)
-                }
-            }
-            if err != nil {
-                glog.Error(err)
-            }
-        }
-    }).Run()
+	// Server
+	go gudp.NewServer("127.0.0.1:8999", func(conn *gudp.Conn) {
+		defer conn.Close()
+		for {
+			data, err := conn.Recv(-1)
+			if len(data) > 0 {
+				if err := conn.Send(append([]byte("> "), data...)); err != nil {
+					g.Log().Error(err)
+				}
+			}
+			if err != nil {
+				g.Log().Error(err)
+			}
+		}
+	}).Run()
 
-    time.Sleep(time.Second)
+	time.Sleep(time.Second)
 
-    // Client
-    for {
-        if conn, err := gudp.NewConn("127.0.0.1:8999"); err == nil {
-            if b, err := conn.SendRecv([]byte(gtime.Datetime()), -1); err == nil {
-                fmt.Println(string(b), conn.LocalAddr(), conn.RemoteAddr())
-            } else {
-                glog.Error(err)
-            }
-            conn.Close()
-        } else {
-            glog.Error(err)
-        }
-        time.Sleep(time.Second)
-    }
+	// Client
+	for {
+		if conn, err := gudp.NewConn("127.0.0.1:8999"); err == nil {
+			if b, err := conn.SendRecv([]byte(gtime.Datetime()), -1); err == nil {
+				fmt.Println(string(b), conn.LocalAddr(), conn.RemoteAddr())
+			} else {
+				g.Log().Error(err)
+			}
+			conn.Close()
+		} else {
+			g.Log().Error(err)
+		}
+		time.Sleep(time.Second)
+	}
 }
 ```
-该示例与```gtcp.Conn```中的通信示例类似，不同的是，客户端与服务端无法保持连接，每次通信都需要创建的新的连接对象进行通信。
+该示例与`gtcp.Conn`中的通信示例类似，不同的是，客户端与服务端无法保持连接，每次通信都需要创建的新的连接对象进行通信。
 
 执行后，输出结果如下：
 ```html

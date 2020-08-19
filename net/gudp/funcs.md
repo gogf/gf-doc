@@ -20,4 +20,7 @@ func SendRecvPkg(addr string, data []byte, retry ...Retry) ([]byte, error)
 func SendRecvPkgWithTimeout(addr string, data []byte, timeout time.Duration, retry ...Retry) ([]byte, error)
 ```
 
-`gudp`的工具相对比较简单。其中，`NewNetConn`方法用于创建标准库的`net.UDPConn`通信对象；`Send`与`SendRecv`用于根据给定的UDP Server地址直接地进行UDP通信，数据写入及读取。
+`gudp`的工具相对比较简单。
+1. 其中，`NewNetConn`方法用于创建标准库的`net.UDPConn`通信对象。
+1. `Send`与`SendRecv`用于根据给定的`UDP Server`地址直接地进行`UDP`通信，数据写入及读取。
+1. `*Pkg`方法用于简便的简单包协议数据传输。
