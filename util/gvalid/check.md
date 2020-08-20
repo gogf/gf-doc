@@ -1,11 +1,11 @@
 [TOC]
 
+# 单数据校验 - Check
+
 接口文档：https://godoc.org/github.com/gogf/gf/util/gvalid
 ```go
 func Check(value interface{}, rules string, msgs interface{}, params ...interface{}) *Error
 ```
-
-# 单数据校验 - Check
 
 单数据校验比较简单，我们来看几个示例。
 

@@ -63,8 +63,6 @@ func main() {
 
 使用`gvalid tag`设置的规则，其校验结果是顺序性的。
 
-> 从`v1.8.0`版本开始，也可以使用`valid`/`v`标签别名。
-
 ```go
 package main
 
@@ -74,10 +72,10 @@ import (
 )
 
 type User struct {
-    Uid   int    `valid:"uid      @integer|min:1"`
-    Name  string `valid:"name     @required|length:6,30#请输入用户名称|用户名称长度非法"`
-    Pass1 string `valid:"password1@required|password3"`
-    Pass2 string `valid:"password2@required|password3|same:password1#||两次密码不一致，请重新输入"`
+    Uid   int    `v:"uid      @integer|min:1"`
+    Name  string `v:"name     @required|length:6,30#请输入用户名称|用户名称长度非法"`
+    Pass1 string `v:"password1@required|password3"`
+    Pass2 string `v:"password2@required|password3|same:password1#||两次密码不一致，请重新输入"`
 }
 
 func main() {
