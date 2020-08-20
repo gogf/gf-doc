@@ -58,7 +58,7 @@ func main() {
 
 在以上示例中，`Age`属性由于默认值`0`的存在，因此会引起`required`规则的失效，因此这里没有使用`required`规则而是使用`between`规则来进行校验。
 
-### 示例2，使用`gvalid tag`绑定规则及提示信息
+### 示例2，使用`gvalid tag`绑定规则及错误信息
 
 
 使用`gvalid tag`设置的规则，其校验结果是顺序性的。
@@ -195,6 +195,62 @@ func main() {
 
 
 
+
+# 可选校验规则
+
+当给定的数据校验规则中不包含`required*`规则时，表示该规则不是一个必须规则，当属性值为`nil`或者`空字符串`时，将会忽略其校验。
+
+## 示例1，空字符串
+```go
+type Params struct {
+	Page      int    `v:"required|min:1         # page is required"`
+	Size      int    `v:"required|between:1,100 # size is required"`
+	ProjectId string `v:"between:1,10000        # project id must between :min, :max"`
+}
+obj := &Params{
+	Page: 1,
+	Size: 10,
+}
+err := gvalid.CheckStruct(obj, nil)
+fmt.Println(err)
+// Output:
+// <nil>
+```
+
+## 示例2，空指针属性
+```go
+type Params struct {
+	Page      int       `v:"required|min:1         # page is required"`
+	Size      int       `v:"required|between:1,100 # size is required"`
+	ProjectId *gvar.Var `v:"between:1,10000        # project id must between :min, :max"`
+}
+obj := &Params{
+	Page: 1,
+	Size: 10,
+}
+err := gvalid.CheckStruct(obj, nil)
+fmt.Println(err)
+// Output:
+// <nil>
+```
+
+## 示例3，空整型属性
+需要注意的是，如果键值为`0`或者`false`，将仍然会被校验。
+```go
+type Params struct {
+	Page      int    `v:"required|min:1         # page is required"`
+	Size      int    `v:"required|between:1,100 # size is required"`
+	ProjectId int `v:"between:1,10000        # project id must between :min, :max"`
+}
+obj := &Params{
+	Page: 1,
+	Size: 10,
+}
+err := gvalid.CheckStruct(obj, nil)
+fmt.Println(err)
+// Output:
+// project id must between 1, 10000
+```
 
 
 
