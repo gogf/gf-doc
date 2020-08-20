@@ -1,6 +1,6 @@
 [TOC]
 
-# 单数据校验 - Check
+# 单数据校验 - `Check`
 
 接口文档：https://godoc.org/github.com/gogf/gf/util/gvalid
 ```go
