@@ -148,3 +148,41 @@ func main() {
 可以看到，多个文件上传提交参数格式为`参数名=@file:xxx&参数名=@file:xxx...`，也可以使用`参数名[]=@file:xxx&参数名[]=@file:xxx...`的形式。
 
 首先运行服务端程序之后，我们再运行这个上传客户端（注意修改上传的文件路径为本地真实文件路径），执行后可以看到文件被成功上传到服务器的指定路径下。
+
+
+
+
+
+
+## 自定义上传文件名称
+
+很简单，修改`FileName`属性即可。
+
+```go
+s := g.Server()
+s.BindHandler("/upload", func(r *ghttp.Request) {
+    file := r.GetUploadFile("TestFile")
+    if file == nil {
+        r.Response.Write("empty file")
+        return
+    }
+    file.Filename = "MyCustomFileName.txt"
+    fileName, err := file.Save(gfile.TempDir())
+    if err != nil {
+        r.Response.Write(err)
+        return
+    }
+    r.Response.Write(fileName)
+})
+s.SetPort(8999)
+s.Run()
+```
+
+
+
+
+
+
+
+
+
