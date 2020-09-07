@@ -12,6 +12,12 @@
 // 例如：查询缓存时设置名称，清理缓存时可以给定清理的缓存名称进行精准清理。
 func (m *Model) Cache(duration time.Duration, name ... string) *Model
 ```
+
+# 缓存对象
+
+
+可以通过`GetCache() *gcache.Cache` 接口方法获得该缓存对象，并通过返回的对象实现自定义的各种缓存操作，例如：`g.DB().GetCache().Keys()`。
+
 # 使用示例
 
 ## 数据表结构
