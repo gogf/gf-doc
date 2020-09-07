@@ -56,7 +56,7 @@ if tx, err := db.Begin(); err == nil {
     fmt.Println(r, err)
 }
 ```
-其他链式操作请参考【[链式操作](database/gdb/chaining/index.md)】章节。
+其他链式操作请参考【[链式操作](database/gdb/model/index.md)】章节。
 
 ## `Transaction`闭包操作
 

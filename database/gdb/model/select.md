@@ -171,7 +171,7 @@ r, err := db.Table("student").Order("class asc,course asc,score desc").All()
 r, err := db.Table("user").Fields("COUNT(*) total,age").Group("age").Having("total>100").All()
 
 // SELECT * FROM `student` ORDER BY class HAVING score>60
-r, err := db.Table("student").Order("class").Having("score>60").All()
+r, err := db.Table("student").Order("class").Having("score>?", 60).All()
 ```
 
 ## 自定义数据表别名
