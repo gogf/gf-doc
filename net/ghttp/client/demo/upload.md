@@ -4,6 +4,7 @@
 
 `GF`支持非常方便的表单文件上传功能，并且HTTP客户端对上传功能进行了必要的封装并极大简化了上传功能调用。
 
+> 注意哦：上传文件大小受到`ghttp.Server`的`ClientMaxBodySize`配置影响：https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig 默认支持的上传文件大小为`8MB`。
 ## 服务端
 
 https://github.com/gogf/gf/blob/master/.example/net/ghttp/client/upload/server.go
