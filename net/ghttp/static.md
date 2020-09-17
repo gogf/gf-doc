@@ -1,7 +1,7 @@
 [TOC]
 
 # 静态文件服务配置
-默认情况下，`gf`框架已开启了静态文件服务功能，但是需要开发者配置**静态文件目录**才能提供服务。
+默认情况下，`gf Server`关闭了静态文件服务的功能，如果开发者配置了**静态文件目录**，那么静态文件服务将会自动开启。
 
 静态文件服务涉及到的常用配置方法如下：
 ```go
@@ -34,7 +34,7 @@ func (s *Server) SetRewriteMap(rewrites map[string]string)
 1. `SetIndexFolder`为设置是否在用户访问文件目录，且没有在目录下检索到`IndexFiles`时，则展示目录下的文件列表，默认为关闭；
 1. `SetServerRoot`为设置默认提供服务的静态文件目录，该目录会被自动添加到`SearchPath`中的第一个搜索路径；
 1. `AddSearchPath`为添加静态文件检索目录，可以有多个，按照文件目录添加的先后顺序执行优先级检索；
-1. `AddStaticPath`为添加URI与目录路径的映射关系，可以自定义静态文件目录的访问URI规则；
+1. `AddStaticPath`为添加`URI`与目录路径的映射关系，可以自定义静态文件目录的访问URI规则；
 1. `SetRewrite`/`SetRewriteMap`为重写规则设置（类似于`nginx`的`rewrite`），严格上来讲不仅仅是静态文件服务，当然也支持动态的路由注册的`rewrite`；
 
 > Tips: 设置静态文件服务的目录路径时，可以使用绝对路径，也可以使用相对路径，例如设置当前运行目录提供静态文件服务可以使用`SetServerRoot(".")`。
