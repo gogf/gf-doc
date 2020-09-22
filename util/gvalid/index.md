@@ -1,4 +1,3 @@
-[TOC]
 
 `gvalid`模块实现了非常强大的数据校验功能，内置了`40种`常用的校验规则，支持单数据多规则校验、多数据多规则批量校验、自定义错误信息、自定义正则校验、自定义校验规则注册、支持`struct tag`规则及提示信息绑定等特性，是目前功能最强大的`Go`数据校验模块。
 
@@ -12,7 +11,7 @@ https://godoc.org/github.com/gogf/gf/util/gvalid
 
 # 校验规则
 
-`40种`常用的校验规则：
+内置`40种`常用的校验规则：
 ```html
 required             格式：required                              说明：必需参数
 required-if          格式：required-if:field,value,...           说明：必需参数(当任意所给定字段值与所给值相等时，即：当field字段的值为value时，当前验证字段为必须参数)
