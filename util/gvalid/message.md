@@ -1,8 +1,10 @@
+[TOC]
+
 # 错误提示
 
 `gvalid`默认的错误提示是英文的，并且错误提示使用了`i18n`特性，也就是说我们可以通过配置`i18n`文件即可替换默认的错误提示。`i18n`国际化功能请参考【[gi18n (国际化处理)](i18n/gi18n/index.md)】章节。
 
-## 默认错误提示
+## 默认`i18n`错误提示
 
 默认的英文国际化语言配置文件参考：https://github.com/gogf/gf/tree/master/util/gvalid/i18n/en
 ```toml
@@ -49,6 +51,7 @@
 "gf.gvalid.rule.in"                   = "The :attribute value is not in acceptable range"
 "gf.gvalid.rule.not-in"               = "The :attribute value is not in acceptable range"
 "gf.gvalid.rule.regex"                = "The :attribute value is invalid"
+"gf.gvalid.rule.__default__"          = "The :attribute value is invalid"
 ```
 
 ## 中文错误提示
@@ -98,6 +101,16 @@
 "gf.gvalid.rule.in"                   = ":attribute 字段值不合法"
 "gf.gvalid.rule.not-in"               = ":attribute 字段值不合法"
 "gf.gvalid.rule.regex"                = ":attribute 字段值不合法"
+"gf.gvalid.rule.__default__"          = ":attribute 字段值不合法"
 ```
+
+
+## `__default__`错误提示
+
+当在`i18n`中找不到对应规则的错误提示时，将会使用`__default__`配置的错误提示信息。往往使用在自定义规则中。
+
+
+
+
 
 
