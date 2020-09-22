@@ -76,7 +76,51 @@ type Entity struct {
 ```
 其中，`EntityUser`, `EntityUserDetail`, `EntityUserScores`分别对应的是用户表、用户详情、用户学分数据表的数据模型。`Entity`是一个组合模型，对应的是一个用户的所有详细信息。
 
+## 数据写入
+写入数据时我们这里不涉及也不考虑分布式事务，只是简单的数据库事务即可。
+```go
+db.Transaction(func(tx *gdb.TX) error {
+    r, err := tx.Table(tableUser).Save(EntityUser{
+        Name: "john",
+    })
+    if err != nil {
+        return err
+    }
+    uid, err := r.LastInsertId()
+    if err != nil {
+        return err
+    }
+    _, err = tx.Table(tableUserDetail).Save(EntityUserDetail{
+        Uid:     int(uid),
+        Address: "Beijing DongZhiMen #66",
+    })
+    if err != nil {
+        return err
+    }
+    _, err = tx.Table(tableUserScores).Save(g.Slice{
+        EntityUserScores{Uid: int(uid), Score: 100},
+        EntityUserScores{Uid: int(uid), Score: 99},
+    })
+    return err
+})
+```
 
+## 数据查询
+
+```go
+// 定义用户列表
+var users []Entity
+// 查询用户基础数据
+err := db.Table("user").ScanList(&users, "User")
+// 查询用户详情数据
+err := db.Table("user_detail").
+       Where("uid", gdb.ListItemValues(users, "User", "Uid")).
+       ScanList(&users, , "UserDetail", "User", "uid:Uid")
+// 查询用户学分数据
+err := db.Table("user_detail").
+       Where("uid", gdb.ListItemValues(users, "User", "Uid")).
+       ScanList(&users, , "UserScores", "User", "uid:Uid")
+```
 
 
 
