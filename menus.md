@@ -172,7 +172,7 @@
             * [写入保存](database/gdb/model/insert-save.md)
             * [更新删除](database/gdb/model/update-delete.md)
             * [数据查询](database/gdb/model/select.md)
-            <!-- * [模型关联](database/gdb/model/association.md) -->
+            * [模型关联](database/gdb/model/association.md)
             * [对象输入](database/gdb/model/struct.md)
             * [字段过滤](database/gdb/model/fields-filter.md)
             * [字段获取](database/gdb/model/fields-retrieve.md)

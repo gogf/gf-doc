@@ -1,7 +1,5 @@
 [TOC]
 
-文档更新中。。。
-
 # 模型关联
 
 `gf`的`ORM`没有采用其他`ORM`常见的`BelongsTo`, `HasOne`, `HasMany`, `ManyToMany`这样的模型关联设计，这样的关联关系维护较繁琐，例如外键约束、额外的标签备注等，对开发者有一定的心智负担。
@@ -14,7 +12,7 @@
 
 ## 数据结构
 
-为简化示例，我们这里设计得表都尽可能简单，每张表仅包含2-3个字段，方便阐述关联关系即可。
+为简化示例，我们这里设计得表都尽可能简单，每张表仅包含3-4个字段，方便阐述关联关系即可。
 
 ### 1. 用户表
 ```sql
@@ -40,6 +38,7 @@ CREATE TABLE `user_scores` (
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
   uid int(10) unsigned NOT NULL,
   score int(10) unsigned NOT NULL,
+  course varchar(45) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
@@ -52,19 +51,20 @@ CREATE TABLE `user_scores` (
 ```go
 // 用户表
 type EntityUser struct {
-    Uid  int    `json:"uid"`
-    Name string `json:"name"`
+    Uid  int    `orm:"uid"`
+    Name string `orm:"name"`
 }
 // 用户详情
 type EntityUserDetail struct {
-    Uid     int    `json:"uid"`
-    Address string `json:"address"`
+    Uid     int    `orm:"uid"`
+    Address string `orm:"address"`
 }
 // 用户学分
 type EntityUserScores struct {
-    Id    int `json:"id"`
-    Uid   int `json:"uid"`
-    Score int `json:"score"`
+    Id     int    `orm:"id"`
+    Uid    int    `orm:"uid"`
+    Score  int    `orm:"score"`
+    Course string `orm:"course"`
 }
 // 组合模型，用户信息
 type Entity struct {
@@ -76,9 +76,9 @@ type Entity struct {
 其中，`EntityUser`, `EntityUserDetail`, `EntityUserScores`分别对应的是用户表、用户详情、用户学分数据表的数据模型。`Entity`是一个组合模型，对应的是一个用户的所有详细信息。
 
 ## 数据写入
-写入数据时我们这里不涉及也不考虑分布式事务，只是简单的数据库事务即可。
+写入数据时涉及到简单的数据库事务即可。
 ```go
-db.Transaction(func(tx *gdb.TX) error {
+err := db.Transaction(func(tx *gdb.TX) error {
     r, err := tx.Table(tableUser).Save(EntityUser{
         Name: "john",
     })
@@ -97,8 +97,8 @@ db.Transaction(func(tx *gdb.TX) error {
         return err
     }
     _, err = tx.Table(tableUserScores).Save(g.Slice{
-        EntityUserScores{Uid: int(uid), Score: 100},
-        EntityUserScores{Uid: int(uid), Score: 99},
+        EntityUserScores{Uid: int(uid), Score: 100, Course: "math"},
+        EntityUserScores{Uid: int(uid), Score: 99, Course: "physics"},
     })
     return err
 })
@@ -116,10 +116,72 @@ err := db.Table("user_detail").
        Where("uid", gdb.ListItemValues(users, "User", "Uid")).
        ScanList(&users, , "UserDetail", "User", "uid:Uid")
 // 查询用户学分数据
-err := db.Table("user_detail").
+err := db.Table("user_scores").
        Where("uid", gdb.ListItemValues(users, "User", "Uid")).
        ScanList(&users, , "UserScores", "User", "uid:Uid")
 ```
+是不是比较简单。这其中涉及到两个比较重要的方法：
+### 1. `ScanList`
+方法定义：
+```go
+// ScanList converts <r> to struct slice which contains other complex struct attributes.
+// Note that the parameter <listPointer> should be type of *[]struct/*[]*struct.
+// Usage example:
+//
+// type Entity struct {
+// 	   User       *EntityUser
+// 	   UserDetail *EntityUserDetail
+//	   UserScores []*EntityUserScores
+// }
+// var users []*Entity
+// or
+// var users []Entity
+//
+// ScanList(&users, "User")
+// ScanList(&users, "UserDetail", "User", "uid:Uid")
+// ScanList(&users, "UserScores", "User", "uid:Uid")
+// The parameters "User"/"UserDetail"/"UserScores" in the example codes specify the target attribute struct
+// that current result will be bound to.
+// The "uid" in the example codes is the table field name of the result, and the "Uid" is the relational
+// struct attribute name. It automatically calculates the HasOne/HasMany relationship with given <relation>
+// parameter.
+// See the example or unit testing cases for clear understanding for this function.
+func (m *Model) ScanList(listPointer interface{}, attributeName string, relation ...string) (err error)
+```
+该方法用于将查询到的数组数据绑定到指定的列表上，例如：
+1. `ScanList(&users, "User")`
+
+    表示将查询到的用户信息数组数据绑定到`users`列表中每一项的`User`属性上。
+
+1. `ScanList(&users, , "UserDetail", "User", "uid:Uid")`
+
+    表示将查询到用户详情数组数据绑定到`users`列表中每一项的`UserDetail`属性上，并且和另一个`User`对象属性通过`uid:Uid`的`字段:属性`关联，内部将会根据这一关联关系自动进行数据绑定。其中`uid:Uid`前面的`uid`表示查询结果字段中的`uid`字段，后面的`Uid`表示目标关联对象中的`Uid`属性。
+
+1. `ScanList(&users, , "UserScores", "User", "uid:Uid")`
+
+    表示将查询到用户详情数组数据绑定到`users`列表中每一项的`UserScores`属性上，并且和另一个`User`对象属性通过`uid:Uid`的`字段:属性`关联，内部将会根据这一关联关系自动进行数据绑定。由于`UserScores`是一个数组类型`[]*EntityUserScores`，因此该方法内部可以自动识别到`User`到`UserScores`其实是`1:N`的关系，自动完成数据绑定。
+
+### 2. `ListItemValues`
+方法定义：
+```go
+// ListItemValues retrieves and returns the elements of all item struct/map with key <key>.
+// Note that the parameter <list> should be type of slice which contains elements of map or struct,
+// or else it returns an empty slice.
+//
+// The parameter <list> supports types like:
+// []map[string]interface{}
+// []map[string]sub-map
+// []struct
+// []struct:sub-struct
+// Note that the sub-map/sub-struct makes sense only if the optional parameter <subKey> is given.
+func ListItemValues(list interface{}, key interface{}, subKey ...interface{}) (values []interface{})
+```
+
+该方法实际是`gutil.ListItemValues`的别名。
+当给定的列表中包含`struct`/`map`数据项时，用于获取指定属性/键名的数据值，构造成数组返回。
+
+`gdb.ListItemValues(users, "User", "Uid")`用于获取`users`数组中，每一个`User`属性项中的`Uid`属性，构造成`[]interface{}`数组返回。这里以便根据`uid`构造成`SELECT...IN...`查询。
+
 
 
 
