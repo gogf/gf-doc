@@ -45,6 +45,7 @@ CREATE TABLE `user_scores` (
 根据表定义，我们可以得知：
 1. 用户表与用户详情是`1:1`关系。
 1. 用户表与用户学分是`1:N`关系。
+1. 这里并没有演示`N:N`的关系，因为相比较于`1:N`的查询只是多了一次关联、或者一次查询，最终处理方式和`1:N`类似。
 
 那么`Golang`的模型可定义如下：
 ```go
@@ -143,7 +144,7 @@ err := db.Table("user_scores").
        ScanList(&users, , "UserScores", "User", "uid:Uid")
 ```
 是不是比较简单。这其中涉及到两个比较重要的方法：
-### 1. `ScanList`
+#### 1. `ScanList`
 方法定义：
 ```go
 // ScanList converts <r> to struct slice which contains other complex struct attributes.
@@ -183,7 +184,7 @@ func (m *Model) ScanList(listPointer interface{}, attributeName string, relation
 
     表示将查询到用户详情数组数据绑定到`users`列表中每一项的`UserScores`属性上，并且和另一个`User`对象属性通过`uid:Uid`的`字段:属性`关联，内部将会根据这一关联关系自动进行数据绑定。由于`UserScores`是一个数组类型`[]*EntityUserScores`，因此该方法内部可以自动识别到`User`到`UserScores`其实是`1:N`的关系，自动完成数据绑定。
 
-### 2. `ListItemValues`
+#### 2. `ListItemValues`
 方法定义：
 ```go
 // ListItemValues retrieves and returns the elements of all item struct/map with key <key>.
