@@ -2,9 +2,7 @@
 
 # 模型关联
 
-`gf`的`ORM`没有采用其他`ORM`常见的`BelongsTo`, `HasOne`, `HasMany`, `ManyToMany`这样的模型关联设计，这样的关联关系维护较繁琐，例如外键约束、额外的标签备注等，对开发者有一定的心智负担。
-
-`gf`框架一如既往地尝试着简化模型关联设计，不倾向于通过向模型结构体中注入过多复杂的标签内容，目标是使得模型关联查询尽可能得易于理解、使用便捷。
+`gf`的`ORM`没有采用其他`ORM`常见的`BelongsTo`, `HasOne`, `HasMany`, `ManyToMany`这样的模型关联设计，这样的关联关系维护较繁琐，例如外键约束、额外的标签备注等，对开发者有一定的心智负担。因此`gf`框架不倾向于通过向模型结构体中注入过多复杂的标签内容，一如既往地尝试着简化设计，目标是使得模型关联查询尽可能得易于理解、使用便捷。
 
 > 接下来关于`gf ORM`提供的模型关联实现，目前属于实验性特性。
 
@@ -107,16 +105,39 @@ err := db.Transaction(func(tx *gdb.TX) error {
 
 ## 数据查询
 
+### 单条数据记录
+```go
+// 定义用户列表
+var user *Entity
+// 查询用户基础数据
+// SELECT * FROM `user` WHERE `name`='john'
+err := db.Table("user").Scan(&user, "name", "john")
+if err != nil {
+    return err
+}
+// 查询用户详情数据
+// SELECT * FROM `user_detail` WHERE `uid`=1
+err := db.Table("user_detail").Scan(&user.UserDetail, "uid", user.Uid)
+// 查询用户学分数据
+// SELECT * FROM `user_scores` WHERE `uid`=1
+err := db.Table("user_scores").Scan(&user.UserScores, "uid", user.Uid)
+```
+查询单条模型数据比较简单，直接使用`Scan`方法即可，该方法会自动识别绑定查询结果到单个对象属性还是数据对象属性中。该方法在之前的章节中已经有介绍，因此这里不再赘述。
+
+### 多条数据记录
 ```go
 // 定义用户列表
 var users []Entity
 // 查询用户基础数据
+// SELECT * FROM `user`
 err := db.Table("user").ScanList(&users, "User")
 // 查询用户详情数据
+// SELECT * FROM `user_detail` WHERE `uid` IN(1,2)
 err := db.Table("user_detail").
        Where("uid", gdb.ListItemValues(users, "User", "Uid")).
        ScanList(&users, , "UserDetail", "User", "uid:Uid")
 // 查询用户学分数据
+// SELECT * FROM `user_scores` WHERE `uid` IN(1,2)
 err := db.Table("user_scores").
        Where("uid", gdb.ListItemValues(users, "User", "Uid")).
        ScanList(&users, , "UserScores", "User", "uid:Uid")
@@ -178,8 +199,8 @@ func (m *Model) ScanList(listPointer interface{}, attributeName string, relation
 func ListItemValues(list interface{}, key interface{}, subKey ...interface{}) (values []interface{})
 ```
 
-该方法实际是`gutil.ListItemValues`的别名。
-当给定的列表中包含`struct`/`map`数据项时，用于获取指定属性/键名的数据值，构造成数组返回。
+该方法是一个通用方法，实际是`gutil.ListItemValues`的别名。
+当给定的列表中包含`struct`/`map`数据项时，用于获取指定属性/键名的数据值，构造成数组`[]interface{}`返回。
 
 `gdb.ListItemValues(users, "User", "Uid")`用于获取`users`数组中，每一个`User`属性项中的`Uid`属性，构造成`[]interface{}`数组返回。这里以便根据`uid`构造成`SELECT...IN...`查询。
 
