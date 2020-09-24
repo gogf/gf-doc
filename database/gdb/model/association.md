@@ -123,7 +123,7 @@ err := db.Table("user_detail").Scan(&user.UserDetail, "uid", user.Uid)
 // SELECT * FROM `user_scores` WHERE `uid`=1
 err := db.Table("user_scores").Scan(&user.UserScores, "uid", user.Uid)
 ```
-查询单条模型数据比较简单，直接使用`Scan`方法即可，该方法会自动识别绑定查询结果到单个对象属性还是数据对象属性中。该方法在之前的章节中已经有介绍，因此这里不再赘述。
+查询单条模型数据比较简单，直接使用`Scan`方法即可，该方法会自动识别绑定查询结果到单个对象属性还是数组对象属性中。该方法在之前的章节中已经有介绍，因此这里不再赘述。
 
 ### 多条数据记录
 ```go
