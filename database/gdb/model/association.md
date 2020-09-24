@@ -79,7 +79,7 @@ type Entity struct {
 写入数据时涉及到简单的数据库事务即可。
 ```go
 err := db.Transaction(func(tx *gdb.TX) error {
-    r, err := tx.Table(tableUser).Save(EntityUser{
+    r, err := tx.Table("user").Save(EntityUser{
         Name: "john",
     })
     if err != nil {
@@ -89,14 +89,14 @@ err := db.Transaction(func(tx *gdb.TX) error {
     if err != nil {
         return err
     }
-    _, err = tx.Table(tableUserDetail).Save(EntityUserDetail{
+    _, err = tx.Table("user_detail").Save(EntityUserDetail{
         Uid:     int(uid),
         Address: "Beijing DongZhiMen #66",
     })
     if err != nil {
         return err
     }
-    _, err = tx.Table(tableUserScores).Save(g.Slice{
+    _, err = tx.Table("user_scores").Save(g.Slice{
         EntityUserScores{Uid: int(uid), Score: 100, Course: "math"},
         EntityUserScores{Uid: int(uid), Score: 99, Course: "physics"},
     })
