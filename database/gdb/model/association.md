@@ -109,19 +109,19 @@ err := db.Transaction(func(tx *gdb.TX) error {
 ### 单条数据记录
 ```go
 // 定义用户列表
-var user *Entity
+var user Entity
 // 查询用户基础数据
 // SELECT * FROM `user` WHERE `name`='john'
-err := db.Table("user").Scan(&user, "name", "john")
+err := db.Table("user").Scan(&user.User, "name", "john")
 if err != nil {
     return err
 }
 // 查询用户详情数据
 // SELECT * FROM `user_detail` WHERE `uid`=1
-err := db.Table("user_detail").Scan(&user.UserDetail, "uid", user.Uid)
+err := db.Table("user_detail").Scan(&user.UserDetail, "uid", user.User.Uid)
 // 查询用户学分数据
 // SELECT * FROM `user_scores` WHERE `uid`=1
-err := db.Table("user_scores").Scan(&user.UserScores, "uid", user.Uid)
+err := db.Table("user_scores").Scan(&user.UserScores, "uid", user.User.Uid)
 ```
 查询单条模型数据比较简单，直接使用`Scan`方法即可，该方法会自动识别绑定查询结果到单个对象属性还是数组对象属性中。该方法在之前的章节中已经有介绍，因此这里不再赘述。
 
