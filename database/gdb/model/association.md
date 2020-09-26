@@ -136,12 +136,12 @@ err := db.Table("user").ScanList(&users, "User")
 // SELECT * FROM `user_detail` WHERE `uid` IN(1,2)
 err := db.Table("user_detail").
        Where("uid", gdb.ListItemValues(users, "User", "Uid")).
-       ScanList(&users, , "UserDetail", "User", "uid:Uid")
+       ScanList(&users, "UserDetail", "User", "uid:Uid")
 // 查询用户学分数据
 // SELECT * FROM `user_scores` WHERE `uid` IN(1,2)
 err := db.Table("user_scores").
        Where("uid", gdb.ListItemValues(users, "User", "Uid")).
-       ScanList(&users, , "UserScores", "User", "uid:Uid")
+       ScanList(&users, "UserScores", "User", "uid:Uid")
 ```
 是不是比较简单。这其中涉及到两个比较重要的方法：
 #### 1. `ScanList`
