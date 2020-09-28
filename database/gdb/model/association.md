@@ -143,6 +143,7 @@ err := db.Table("user_scores").
        Where("uid", gdb.ListItemValues(users, "User", "Uid")).
        ScanList(&users, "UserScores", "User", "uid:Uid")
 ```
+
 是不是比较简单。这其中涉及到两个比较重要的方法：
 #### 1. `ScanList`
 方法定义：
@@ -184,6 +185,8 @@ func (m *Model) ScanList(listPointer interface{}, attributeName string, relation
 
     表示将查询到用户详情数组数据绑定到`users`列表中每一项的`UserScores`属性上，并且和另一个`User`对象属性通过`uid:Uid`的`字段:属性`关联，内部将会根据这一关联关系自动进行数据绑定。由于`UserScores`是一个数组类型`[]*EntityUserScores`，因此该方法内部可以自动识别到`User`到`UserScores`其实是`1:N`的关系，自动完成数据绑定。
 
+需要提醒的是，如果关联数据中对应的关联属性数据不存在，那么该属性不会被初始化并将保持`nil`。
+
 #### 2. `ListItemValues`
 方法定义：
 ```go
@@ -199,6 +202,8 @@ func (m *Model) ScanList(listPointer interface{}, attributeName string, relation
 // Note that the sub-map/sub-struct makes sense only if the optional parameter <subKey> is given.
 func ListItemValues(list interface{}, key interface{}, subKey ...interface{}) (values []interface{})
 ```
+
+> 也可以使用`ListItemValuesUnique`方法，用于过滤重复的返回值，保证返回的列表数据中不带有重复值。
 
 该方法是一个通用方法，实际是`gutil.ListItemValues`的别名。
 当给定的列表中包含`struct`/`map`数据项时，用于获取指定属性/键名的数据值，构造成数组`[]interface{}`返回。
