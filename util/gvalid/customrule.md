@@ -14,17 +14,20 @@ func RegisterRule(rule string, f RuleFunc) error
 校验方法定义：
 ```go
 // RuleFunc is the custom function for data validation.
+// The parameter <rule> specifies the validation rule string, like "required", "between:1,100", etc.
 // The parameter <value> specifies the value for this rule to validate.
 // The parameter <message> specifies the custom error message or configured i18n message for this rule.
 // The parameter <params> specifies all the parameters that needs. You can ignore parameter <params> if
 // you do not really need it in your custom validation rule.
-type RuleFunc func(value interface{}, message string, params map[string]interface{}) error
+type RuleFunc func(rule string, value interface{}, message string, params map[string]interface{}) error
 ```
 简要说明：
 1. 您需要按照`RuleFunc`类型的方法定义，实现一个您需要的校验方法，随后使用`RegisterRule`注册到`gvalid`模块中全局管理。该注册逻辑往往是在程序初始化时执行。该方法在对数据进行校验时将会被自动调用，方法返回`nil`表示校验通过，否则应当返回一个非空的`error`类型值。
-1. 其中，`value`参数表示被校验的数据值，注意类型是一个`interface{}`，因此您可以传递任意类型的参数，并在校验方法内部按照程序使用约定自行进行转换（往往使用`gconv`模块实现转换）。
-1. 其中，`message`参数表示在校验失败后返回的校验错误提示信息，往往在`struct`定义时使用`gvalid tag`来通过标签定义。
-1. 其中，`params`参数表示校验时传递的所有参数，例如校验的是一个`map`或者`struct`时，往往在联合校验时有用。
+1. 参数说明：
+    - `rule`参数表示当前的校验规则，包含规则的参数，例如：`required`, `between:1,100`, `length:6`等等。
+    - `value`参数表示被校验的数据值，注意类型是一个`interface{}`，因此您可以传递任意类型的参数，并在校验方法内部按照程序使用约定自行进行转换（往往使用`gconv`模块实现转换）。
+    - `message`参数表示在校验失败后返回的校验错误提示信息，往往在`struct`定义时使用`gvalid tag`来通过标签定义。
+    - `params`参数表示校验时传递的所有参数，例如校验的是一个`map`或者`struct`时，往往在联合校验时有用。
 
 > 注意事项：从性能考虑，自定义规则的注册方法不支持并发调用，您需要在程序启动时进行注册（例如在`boot`包中处理），无法在运行时动态注册，否则会产生并发安全问题。
 
@@ -33,8 +36,8 @@ type RuleFunc func(value interface{}, message string, params map[string]interfac
 在用户注册时，我们往往需要校验当前用户提交的名称/账号是否唯一，因此我们可以注册一个`unique-name`的全局规则来实现。
 
 ```go
-rule := "unique-name"
-gvalid.RegisterRule(rule, func(value interface{}, message string, params map[string]interface{}) error {
+registerRule := "unique-name"
+gvalid.RegisterRule(registerRule, func(rule string, value interface{}, message string, params map[string]interface{}) error {
 	var (
 		id   = gconv.Int(params["Id"])
 		name = gconv.String(value)
@@ -68,8 +71,8 @@ fmt.Println(err.Error())
 
 默认情况下，`gvalid`的内置规则是不支持`map`、`slice`类型的`required`规则校验，因此我们可以自行实现，然后覆盖原有规则。其他的规则也可以按照此逻辑自定义覆盖。
 ```go
-rule := "required"
-gvalid.RegisterRule(rule, func(value interface{}, message string, params map[string]interface{}) error {
+registerRule := "required"
+gvalid.RegisterRule(registerRule, func(rule string, value interface{}, message string, params map[string]interface{}) error {
     reflectValue := reflect.ValueOf(value)
     if reflectValue.Kind() == reflect.Ptr {
         reflectValue = reflectValue.Elem()
