@@ -44,7 +44,7 @@ type Pool
 
 ## 使用示例
 
-**1、使用默认的goroutine池，限制10个工作goroutine执行1000个任务**
+**1、使用默认的goroutine池，限制100个工作goroutine执行1000个任务**
 
 https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool1.go
 
