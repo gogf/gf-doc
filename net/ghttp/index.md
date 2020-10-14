@@ -2,7 +2,9 @@
 
 [TOC]
 
-`GF`框架提供了非常强大的`WebServer`，由`ghttp`模块实现。实现了丰富完善的相关组件，例如：Router、Cookie、Session、路由注册、配置管理、模板引擎、缓存控制等等，支持热重启、热更新、多域名、多端口、多实例、HTTPS、Rewrite等等特性。
+> `GF`是一款基础设施建设比较完善的模块化框架，`WebServer`模块是其中比较核心的模块，我们这里将`Web`服务开发作为框架入门的选择，便于大家更容易学习和理解。
+
+`GF`框架提供了非常强大的`WebServer`，由`ghttp`模块实现。实现了丰富完善的相关组件，例如：`Router`、`Cookie`、`Session`、路由注册、配置管理、模板引擎、缓存控制等等，支持热重启、热更新、多域名、多端口、多实例、`HTTPS`、`Rewrite`、`PProf`等等特性。
 
 接口文档地址： 
 
@@ -92,7 +94,7 @@ http://127.0.0.1:8300/
 
 # 多实例支持
 
-`Server`支持多实例运行，下面我们来看一个例子：
+`Server`支持同一进程多实例运行，下面我们来看一个例子：
 
 ```go
 package main
@@ -173,7 +175,13 @@ import (
 func main() {
     s := g.Server()
     s.BindHandler("/{class}-{course}/:name/*act", func(r *ghttp.Request) {
-        r.Response.Writef("%v %v %v %v", r.Get("class"), r.Get("course"), r.Get("name"), r.Get("act"))
+        r.Response.Writef(
+            "%v %v %v %v", 
+            r.Get("class"), 
+            r.Get("course"), 
+            r.Get("name"), 
+            r.Get("act"),
+        )
     })
     s.SetPort(8199)
     s.Run()
