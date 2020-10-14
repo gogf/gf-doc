@@ -2,7 +2,7 @@
 
 # 工具方法
 
-https://godoc.org/github.com/gogf/gf/os/gtime
+https://pkg.go.dev/github.com/gogf/gf/os/gtime
 
 
 方法比较简单，比较常用的是以下几个方法;

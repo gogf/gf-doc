@@ -11,7 +11,7 @@ import "github.com/gogf/gf/errors/gerror"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/errors/gerror
+https://pkg.go.dev/github.com/gogf/gf/errors/gerror
 
 ```go
 func New(value interface{}) error

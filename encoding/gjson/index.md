@@ -15,7 +15,7 @@ import "github.com/gogf/gf/encoding/gjson"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/encoding/gjson
+https://pkg.go.dev/github.com/gogf/gf/encoding/gjson
 
 
 

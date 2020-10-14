@@ -5,7 +5,7 @@
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/net/ghttp#RouterGroup
+https://pkg.go.dev/github.com/gogf/gf/net/ghttp#RouterGroup
 
 ```go
 // 创建分组路由

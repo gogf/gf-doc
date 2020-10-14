@@ -6,7 +6,7 @@ import "github.com/gogf/gf/net/gudp"
 ```
 
 **接口文档**：
-https://godoc.org/github.com/gogf/gf/net/gudp
+https://pkg.go.dev/github.com/gogf/gf/net/gudp
 ```go
 type Server
     func GetServer(name ...interface{}) *Server

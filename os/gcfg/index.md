@@ -10,7 +10,7 @@ import "github.com/gogf/gf/os/gcfg"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/os/gcfg
+https://pkg.go.dev/github.com/gogf/gf/os/gcfg
 
 
 # 配置管理

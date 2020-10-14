@@ -9,7 +9,7 @@
 
 请查看API文档：
 
-https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
+https://pkg.go.dev/github.com/gogf/gf/net/ghttp#ServerConfig
 
 ## 配置属性
 日志相关配置属性如下：

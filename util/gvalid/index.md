@@ -7,7 +7,7 @@ import "github.com/gogf/gf/util/gvalid"
 ```
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/util/gvalid
+https://pkg.go.dev/github.com/gogf/gf/util/gvalid
 
 # 校验规则
 

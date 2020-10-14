@@ -23,7 +23,7 @@
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/os/gview
+https://pkg.go.dev/github.com/gogf/gf/os/gview
 
 
 简要说明：

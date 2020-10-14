@@ -9,7 +9,7 @@ import "github.com/gogf/gf/os/gcron"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/os/gcron
+https://pkg.go.dev/github.com/gogf/gf/os/gcron
 
 
 简要说明：

@@ -14,7 +14,7 @@ import "github.com/gogf/gf/i18n/gi18n"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/i18n/gi18n
+https://pkg.go.dev/github.com/gogf/gf/i18n/gi18n
 
 ```go
 func SetDelimiters(left, right string)

@@ -10,6 +10,6 @@ import "github.com/gogf/gf/os/gfile"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/os/gfile
+https://pkg.go.dev/github.com/gogf/gf/os/gfile
 
 

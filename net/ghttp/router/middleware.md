@@ -42,7 +42,7 @@ func Middleware(r *ghttp.Request) {
 
 ## 中间件注册
 
-中间件的注册有多种方式，参考接口文档： https://godoc.org/github.com/gogf/gf/net/ghttp
+中间件的注册有多种方式，参考接口文档： https://pkg.go.dev/github.com/gogf/gf/net/ghttp
 
 ### 全局中间件
 

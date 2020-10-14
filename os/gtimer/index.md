@@ -27,7 +27,7 @@ import "github.com/gogf/gf/os/gtimer"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/os/gtimer
+https://pkg.go.dev/github.com/gogf/gf/os/gtimer
 
 简要说明：
 1. `New`方法用于创建自定义的任务定时器对象:

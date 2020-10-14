@@ -15,7 +15,7 @@ import "github.com/gogf/gf/container/glist"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/container/glist
+https://pkg.go.dev/github.com/gogf/gf/container/glist
 
 ## 性能测试
 

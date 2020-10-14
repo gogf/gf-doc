@@ -2,7 +2,7 @@
 
 # 单数据校验 - `Check`
 
-接口文档：https://godoc.org/github.com/gogf/gf/util/gvalid
+接口文档：https://pkg.go.dev/github.com/gogf/gf/util/gvalid
 ```go
 func Check(value interface{}, rules string, msgs interface{}, params ...interface{}) *Error
 ```

@@ -18,7 +18,7 @@ type Result   []Record               // 返回数据表记录列表
 # `Record`记录处理
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/database/gdb
+https://pkg.go.dev/github.com/gogf/gf/database/gdb
 
 `gdb`为数据表记录操作提供了极高的灵活性和简便性，除了支持以`map`的形式访问/操作数据表记录以外，也支持将数据表记录转换为`struct`进行处理。我们以下使用一个简单的示例来演示该特性。
 
@@ -99,7 +99,7 @@ Nick-Name  Nick_Name      match
 `Result/Record`数据类型根据数据结果集操作的需要，往往需要根据记录中**特定的字段**作为键名进行数据检索，因此它包含多个用于转换`Map/List`的方法，同时也包含了常用数据结构`JSON/XML`的转换方法。
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/database/gdb
+https://pkg.go.dev/github.com/gogf/gf/database/gdb
 
 由于方法比较简单，这里便不再举例说明。需要注意的是两个方法`Record.Map`及`Result.List`，这两个方法也是使用比较频繁的方法，用以将`ORM`查询结果信息转换为可做展示的数据类型。由于结果集字段值底层为`[]byte`类型，虽然使用了新的`Value`类型做了封装，并且也提供了数十种常见的类型转换方法(具体请阅读【[gvar通用动态变量](container/gvar/index.md)】章节)，但是大多数时候需要直接将结果`Result`或者`Record`直接作为`json`或者`xml`数据结构返回，就需要做转换才行。
 

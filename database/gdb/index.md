@@ -10,7 +10,7 @@
 **注意：为提高数据库操作安全性，在`ORM`操作中不建议直接将参数拼接成`SQL`字符串执行，建议尽量使用预处理的方式（充分使用`?`占位符）来传递SQL参数。`gdb`的底层实现中均采用的是预处理的方式处理开发者传递的参数，以充分保证数据库操作安全性。**
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/database/gdb
+https://pkg.go.dev/github.com/gogf/gf/database/gdb
 
 # 数据结构
 

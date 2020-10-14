@@ -9,4 +9,4 @@ import "github.com/gogf/gf/encoding/gcompress"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/encoding/gcompress
+https://pkg.go.dev/github.com/gogf/gf/encoding/gcompress

@@ -3,7 +3,7 @@
 
 # 数据格式转换
 
-数据格式转换有很多方法，具体请查看接口文档：https://godoc.org/github.com/gogf/gf/encoding/gjson
+数据格式转换有很多方法，具体请查看接口文档：https://pkg.go.dev/github.com/gogf/gf/encoding/gjson
 
 这里需要注意的是，有一些`Must*`转换方法，这些方法保证必须转换为指定的数据格式，否则直接`panic`。
 

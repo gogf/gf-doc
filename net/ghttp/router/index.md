@@ -4,7 +4,7 @@
 `WebServer`提供服务需要回调函数/方法/对象/控制器的支持，`ghttp`包支持多种路由注册模式，为开发者提供非常强大和灵活的接口功能。路由注册是整个`WebServer`s最核心的部分，也是`gf`框架中最精心设计的一个模块。
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/net/ghttp
+https://pkg.go.dev/github.com/gogf/gf/net/ghttp
 
 # g与ghttp包
 

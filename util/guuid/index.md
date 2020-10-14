@@ -9,6 +9,6 @@ import "github.com/gogf/guuid"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/guuid
+https://pkg.go.dev/github.com/gogf/guuid
 
 

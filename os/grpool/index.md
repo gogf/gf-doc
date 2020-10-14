@@ -21,7 +21,7 @@ import "github.com/gogf/gf/os/grpool"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/os/grpool
+https://pkg.go.dev/github.com/gogf/gf/os/grpool
 
 ```go
 func Add(f func()) error

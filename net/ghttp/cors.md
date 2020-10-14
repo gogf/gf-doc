@@ -5,7 +5,7 @@
 允许接口跨域往往是需要结合[中间件](net/ghttp/router/middleware.md)一起使用，来统一设置某些路由规则下的接口可以跨域访问。同时，针对允许`WebSocket`的跨域请求访问，也是通过该方式来实现。
 
 相关方法：
-https://godoc.org/github.com/gogf/gf/net/ghttp#Response
+https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Response
 
 
 ## `CORS`对象

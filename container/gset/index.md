@@ -16,7 +16,7 @@ import "github.com/gogf/gf/container/gset"
 ```
 
 **接口文档**：
-https://godoc.org/github.com/gogf/gf/container/gset
+https://pkg.go.dev/github.com/gogf/gf/container/gset
 
 
 

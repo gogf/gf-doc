@@ -8,6 +8,6 @@ import "github.com/gogf/gf/crypto/gsha1"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/crypto/gsha1
+https://pkg.go.dev/github.com/gogf/gf/crypto/gsha1
 
 

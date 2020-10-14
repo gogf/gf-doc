@@ -1,7 +1,7 @@
 <div align=center>
 <img src="/logo.png" width="100"/>
 
-[![Go Doc](https://godoc.org/github.com/gogf/gf?status.svg)](https://godoc.org/github.com/gogf/gf) 
+[![Go Doc](https://pkg.go.dev/github.com/gogf/gf?status.svg)](https://pkg.go.dev/github.com/gogf/gf) 
 [![Build Status](https://travis-ci.org/gogf/gf.svg?branch=master)](https://travis-ci.org/gogf/gf) 
 [![Go Report](https://goreportcard.com/badge/github.com/gogf/gf)](https://goreportcard.com/report/github.com/gogf/gf)
 [![Code Coverage](https://codecov.io/gh/gogf/gf/branch/master/graph/badge.svg)](https://codecov.io/gh/gogf/gf/branch/master)

@@ -8,7 +8,7 @@ import "github.com/gogf/gf/encoding/ghash"
 ```
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/encoding/ghash
+https://pkg.go.dev/github.com/gogf/gf/encoding/ghash
 
 
 性能基准测试：

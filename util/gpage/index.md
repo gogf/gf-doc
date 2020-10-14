@@ -10,7 +10,7 @@ import "github.com/gogf/gf/util/gpage"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/util/gpage
+https://pkg.go.dev/github.com/gogf/gf/util/gpage
 
 **分页对象**：
 ```go

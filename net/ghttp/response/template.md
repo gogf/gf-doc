@@ -2,7 +2,7 @@
 
 # 模板解析
 
-接口文档：https://godoc.org/github.com/gogf/gf/net/ghttp#Response
+接口文档：https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Response
 
 `Response`支持模板文件/内容解析输出，或者模板文件/内容解析返回。与直接使用模板对象解析模板功能不同的是，`Response`的解析支持一些请求相关的内置变量。模板解析包含以下方法：
 

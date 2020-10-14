@@ -7,7 +7,7 @@
 
 ## `DB`接口
 
-接口文档：https://godoc.org/github.com/gogf/gf/database/gdb#DB
+接口文档：https://pkg.go.dev/github.com/gogf/gf/database/gdb#DB
 
 `DB`接口是数据库操作的核心接口，也是我们通过`ORM`操作数据库时最常用的接口，这里主要对接口的几个重要方法做说明：
 1. `Open`方法用于创建特定的数据库连接对象，返回的是标准库的`*sql.DB`通用数据库对象。
@@ -17,7 +17,7 @@
 
 ## `Driver`接口
 
-接口文档：https://godoc.org/github.com/gogf/gf/database/gdb#Driver
+接口文档：https://pkg.go.dev/github.com/gogf/gf/database/gdb#Driver
 
 开发者自定义的驱动需要实现以下接口：
 ```go

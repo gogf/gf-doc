@@ -10,7 +10,7 @@ import "github.com/gogf/gf/encoding/gbinary"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/encoding/gbinary
+https://pkg.go.dev/github.com/gogf/gf/encoding/gbinary
 
 用于二进制数据结构转换处理的接口文档如下：
 ```go

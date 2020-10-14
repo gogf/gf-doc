@@ -9,7 +9,7 @@ import "github.com/gogf/gf/debug/gdebug"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/debug/gdebug
+https://pkg.go.dev/github.com/gogf/gf/debug/gdebug
 
 ```go
 func Caller(skip ...int) (function string, path string, line int)

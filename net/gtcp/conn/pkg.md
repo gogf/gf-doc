@@ -20,7 +20,7 @@
 
 ## 操作方法
 
-https://godoc.org/github.com/gogf/gf/net/gtcp
+https://pkg.go.dev/github.com/gogf/gf/net/gtcp
 
 ```go
 type Conn

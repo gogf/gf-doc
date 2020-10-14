@@ -172,7 +172,7 @@ type ConfigNode  struct {
 这是原生调用`gdb`模块来配置管理数据库。如果开发者想要自行控制数据库配置管理可以参考以下方法。若无需要可忽略该章节。
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/database/gdb
+https://pkg.go.dev/github.com/gogf/gf/database/gdb
 
 ```go
 // 添加一个数据库节点到指定的分组中

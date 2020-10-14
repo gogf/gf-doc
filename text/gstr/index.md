@@ -9,6 +9,6 @@ import "github.com/gogf/gf/text/gstr"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/text/gstr
+https://pkg.go.dev/github.com/gogf/gf/text/gstr
 
 
