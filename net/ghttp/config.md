@@ -7,12 +7,12 @@
 # 配置对象
 
 配置对象定义：
-https://pkg.go.dev/github.com/gogf/gf/net/ghttp#ServerConfig
+https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 
 
 
 ## 配置管理方法
-方法列表： https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Server
+方法列表： https://godoc.org/github.com/gogf/gf/net/ghttp#Server
 
 简要说明：
 1. 可以通过`SetConfig`及`SetConfigWithMap`来设置。
@@ -60,7 +60,7 @@ s.Run()
 
 当使用`g.Server(单例名称)`获取`Server`单例对象时，将会自动通过默认的配置管理对象获取对应的`Server`配置。默认情况下会读取`server.单例名称`配置项，当该配置项不存在时，将会读取`server`配置项。
 
-支持的配置文件配置项请参考`Server`配置管理对象属性：https://pkg.go.dev/github.com/gogf/gf/net/ghttp#ServerConfig
+支持的配置文件配置项请参考`Server`配置管理对象属性：https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 
 ## 示例1，默认配置项
 ```toml

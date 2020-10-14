@@ -15,7 +15,7 @@ import "github.com/gogf/gf/crypto/gdes"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/crypto/gdes
+https://godoc.org/github.com/gogf/gf/crypto/gdes
 
 
 

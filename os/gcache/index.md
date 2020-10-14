@@ -10,7 +10,7 @@ import "github.com/gogf/gf/os/gcache"
 
 **接口文档**： 
 
-https://pkg.go.dev/github.com/gogf/gf/os/gcache
+https://godoc.org/github.com/gogf/gf/os/gcache
 
 简要介绍：
 

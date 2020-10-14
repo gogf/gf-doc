@@ -17,7 +17,7 @@ import "github.com/gogf/gkafka"
 ```
 
 ## 接口文档
-[godoc.org/github.com/gogf/gkafka](https://pkg.go.dev/github.com/gogf/gkafka)
+[godoc.org/github.com/gogf/gkafka](https://godoc.org/github.com/gogf/gkafka)
 
 
 ## 使用示例

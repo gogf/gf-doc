@@ -7,12 +7,12 @@
 # 配置对象
 
 配置对象定义：
-https://pkg.go.dev/github.com/gogf/gf/os/gview#Config
+https://godoc.org/github.com/gogf/gf/os/gview#Config
 
 
 
 ## 配置方法
-方法列表： https://pkg.go.dev/github.com/gogf/gf/os/gview
+方法列表： https://godoc.org/github.com/gogf/gf/os/gview
 
 简要说明：
 1. 可以通过`SetConfig`及`SetConfigWithMap`来设置。

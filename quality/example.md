@@ -80,7 +80,7 @@ func ExampleSet_IsSubsetOf() {
 
 ### `Godoc`代码示例
 
-https://pkg.go.dev/github.com/gogf/gf/container/gset#Set.IsSubsetOf
+https://godoc.org/github.com/gogf/gf/container/gset#Set.IsSubsetOf
 
 <img src="/images/WX20200610-233845@2x.png" width="500"/>
 

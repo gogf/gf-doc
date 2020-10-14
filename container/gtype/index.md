@@ -21,7 +21,7 @@ import "github.com/gogf/gf/container/gtype"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/container/gtype
+https://godoc.org/github.com/gogf/gf/container/gtype
 
 
 ## 性能测试

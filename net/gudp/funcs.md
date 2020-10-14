@@ -7,7 +7,7 @@ import "github.com/gogf/gf/net/gudp"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/net/gudp
+https://godoc.org/github.com/gogf/gf/net/gudp
 
 ```go
 func Checksum(buffer []byte) uint32

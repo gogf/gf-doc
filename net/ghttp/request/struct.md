@@ -5,7 +5,7 @@
 对象转换在请求处理中非常常见。我们推荐将输入和输出定义为`struct`结构体对象，以便于结构化的参数输入输出维护。`GF`框架支持非常便捷的对象转换，支持将客户端提交的参数如`Query`参数、表单参数、内容参数、`JSON/XML`等参数非常便捷地转换为指定的`struct`结构体，并且支持提交参数与`struct`属性的映射关系维护。
 
 对象转换方法使用`Request`对象的`Parse`方法或者`Get*Struct`方法，具体方法定义请参考API文档：
-https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Request
+https://godoc.org/github.com/gogf/gf/net/ghttp#Request
 
 # 参数映射
 

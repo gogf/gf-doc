@@ -9,7 +9,7 @@
 
 # 配置文件（推荐）
 
-日志组件支持配置文件，当使用`g.Log(单例名称)`获取`Logger`单例对象时，将会自动通过默认的配置管理对象获取对应的`Logger`配置。默认情况下会读取`logger.单例名称`配置项，当该配置项不存在时，将会读取默认的`logger`配置项。配置项请参考配置对象结构定义：https://pkg.go.dev/github.com/gogf/gf/os/glog#Config
+日志组件支持配置文件，当使用`g.Log(单例名称)`获取`Logger`单例对象时，将会自动通过默认的配置管理对象获取对应的`Logger`配置。默认情况下会读取`logger.单例名称`配置项，当该配置项不存在时，将会读取默认的`logger`配置项。配置项请参考配置对象结构定义：https://godoc.org/github.com/gogf/gf/os/glog#Config
 
 ## 示例1，默认配置项
 ```toml
@@ -53,7 +53,7 @@ l4 := g.Log()
 
 配置方法用于模块化使用`glog`时由开发者自己进行配置管理。
 
-方法列表： https://pkg.go.dev/github.com/gogf/gf/os/glog
+方法列表： https://godoc.org/github.com/gogf/gf/os/glog
 
 简要说明：
 1. 可以通过`SetConfig`及`SetConfigWithMap`来设置。

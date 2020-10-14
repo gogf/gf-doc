@@ -10,5 +10,5 @@ import "github.com/gogf/gf/encoding/ghtml"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/encoding/ghtml
+https://godoc.org/github.com/gogf/gf/encoding/ghtml
 

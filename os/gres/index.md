@@ -20,7 +20,7 @@ import "github.com/gogf/gf/os/gres"
 
 **接口文档**： 
 
-https://pkg.go.dev/github.com/gogf/gf/os/gres
+https://godoc.org/github.com/gogf/gf/os/gres
 
 
 

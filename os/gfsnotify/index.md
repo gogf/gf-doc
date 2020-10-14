@@ -9,7 +9,7 @@ import "github.com/gogf/gf/os/gfsnotify"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/os/gfsnotify
+https://godoc.org/github.com/gogf/gf/os/gfsnotify
 
 
 推荐使用`gfsnotify`模块提供的```Add```和```Remove```模块方法，用于添加监控和取消监控。推荐原因见随后章节说明。

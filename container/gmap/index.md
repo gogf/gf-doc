@@ -25,7 +25,7 @@ import "github.com/gogf/gf/container/gmap"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/container/gmap
+https://godoc.org/github.com/gogf/gf/container/gmap
 
 
 ## 并发安全

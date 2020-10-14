@@ -11,7 +11,7 @@ import "github.com/gogf/gf/database/gredis"
 ```
 
 **接口文档**：
-https://pkg.go.dev/github.com/gogf/gf/database/gredis
+https://godoc.org/github.com/gogf/gf/database/gredis
 
 
 `gredis`使用了连接池来进行`Redis`连接管理，通过`Config`配置对象或者`Set*`方法可以对连接池的属性进行管理，通过`Stats`方法可以获取连接池的统计信息。

@@ -5,7 +5,7 @@
 # 事务操作
 
 `gdb`事务操作比较简单，可以通过两种操作方式来实现。一种是开启事务之后会返回一个事务操作对象`*gdb.TX`，随后可以使用该对象进行如之前章节介绍的方法操作和链式操作；一种是以闭包的形式来操作事务，所有的事务逻辑在闭包中实现。接口文档：
-https://pkg.go.dev/github.com/gogf/gf/database/gdb#TX
+https://godoc.org/github.com/gogf/gf/database/gdb#TX
 
 
 
@@ -21,7 +21,7 @@ if tx, err := db.Begin(); err == nil {
     fmt.Println("开启事务操作")
 }
 ```
-事务操作对象可以执行所有db对象的方法，具体请参考[API文档](https://pkg.go.dev/github.com/gogf/gf/database/gdb)。
+事务操作对象可以执行所有db对象的方法，具体请参考[API文档](https://godoc.org/github.com/gogf/gf/database/gdb)。
 
 ### 2. 事务回滚操作
 ```go

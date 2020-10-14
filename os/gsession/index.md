@@ -5,7 +5,7 @@
 
 # 接口文档
 
-https://pkg.go.dev/github.com/gogf/gf/os/gsession
+https://godoc.org/github.com/gogf/gf/os/gsession
 
 任何时候都可以通过`ghttp.Request`获取`Session`对象，因为`Cookie`和`Session`都是和请求会话相关，因此都属于`Request`的成员对象，并对外公开。`GF`框架的`Session`默认过期时间是`24小时`。
 

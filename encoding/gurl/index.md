@@ -10,5 +10,5 @@ import "github.com/gogf/gf/encoding/gurl"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/encoding/gurl
+https://godoc.org/github.com/gogf/gf/encoding/gurl
 

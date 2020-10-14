@@ -1,6 +1,6 @@
 # 缓冲控制
 
-接口文档：https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Response
+接口文档：https://godoc.org/github.com/gogf/gf/net/ghttp#Response
 
 `Response`输出采用了缓冲控制，输出的内容预先写入到一块缓冲区，等待服务方法执行完毕后才真正地输出到客户端。该特性在提高执行效率同时为输出内容的控制提供了更高的灵活性。
 

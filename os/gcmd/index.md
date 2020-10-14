@@ -15,7 +15,7 @@ import "github.com/gogf/gf/os/gcmd"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/os/gcmd
+https://godoc.org/github.com/gogf/gf/os/gcmd
 
 ```go
 func GetArg(index int, def ...string) string

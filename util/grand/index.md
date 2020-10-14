@@ -11,7 +11,7 @@ import "github.com/gogf/gf/util/grand"
 
 接口文档： 
 
-https://pkg.go.dev/github.com/gogf/gf/util/grand
+https://godoc.org/github.com/gogf/gf/util/grand
 
 常用方法：
 ```go

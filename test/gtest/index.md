@@ -10,7 +10,7 @@ import "github.com/gogf/gf/test/gtest"
 
 **接口文档**： 
 
-https://pkg.go.dev/github.com/gogf/gf/test/gtest
+https://godoc.org/github.com/gogf/gf/test/gtest
 
 ```go
 func C(t *testing.T, f func(t *T))

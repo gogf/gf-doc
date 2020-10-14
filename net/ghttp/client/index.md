@@ -5,7 +5,7 @@
 `GF`框架提供了强大便捷易用的HTTP客户端，由`ghttp`模块实现。
 
 方法列表：
-https://pkg.go.dev/github.com/gogf/gf/net/ghttp
+https://godoc.org/github.com/gogf/gf/net/ghttp
 
 常用方法：
 ```go

@@ -6,7 +6,7 @@
 其中比较重要且复杂的是校验规则参数的定义。
 
 校验方法：
-https://pkg.go.dev/github.com/gogf/gf/util/gvalid
+https://godoc.org/github.com/gogf/gf/util/gvalid
 ```go
 // 自定义错误信息: map[键名] => 字符串|map[规则]错误信息
 type CustomMsg = map[string]interface{}

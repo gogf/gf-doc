@@ -5,7 +5,7 @@
 
 # 方法操作
 
-接口文档：https://pkg.go.dev/github.com/gogf/gf/os/gres
+接口文档：https://godoc.org/github.com/gogf/gf/os/gres
 
 主要方法介绍：
 

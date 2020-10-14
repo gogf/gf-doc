@@ -17,7 +17,7 @@ import "github.com/gogf/gf/os/gmlock"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/os/gmlock
+https://godoc.org/github.com/gogf/gf/os/gmlock
 
 ```go
 func Lock(key string)

@@ -1,6 +1,6 @@
 # `JSON/XML`输出
 
-接口文档：https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Response
+接口文档：https://godoc.org/github.com/gogf/gf/net/ghttp#Response
 
 `Response`提供了对`JSON/XML`数据格式输出的原生支持，通过以下方法实现：
 1. `WriteJson*` 方法用于返回`JSON`数据格式，参数为任意类型，可以为`string`、`map`、`struct`等等。返回的`Content-Type`为`application/json`。

@@ -6,7 +6,7 @@
 `gdb`方法操作相对链式操作更偏底层操作一些，在项目开发中常用链式操作，因为链式操作更简单灵活，但链式操作执行不了太过于复杂的SQL操作，可以交给方法操作来处理。
 
 接口文档：
-https://pkg.go.dev/github.com/gogf/gf/database/gdb
+https://godoc.org/github.com/gogf/gf/database/gdb
 
 ```go
 // SQL操作方法，返回原生的标准库sql对象

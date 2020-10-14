@@ -5,7 +5,7 @@
 `gjson`模块除了最基础支持的`JSON`数据格式创建`Json`对象，还支持常用的数据格式内容创建`Json`对象。支持的数据格式为：`JSON`, `XML`, `INI`, `YAML`, `TOML`。此外，也支持直接通过`struct`对象创建`Json`对象。
 
 
-对象创建常用`New`和`Load*`方法，更多的方法请查看接口文档：https://pkg.go.dev/github.com/gogf/gf/encoding/gjson
+对象创建常用`New`和`Load*`方法，更多的方法请查看接口文档：https://godoc.org/github.com/gogf/gf/encoding/gjson
 
 
 ## 使用`New`方法创建

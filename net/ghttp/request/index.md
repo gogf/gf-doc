@@ -4,7 +4,7 @@
 请求输入依靠 `ghttp.Request` 对象实现，`ghttp.Request`继承了底层的`http.Request`对象。`ghttp.Request`包含一个与当前请求对应的返回输出对象`Response`，用于数据的返回处理。
 
 相关方法：
-https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Request
+https://godoc.org/github.com/gogf/gf/net/ghttp#Request
 
 
 

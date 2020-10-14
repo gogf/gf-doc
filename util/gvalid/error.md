@@ -1,7 +1,7 @@
 # 校验结果
 
 校验结果为一个`Error`对象指针。当数据规则校验成功时，校验方法返回的结果为`nil`。当数据规则校验失败时，返回的该对象是一个结构化的层级map，包含多个字段及其规则及对应错误信息，以便于接收端能够准确定位错误规则。相关数据结构及方法如下：
-https://pkg.go.dev/github.com/gogf/gf/util/gvalid
+https://godoc.org/github.com/gogf/gf/util/gvalid
 ```go
 // 校验错误信息: map[键名]map[规则名]错误信息
 type ErrorMap map[string]map[string]string

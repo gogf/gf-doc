@@ -8,7 +8,7 @@
 
 接口文档地址： 
 
-https://pkg.go.dev/github.com/gogf/gf/net/ghttp
+https://godoc.org/github.com/gogf/gf/net/ghttp
 
 # 哈喽世界
 

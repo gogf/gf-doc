@@ -16,7 +16,7 @@ import "github.com/gogf/gf/container/gpool"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/container/gpool
+https://godoc.org/github.com/gogf/gf/container/gpool
 
 需要注意两点：
 1. `New`方法的过期时间类型为`time.Duration`；

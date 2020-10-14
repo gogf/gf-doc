@@ -13,7 +13,7 @@ import "github.com/gogf/gf/util/guid"
 
 **接口文档**： 
 
-https://pkg.go.dev/github.com/gogf/gf/util/guid
+https://godoc.org/github.com/gogf/gf/util/guid
 
 
 ## 基本介绍

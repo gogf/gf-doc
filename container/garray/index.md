@@ -15,7 +15,7 @@ import "github.com/gogf/gf/container/garray"
 
 **接口文档**：
 
-https://pkg.go.dev/github.com/gogf/gf/container/garray
+https://godoc.org/github.com/gogf/gf/container/garray
 
 简要说明：
 1. `garray`模块下的对象及方法较多，建议仔细看看接口文档。

@@ -4,7 +4,7 @@
 
 # 接口文档
 
-https://pkg.go.dev/github.com/gogf/gf/net/ghttp#Cookie
+https://godoc.org/github.com/gogf/gf/net/ghttp#Cookie
 
 ```go
 type Cookie
