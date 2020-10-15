@@ -1,6 +1,8 @@
 
 # `Redis`缓存
 
+> `v1.14.0`新版本特性。
+
 `GF`框架通过社区模块提供了`gcache`的`Redis`缓存适配实现，仓库地址：https://github.com/gogf/gcache-adapter 使用方式请参考仓库`README`介绍。
 
 

@@ -19,6 +19,8 @@ func (m *Model) Cache(duration time.Duration, name ... string) *Model
 
 # 缓存适配（`Redis`缓存）
 
+> `v1.14.0`新版本特性。
+
 默认情况下`ORM`的`*gcache.Cache`缓存对象提供的是单进程内存缓存，虽然性能非常高效，但是只能在单进程内使用。如果服务如果采用多节点部署，多节点之间的缓存可能会产生数据不一致的情况，因此大多数场景下我们都是通过`Redis`服务器来实现对数据库查询数据的缓存。`*gcache.Cache`对象采用了适配器设计模式，可以轻松实现从单进程内存缓存切换为分布式的`Redis`缓存，具体请参考：
 1. `gcache`模块【[缓存适配](os/gcache/adapter.md)】章节。
 1. `Redis`适配器: https://github.com/gogf/gcache-adapter 使用方式请参考仓库`README`介绍。
