@@ -25,6 +25,8 @@ func (m *Model) Cache(duration time.Duration, name ... string) *Model
 1. `gcache`模块【[缓存适配](os/gcache/adapter.md)】章节。
 1. `Redis`适配器: https://github.com/gogf/gcache-adapter 使用方式请参考仓库`README`介绍。
 
+> `Redis`的缓存是基于查询`SQL`作为键名，查询结果作为键值。通过`Cache`链式方法对缓存的写入和清除都非常便捷。
+
 # 使用示例
 
 ## 数据表结构
