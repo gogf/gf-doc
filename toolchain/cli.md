@@ -98,7 +98,7 @@ Built Detail:
     system   = "linux,windows,darwin"
     output   = ""
     path     = "./bin"
-	extra    = "-ldflags \"-s -w\""
+	extra    = ""
     # 自定义编译时内置变量
     [compiler.VarMap]
         author = "john"

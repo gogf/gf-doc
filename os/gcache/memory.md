@@ -169,7 +169,7 @@ func main() {
     n, _ := c.Size()
     fmt.Println(n)
     keys, _ := c.Keys()
-    fmt.Println(keys
+    fmt.Println(keys)
 
     // 读取键名1，保证该键名是优先保留
     v, _ := c.Get(1)
