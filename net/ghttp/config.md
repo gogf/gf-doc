@@ -17,7 +17,7 @@ https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 简要说明：
 1. 可以通过`SetConfig`及`SetConfigWithMap`来设置。
 1. 也可以使用`Server`对象的`Set*/Enable*`方法进行特定配置的设置。
-1. 主要注意的是，配置项在`Server`执行`Start`之后便不能再修改，以便产生并发安全问题。
+1. 主要注意的是，配置项在`Server`执行`Start`之后便不能再修改，防止产生并发安全问题。
 
 ## `SetConfigWithMap`方法
 
