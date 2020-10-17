@@ -106,39 +106,29 @@ import (
 	"github.com/gogf/gf/errors/gerror"
 )
 
-func Error1() error {
-	return errors.New("test1")
-}
-
-func Error2() error {
-	return gerror.New("test2")
-}
-
 func main() {
-	err1 := Error1()
-	err2 := Error2()
-	fmt.Printf("%s, %-s, %+s\n", err1, err1, err1)
-	fmt.Printf("%v, %-v, %+v\n", err1, err1, err1)
-	fmt.Printf("%s, %-s, %+s\n", err2, err2, err2)
-	fmt.Printf("%v, %-v, %+v\n", err2, err2, err2)
+	var err error
+	err = errors.New("sql error")
+	err = gerror.Wrap(err, "adding failed")
+	err = gerror.Wrap(err, "api calling failed")
+	fmt.Printf(" %%s: %s\n", err)
+	fmt.Printf("%%-s: %-s\n", err)
+	fmt.Println("%+s: ")
+	fmt.Printf("%+s\n", err)
 }
 ```
 执行后，终端输出为：
 ```html
-test1, test1, test1
-test1, test1, test1
-test2, test2, 1.	test2
-    1). main.Error2
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror1.go:15
-    2). main.main
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror1.go:20
-
-test2, test2, test2
-1. test2
-    1). main.Error2
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror1.go:15
-    2). main.main
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror1.go:20
+ %s: api calling failed: adding failed: sql error
+%-s: api calling failed
+%+s: 
+1. api calling failed
+   1).  main.main
+        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/.example/other/test.go:14
+2. adding failed
+   1).  main.main
+        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/.example/other/test.go:13
+3. sql error
 ```
 
 ## `Stack`方法
@@ -161,31 +151,23 @@ import (
 	"github.com/gogf/gf/errors/gerror"
 )
 
-func Error1() error {
-	return errors.New("test1")
-}
-
-func Error2() error {
-	return gerror.New("test2")
-}
-
 func main() {
-	err1 := Error1()
-	err2 := Error2()
-	fmt.Println("err1:", gerror.Stack(err1))
-	fmt.Println("err2:", gerror.Stack(err2))
+	var err error
+	err = errors.New("sql error")
+	err = gerror.Wrap(err, "adding failed")
+	err = gerror.Wrap(err, "api calling failed")
+	fmt.Println(gerror.Stack(err))
 }
 ```
 执行后，终端输出：
 ```html
-err1:
- 
-err2:
- 1. test2
-    1). main.Error2
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror3.go:15
-    2). main.main
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror3.go:20
+1. api calling failed
+   1).  main.main
+        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/.example/other/test.go:14
+2. adding failed
+   1).  main.main
+        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/.example/other/test.go:13
+3. sql error
 ```
 
 ## `Cause`方法
@@ -239,33 +221,28 @@ package main
 
 import (
 	"errors"
-
-	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/frame/g"
 
 	"github.com/gogf/gf/errors/gerror"
 )
 
-func Error1() error {
-	return errors.New("test1")
-}
-
-func Error2() error {
-	return gerror.New("test2")
-}
-
 func main() {
-	glog.Println(Error1())
-	glog.Println(Error2())
+	var err error
+	err = errors.New("sql error")
+	err = gerror.Wrap(err, "adding failed")
+	err = gerror.Wrap(err, "api calling failed")
+	g.Log().Print(err)
 }
 ```
 执行后，终端输出：
 ```html
-2019-07-13 15:01:31.131 test1
-2019-07-13 15:01:31.131 test2
-1. test2
-    1). main.Error2
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror5.go:16
-    2). main.main
-        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/errors/gerror/gerror5.go:21
+2020-10-17 15:22:26.793 api calling failed: adding failed: sql error
+1. api calling failed
+   1).  main.main
+        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/.example/other/test.go:14
+2. adding failed
+   1).  main.main
+        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/.example/other/test.go:13
+3. sql error
 ```
 
