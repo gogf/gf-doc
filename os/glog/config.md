@@ -11,6 +11,23 @@
 
 日志组件支持配置文件，当使用`g.Log(单例名称)`获取`Logger`单例对象时，将会自动通过默认的配置管理对象获取对应的`Logger`配置。默认情况下会读取`logger.单例名称`配置项，当该配置项不存在时，将会读取默认的`logger`配置项。配置项请参考配置对象结构定义：https://godoc.org/github.com/gogf/gf/os/glog#Config
 
+完整配置文件配置项及说明如下，其中配置项名称不区分大小写：
+```toml
+[logger]
+	Path                 = "/var/log/"   # 日志文件路径。默认为空，表示关闭，仅输出到终端
+	File                 = "{Y-m-d}.log" # 日志文件格式。默认为"{Y-m-d}.log"
+	Prefix               = ""            # 日志内容输出前缀。默认为空
+	CtxKeys              = []            # Context上下文变量名称，自动打印Context的变量到日志中。默认为空
+	HeaderPrint          = true          # 是否打印日志的头信息。默认true
+	StdoutPrint          = true          # 日志是否同时输出到终端。默认true
+	RotateSize           = 0             # 按照日志文件大小对文件进行滚动切分。默认为0，表示关闭滚动切分特性
+	RotateExpire         = 0             # 按照日志文件时间间隔对文件滚动切分。默认为0，表示关闭滚动切分特性
+	RotateBackupLimit    = 0             # 按照切分的文件数量清理切分文件，当滚动切分特性开启时有效。默认为0，表示不备份，切分则删除
+	RotateBackupExpire   = 0             # 按照切分的文件有效期清理切分文件，当滚动切分特性开启时有效。默认为0，表示不备份，切分则删除
+	RotateBackupCompress = 0             # 滚动切分文件的压缩比（0-9）。默认为0，表示不压缩
+	RotateCheckInterval  = "1h"          # 滚动切分的时间检测间隔，一般不需要设置。默认为1小时
+```
+
 ## 示例1，默认配置项
 ```toml
 [logger]
