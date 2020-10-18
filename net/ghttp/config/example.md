@@ -8,23 +8,23 @@ https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 ```toml
 [server]
     # 基本配置
-    Address        = ":80"            # 本地监听地址。默认":80"
-	HTTPSAddr      = ":443"           # TLS/HTTPS配置，同时需要配置证书和密钥。默认关闭
-	HTTPSCertPath  = ""               # TLS/HTTPS证书文件本地路径，建议使用绝对路径。默认关闭
-	HTTPSKeyPath   = ""               # TLS/HTTPS密钥文件本地路径，建议使用绝对路径。默认关闭
-	ReadTimeout    = "60s"            # 请求读取超时时间，一般不需要配置。默认为60秒
-	WriteTimeout   = "0"              # 数据返回写入超时时间，一般不需要配置。默认不超时（0）
-	IdleTimeout    = "60s"            # 仅当Keep-Alive开启时有效，请求闲置时间。默认为60秒
-	MaxHeaderBytes = "10240"          # 请求Header大小限制（Byte）。默认为10KB
-	KeepAlive      = true             # 是否开启Keep-Alive功能。默认true
-	ServerAgent    = "GF HTTP Server" # 服务端Agent信息。默认为"GF HTTP Server"   
+    Address             = ":80"                        # 本地监听地址。默认":80"
+	HTTPSAddr           = ":443"                       # TLS/HTTPS配置，同时需要配置证书和密钥。默认关闭
+	HTTPSCertPath       = ""                           # TLS/HTTPS证书文件本地路径，建议使用绝对路径。默认关闭
+	HTTPSKeyPath        = ""                           # TLS/HTTPS密钥文件本地路径，建议使用绝对路径。默认关闭
+	ReadTimeout         = "60s"                        # 请求读取超时时间，一般不需要配置。默认为60秒
+	WriteTimeout        = "0"                          # 数据返回写入超时时间，一般不需要配置。默认不超时（0）
+	IdleTimeout         = "60s"                        # 仅当Keep-Alive开启时有效，请求闲置时间。默认为60秒
+	MaxHeaderBytes      = "10240"                      # 请求Header大小限制（Byte）。默认为10KB
+	KeepAlive           = true                         # 是否开启Keep-Alive功能。默认true
+	ServerAgent         = "GF HTTP Server"             # 服务端Agent信息。默认为"GF HTTP Server"   
     
     # 静态服务配置
-	IndexFiles        = ["index.html","index.htm"]   # 自动首页静态文件检索。默认为["index.html", "index.htm"]
-	IndexFolder       = false                        # 当访问静态文件目录时，是否展示目录下的文件列表。默认关闭，那么请求将返回403
-    ServerRoot        = "/var/www"                   # 静态文件服务的目录根路径，配置时自动开启静态文件服务。默认关闭
-	SearchPaths       = ["/home/www","/var/lib/www"] # 提供静态文件服务时额外的文件搜索路径，当根路径找不到时则按照顺序在搜索目录查找。默认关闭
-	FileServerEnabled = false                        # 静态文件服务总开关。默认false
+	IndexFiles          = ["index.html","index.htm"]   # 自动首页静态文件检索。默认为["index.html", "index.htm"]
+	IndexFolder         = false                        # 当访问静态文件目录时，是否展示目录下的文件列表。默认关闭，那么请求将返回403
+    ServerRoot          = "/var/www"                   # 静态文件服务的目录根路径，配置时自动开启静态文件服务。默认关闭
+	SearchPaths         = ["/home/www","/var/lib/www"] # 提供静态文件服务时额外的文件搜索路径，当根路径找不到时则按照顺序在搜索目录查找。默认关闭
+	FileServerEnabled   = false                        # 静态文件服务总开关。默认false
 	
     # Cookie配置
 	CookieMaxAge        = "365s"             # Cookie有效期。默认为365天
