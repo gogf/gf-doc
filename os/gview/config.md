@@ -16,7 +16,7 @@ https://godoc.org/github.com/gogf/gf/os/gview#Config
 
 完整配置文件配置项及说明如下，其中配置项名称不区分大小写：
 ```toml
-[logger]
+[viewer]
     Paths       = ["/var/www/template"] # 模板文件搜索目录路径，建议使用绝对路径。默认为当前程序工作路径
     DefaultFile = "index.html"          # 默认解析的模板引擎文件。默认为"index.html"
     Delimiters  =  ["${", "}"]          # 模板引擎变量分隔符号。默认为 ["{{", "}}"]
