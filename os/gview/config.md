@@ -10,38 +10,21 @@
 https://godoc.org/github.com/gogf/gf/os/gview#Config
 
 
-
-## 配置方法
-方法列表： https://godoc.org/github.com/gogf/gf/os/gview
-
-简要说明：
-1. 可以通过`SetConfig`及`SetConfigWithMap`来设置。
-1. 也可以使用`View`对象的`Set*`方法进行特定配置的设置。
-1. 主要注意的是，配置项在`View`对象执行视图解析之前设置，避免并发安全问题。
-
-## `SetConfigWithMap`方法
-
-我们可以使用`SetConfigWithMap`方法通过`Key-Value`键值对来设置/修改`View`的特定配置，其余的配置使用默认配置即可。其中`Key`的名称即是`Config`这个`struct`中的属性名称，并且不区分大小写，单词间也支持使用`-`/`_`/`空格`符号连接，具体可参考【[gconv.Struct转换规则](util/gconv/struct.md)】章节。
-
-简单示例：
-```go
-view := gview.New()
-view.SetConfigWithMap(g.Map{
-    "Paths":       []string{"template"},
-    "DefaultFile": "index.html",
-    "Delimiters":  []string{"${", "}"},
-    "Data": g.Map{
-        "name":    "gf",
-        "version": "1.10.0",
-    },
-})
-result, err := view.ParseContent("hello ${.name}, version: ${.version}")
-```
-其中`DefaultFile`表示默认解析的模板文件，键名也可以使用`defaultFile`, `default-File`, `default_file`, `default file`，其他配置属性以此类推。
-
 # 配置文件
 
 视图组件支持配置文件，当使用`g.View(单例名称)`获取`View`单例对象时，将会自动通过默认的配置管理对象获取对应的`View`配置。默认情况下会读取`viewer.单例名称`配置项，当该配置项不存在时，将会读取`viewer`配置项。
+
+完整配置文件配置项及说明如下，其中配置项名称不区分大小写：
+```toml
+[logger]
+    Paths       = ["/var/www/template"] # 模板文件搜索目录路径，建议使用绝对路径。默认为当前程序工作路径
+    DefaultFile = "index.html"          # 默认解析的模板引擎文件。默认为"index.html"
+    Delimiters  =  ["${", "}"]          # 模板引擎变量分隔符号。默认为 ["{{", "}}"]
+    AutoEncode  = false                 # 是否默认对变量内容进行XSS编码。默认为false
+    [viewer.Data]                       # 自定义的全局Key-Value键值对，将在模板解析中可被直接使用到
+        Key1 = "Value1"
+        Key2 = "Value2"
+```
 
 ## 示例1，默认配置项
 ```toml
@@ -84,4 +67,34 @@ v3 := g.View("none")
 v4 := g.View()
 ```
 
+
+
+
+## 配置方法
+方法列表： https://godoc.org/github.com/gogf/gf/os/gview
+
+简要说明：
+1. 可以通过`SetConfig`及`SetConfigWithMap`来设置。
+1. 也可以使用`View`对象的`Set*`方法进行特定配置的设置。
+1. 主要注意的是，配置项在`View`对象执行视图解析之前设置，避免并发安全问题。
+
+## `SetConfigWithMap`方法
+
+我们可以使用`SetConfigWithMap`方法通过`Key-Value`键值对来设置/修改`View`的特定配置，其余的配置使用默认配置即可。其中`Key`的名称即是`Config`这个`struct`中的属性名称，并且不区分大小写，单词间也支持使用`-`/`_`/`空格`符号连接，具体可参考【[gconv.Struct转换规则](util/gconv/struct.md)】章节。
+
+简单示例：
+```go
+view := gview.New()
+view.SetConfigWithMap(g.Map{
+    "Paths":       []string{"template"},
+    "DefaultFile": "index.html",
+    "Delimiters":  []string{"${", "}"},
+    "Data": g.Map{
+        "name":    "gf",
+        "version": "1.10.0",
+    },
+})
+result, err := view.ParseContent("hello ${.name}, version: ${.version}")
+```
+其中`DefaultFile`表示默认解析的模板文件，键名也可以使用`defaultFile`, `default-File`, `default_file`, `default file`，其他配置属性以此类推。
 
