@@ -16,6 +16,22 @@
 
 `ORM`空跑可以通过`DryRun`配置项来启用，默认关闭。当`ORM`的空跑特性开启时，读取操作将会提交，而写入、更新、删除操作将会被忽略。该特性往往结合调试模式和日志输出一起使用，用于校验当前的程序（特别是脚本）执行的`SQL`是否符合预期。
 
+# 字段映射
+
+在对数据进行写入/更新时，如果给定的参数为`map/struct`时，给定参数的键名/属性名称将会自动按照忽略大小写及特殊字符的方式与数据表的字段进行自动识别映射。例如：
+```html
+Map键名     字段名称     是否匹配
+nickname   nickname      match
+NICKNAME   nickname      match
+Nick-Name  nickname      match
+nick_name  nickname      match
+nick name  nickname      match
+NickName   nickname      match
+Nick-name  nickname      match
+nick_name  nickname      match
+nick name  nickname      match
+```
+
 # 类型识别
 
 使用`gdb`查询数据时，返回的数据类型将会被自动识别映射到`Go变量类型`。例如: 当字段类型为`int(xx)`时，查询到的字段值类型将会被识别会`int`类型；当字段类型为`varchar(xxx)`/`char(xxx)`/`text`等类型时将会被自动识别为`string`类型。以下以`mysql`类型为例，介绍数据库类型与Go变量类型的自动识别映射关系: https://github.com/gogf/gf/blob/master/database/gdb/gdb_structure.go
@@ -72,7 +88,7 @@ if r, err := db.Table("goods").FindOne(1); err == nil {
     fmt.Printf("goods title: %s\n",   r["title"].String())
     fmt.Printf("goods proce: %.2f\n", r["price"].Float32())
 } else {
-    glog.Error(err)
+    g.Log().Error(err)
 }
 ```
 执行后，输出结果为：
