@@ -10,15 +10,48 @@
 
 ### 数据校验
 
-针对于注册逻辑，参数结构体以及校验规则的绑定并没有放置于控制器中，而是由`service`负责维护。因为该方法的参数复杂且复用性比较强，不仅仅在控制中需要校验，其他`service`调用时也需要执行该校验逻辑。
+针对于注册逻辑，请求参数输入结构体以及简单的校验规则的放置于控制器`api`中管理，随后往往通过`gconv.Struct`方法转换为`service`对应方法需要的输入参数。`api`的输入参数与`service`的输入参数数据结构往往比较类似，但不是完全一致，但两者相同属性的数据类型往往需要一一对应，以方便转换。
 
+`api`层请求输入参数：
 ```go
-// 注册输入参数
-type SignUpInput struct {
+// 注册请求参数，用于前后端交互参数格式约定
+type SignUpRequest struct {
 	Passport  string `v:"required|length:6,16#账号不能为空|账号长度应当在:min到:max之间"`
 	Password  string `v:"required|length:6,16#请输入确认密码|密码长度应当在:min到:max之间"`
 	Password2 string `v:"required|length:6,16|same:Password#密码不能为空|密码长度应当在:min到:max之间|两次密码输入不相等"`
 	Nickname  string
+}
+```
+
+`service`层对应方法输入参数：
+```go
+// 注册输入参数
+type SignUpParam struct {
+	Passport  string
+	Password  string
+	Password2 string
+	Nickname  string
+}
+```
+
+`api`请求参数到`service`输入参数的转换：
+```go
+func (c *C) SignUp(r *ghttp.Request) {
+	var (
+		data        *SignUpRequest
+		signUpParam *user.SignUpParam
+	)
+	if err := r.Parse(&data); err != nil {
+		response.JsonExit(r, 1, err.Error())
+	}
+	if err := gconv.Struct(data, &signUpParam); err != nil {
+		response.JsonExit(r, 1, err.Error())
+	}
+	if err := user.SignUp(signUpParam); err != nil {
+		response.JsonExit(r, 1, err.Error())
+	} else {
+		response.JsonExit(r, 0, "ok")
+	}
 }
 ```
 
@@ -26,106 +59,4 @@ type SignUpInput struct {
 
 ## 实现代码
 
-https://github.com/gogf/gf-demos/blob/master/app/service/user/user.go
-```go
-package user
-
-import (
-	"errors"
-	"fmt"
-	"github.com/gogf/gf-demos/app/model/user"
-	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/gtime"
-	"github.com/gogf/gf/util/gconv"
-	"github.com/gogf/gf/util/gvalid"
-)
-
-const (
-	USER_SESSION_MARK = "user_info"
-)
-
-// 注册输入参数
-type SignUpInput struct {
-	Passport  string `v:"required|length:6,16#账号不能为空|账号长度应当在:min到:max之间"`
-	Password  string `v:"required|length:6,16#请输入确认密码|密码长度应当在:min到:max之间"`
-	Password2 string `v:"required|length:6,16|same:Password#密码不能为空|密码长度应当在:min到:max之间|两次密码输入不相等"`
-	Nickname  string
-}
-
-// 用户注册
-func SignUp(data *SignUpInput) error {
-	// 输入参数检查
-	if e := gvalid.CheckStruct(data, nil); e != nil {
-		return errors.New(e.String())
-	}
-	// 昵称为非必需参数，默认使用账号名称
-	if data.Nickname == "" {
-		data.Nickname = data.Passport
-	}
-	// 账号唯一性数据检查
-	if !CheckPassport(data.Passport) {
-		return errors.New(fmt.Sprintf("账号 %s 已经存在", data.Passport))
-	}
-	// 昵称唯一性数据检查
-	if !CheckNickName(data.Nickname) {
-		return errors.New(fmt.Sprintf("昵称 %s 已经存在", data.Nickname))
-	}
-	// 将输入参数赋值到数据库实体对象上
-	var entity *user.Entity
-	if err := gconv.Struct(data, &entity); err != nil {
-		return err
-	}
-	// 记录账号创建/注册时间
-	entity.CreateTime = gtime.Now()
-	if _, err := user.Save(entity); err != nil {
-		return err
-	}
-	return nil
-}
-
-// 判断用户是否已经登录
-func IsSignedIn(session *ghttp.Session) bool {
-	return session.Contains(USER_SESSION_MARK)
-}
-
-// 用户登录，成功返回用户信息，否则返回nil; passport应当会md5值字符串
-func SignIn(passport, password string, session *ghttp.Session) error {
-	one, err := user.FindOne("passport=? and password=?", passport, password)
-	if err != nil {
-		return err
-	}
-	if one == nil {
-		return errors.New("账号或密码错误")
-	}
-	return session.Set(USER_SESSION_MARK, one)
-}
-
-// 用户注销
-func SignOut(session *ghttp.Session) error {
-	return session.Remove(USER_SESSION_MARK)
-}
-
-// 检查账号是否符合规范(目前仅检查唯一性),存在返回false,否则true
-func CheckPassport(passport string) bool {
-	if i, err := user.FindCount("passport", passport); err != nil {
-		return false
-	} else {
-		return i == 0
-	}
-}
-
-// 检查昵称是否符合规范(目前仅检查唯一性),存在返回false,否则true
-func CheckNickName(nickname string) bool {
-	if i, err := user.FindCount("nickname", nickname); err != nil {
-		return false
-	} else {
-		return i == 0
-	}
-}
-
-// 获得用户信息详情
-func GetProfile(session *ghttp.Session) (u *user.Entity) {
-	_ = session.GetStruct(USER_SESSION_MARK, &u)
-	return
-}
-```
+https://github.com/gogf/gf-demos/blob/master/app/service/user
