@@ -17,6 +17,7 @@
         * [基础类库](start/library.md)
     * [服务配置](start/config.md)
     * [路由注册](start/router.md)
+    * [开始运行](start/buildrun.md)
 * [代码质量](#)
     * [基本介绍](quality/index.md)
     * [代码示例](quality/example.md)
