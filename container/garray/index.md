@@ -174,13 +174,13 @@ func main() {
 	// Iterator is alias of IteratorAsc, which iterates the array readonly in ascending order
 	//  with given callback function <f>.
 	// If <f> returns true, then it continues iterating; or false to stop.
-	array.Iterator(func(k int, v string) bool {
+	array.Iterator(func(k int, v interface{}) bool {
 		fmt.Println(k, v)
 		return true
 	})
 	// IteratorDesc iterates the array readonly in descending order with given callback function <f>.
 	// If <f> returns true, then it continues iterating; or false to stop.
-	array.IteratorDesc(func(k int, v string) bool {
+	array.IteratorDesc(func(k int, v interface{}) bool {
 		fmt.Println(k, v)
 		return true
 	})
