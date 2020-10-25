@@ -60,6 +60,20 @@ https://godoc.org/github.com/gogf/gf/i18n/gi18n
 ### 资源管理器
 `gi18n`默认支持资源管理器，也就是说，默认情况下会从`gres`配置管理器中检索`i18n`目录，或者开发者设置的`i18n`目录路径。
 
+## 对象创建
+
+大多数场景下，我们推荐使用`g.I18n`单例对象，并可自定义配置不同的单例对象，但是需要注意的是，单例对象的配置修改是全局有效的。例如：
+```go
+g.I18n().T("{#hello} {#world}")
+```
+
+其次，我们也可以模块化独立使用`gi18n`模块，通过`gi18n.New()`方法创建独立的`i18n`对象，然后开发者自行进行管理。例如：
+```go
+i18n := gi18n.New()
+i18n.T("{#hello} {#world}")
+```
+
+
 ## `T`方法
 
 `T`方法为`Translate`方法的别名，也是大多数时候我们推荐使用的方法名称。`T`方法可以给定关键字名称，也可以直接给定模板内容，将会被自动转译并返回转译后的字符串内容。
@@ -107,21 +121,21 @@ func T(content string, language ...string) string
 	)
 
 	func main() {
-		t := gi18n.New()
-		t.SetLanguage("en")
-		fmt.Println(t.Translate(`hello`))
-		fmt.Println(t.Translate(`GF says: {#hello}{#world}!`))
+		i18n := gi18n.New()
+		i18n.SetLanguage("en")
+		fmt.Println(i18n.Translate(`hello`))
+		fmt.Println(i18n.Translate(`GF says: {#hello}{#world}!`))
 
-		t.SetLanguage("ja")
-		fmt.Println(t.Translate(`hello`))
-		fmt.Println(t.Translate(`GF says: {#hello}{#world}!`))
+		i18n.SetLanguage("ja")
+		fmt.Println(i18n.Translate(`hello`))
+		fmt.Println(i18n.Translate(`GF says: {#hello}{#world}!`))
 
-		t.SetLanguage("ru")
-		fmt.Println(t.Translate(`hello`))
-		fmt.Println(t.Translate(`GF says: {#hello}{#world}!`))
+		i18n.SetLanguage("ru")
+		fmt.Println(i18n.Translate(`hello`))
+		fmt.Println(i18n.Translate(`GF says: {#hello}{#world}!`))
 
-		fmt.Println(t.Translate(`hello`, "zh-CN"))
-		fmt.Println(t.Translate(`GF says: {#hello}{#world}!`, "zh-CN"))
+		fmt.Println(i18n.Translate(`hello`, "zh-CN"))
+		fmt.Println(i18n.Translate(`GF says: {#hello}{#world}!`, "zh-CN"))
 	}
 	```
 	执行后，终端输出为：
@@ -174,12 +188,12 @@ func Tf(format string, values ...interface{}) string
 			orderAmount = 99.8
 		)
 
-		t := gi18n.New()
+		i18n := gi18n.New()
 		t.SetLanguage("en")
-		fmt.Println(t.Tf(`{#OrderPaid}`, orderId, orderAmount))
+		fmt.Println(i18n.Tf(`{#OrderPaid}`, orderId, orderAmount))
 
 		t.SetLanguage("zh-CN")
-		fmt.Println(t.Tf(`{#OrderPaid}`, orderId, orderAmount))
+		fmt.Println(i18n.Tf(`{#OrderPaid}`, orderId, orderAmount))
 	}
 	```
 	执行后，终端输出为：
