@@ -60,16 +60,17 @@ https://godoc.org/github.com/gogf/gf/i18n/gi18n
 ### 资源管理器
 `gi18n`默认支持资源管理器，也就是说，默认情况下会从`gres`配置管理器中检索`i18n`目录，或者开发者设置的`i18n`目录路径。
 
-## `T/Translate`方法
-其中`T`方法为`Translate`方法的简写，也是大多数时候我们推荐使用的方法名称。`T`方法可以给定关键字名称，也可以直接给定模板内容，将会被自动转译并返回转译后的字符串内容。
+## `T`方法
+
+`T`方法为`Translate`方法的别名，也是大多数时候我们推荐使用的方法名称。`T`方法可以给定关键字名称，也可以直接给定模板内容，将会被自动转译并返回转译后的字符串内容。
 
 此外，`T`方法可以通过第二个语言参数指定需要转译的目标语言名称，该名称需要和配置文件/路径中的名称一致，往往是标准化的国际化语言缩写名称如：`en/ja/ru/zh-CN/zh-TW`等等。否则，将会自动使用`Manager`转译对象中设置的语言进行转译。
 
 方法定义：
 ```go
-// Translate translates <content> with configured language and returns the translated content.
+// T translates <content> with configured language and returns the translated content.
 // The parameter <language> specifies custom translation language ignoring configured language.
-func Translate(content string, language ...string) string
+func T(content string, language ...string) string
 ```
 
 ### 关键字转译
@@ -135,28 +136,28 @@ func Translate(content string, language ...string) string
 	GF says: 你好世界!
 	```
 
-## `Tf/TranslateFormat`方法
+## `Tf`方法
 
-`Tf/TranslateFormat`方法支持格式化转译内容，字符串格式化语法参考标准库`fmt`包的`Sprintf`方法。
+`Tf`为`TranslateFormat`的别名，该方法支持格式化转译内容，字符串格式化语法参考标准库`fmt`包的`Sprintf`方法。
 
 方法定义：
 ```go
-// TranslateFormat translates, formats and returns the <format> with configured language
+// Tf translates, formats and returns the <format> with configured language
 // and given <values>.
-func TranslateFormat(format string, values ...interface{}) string 
+func Tf(format string, values ...interface{}) string 
 ```
 
 我们来看一个简单的示例。
 
 1. 转译文件
 	- `en.toml`
-		```toml
-		OrderPaid = "You have successfully complete order #%d payment, paid amount: ￥%0.2f."
+	```toml
+	OrderPaid = "You have successfully complete order #%d payment, paid amount: ￥%0.2f."
 		```
 	- `zh-CN.toml`
-		```toml
-		OrderPaid = "您已成功完成订单号 #%d 支付，支付金额￥%.2f。"
-		```
+	```toml
+	OrderPaid = "您已成功完成订单号 #%d 支付，支付金额￥%.2f。"
+	```
 1. 示例代码
 	```go
 	package main
@@ -190,17 +191,17 @@ func TranslateFormat(format string, values ...interface{}) string
 > 为方便演示，该示例中对支付金额的处理比较简单，在实际项目中往往需要在业务代码中对支付金额的单位按照区域做自动转换，再渲染`i18n`显示内容。
 	
 
-## `Tfl/TranslateFormatLang`方法
+## `Tfl`方法
 
-`Tfl/TranslateFormatLang`方法支持格式化转译内容，并可指定转译的语言，字符串格式化语法参考标准库`fmt`包的`Sprintf`方法。
+`Tfl`为`TranslateFormatLang`的别名，该方法支持格式化转译内容，并可指定转译的语言，字符串格式化语法参考标准库`fmt`包的`Sprintf`方法。
 
 方法定义：
 ```go
-// TranslateFormatLang translates, formats and returns the <format> with configured language
+// Tfl translates, formats and returns the <format> with configured language
 // and given <values>. The parameter <language> specifies custom translation language ignoring
 // configured language. If <language> is given empty string, it uses the default configured
 // language for the translation.
-func TranslateFormatLang(language string, format string, values ...interface{}) string
+func Tfl(language string, format string, values ...interface{}) string
 ```
 
 我们将上面的示例做些改动来演示。
@@ -209,13 +210,13 @@ func TranslateFormatLang(language string, format string, values ...interface{}) 
 
 1. 转译文件
 	- `en.toml`
-		```toml
-		OrderPaid = "You have successfully complete order #%d payment, paid amount: ￥%0.2f."
+	```toml
+	OrderPaid = "You have successfully complete order #%d payment, paid amount: ￥%0.2f."
 		```
 	- `zh-CN.toml`
-		```toml
-		OrderPaid = "您已成功完成订单号 #%d 支付，支付金额￥%.2f。"
-		```
+	```toml
+	OrderPaid = "您已成功完成订单号 #%d 支付，支付金额￥%.2f。"
+	```
 1. 示例代码
 	```go
 	package main
