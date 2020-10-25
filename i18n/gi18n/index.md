@@ -146,6 +146,8 @@ func Translate(content string, language ...string) string
 func TranslateFormat(format string, values ...interface{}) string 
 ```
 
+我们来看一个简单的示例。
+
 1. 转译文件
 	- `en.toml`
 		```toml
