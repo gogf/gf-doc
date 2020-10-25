@@ -75,6 +75,7 @@
             * [文件上传](net/ghttp/client/demo/upload.md)
             * [自定义Cookie](net/ghttp/client/demo/cookie.md)
             * [自定义Header](net/ghttp/client/demo/header.md)
+            * [代理Proxy设置](net/ghttp/client/demo/proxy.md)
             * [原始信息打印](net/ghttp/client/demo/dump.md)
     * [分页管理](#)
         * [基本介绍](util/gpage/index.md)
