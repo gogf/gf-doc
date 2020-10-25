@@ -1,11 +1,9 @@
 [TOC]
 
 
-# I18N国际化
+# `I18N`国际化
 
-`GF`框架支持I18N国际化，由`gi18n`模块实现。
-
-> 为方便开发者使用，提高开发效率，该模块已完美地集成到了`WebServer`及视图引擎组件中。
+`GF`框架支持`I18N`国际化，由`gi18n`模块实现。
 
 **使用方式**：
 ```go
@@ -16,24 +14,6 @@ import "github.com/gogf/gf/i18n/gi18n"
 
 https://godoc.org/github.com/gogf/gf/i18n/gi18n
 
-```go
-func SetDelimiters(left, right string)
-func SetLanguage(language string)
-func SetPath(path string) error
-func T(content string, language ...string) string
-func Translate(content string, language ...string) string
-
-type Manager
-    func Instance(name ...string) *Manager
-    func New(options ...Options) *Manager
-    func (m *Manager) SetDelimiters(left, right string)
-    func (m *Manager) SetLanguage(language string)
-    func (m *Manager) SetPath(path string) error
-    func (m *Manager) T(content string, language ...string) string
-    func (m *Manager) Translate(content string, language ...string) string
-type Options
-    func DefaultOptions() Options
-```
 
 ## 使用配置
 
@@ -43,9 +23,9 @@ type Options
 ### 文件目录
 默认情况下`gi18n`会自动读取当前项目根目录下的`i18n`目录，默认将该目录作为国际化转译文件存储目录。开发者也可以通过`SetPath`方法自定义`i18n`文件的存储目录路径。
 
-在`i18n`目录下可以直接给定国际化文件如：`en.toml`/`ja.toml`/`zh-CN.toml`；也可以给定国际化文件目录，如：`en/editor.toml`/`en/user.toml`、`zh-CN/editor.toml`/`zh-CN/user.toml`。
+在`i18n`目录下可以直接按照国际化名称命名的文件如：`en.toml`/`ja.toml`/`zh-CN.toml`；也可以给定国际化名称目录，目录下随意自定义配置文件，如：`en/editor.toml`/`en/user.toml`、`zh-CN/editor.toml`/`zh-CN/user.toml`。
 
-例如，以下的`i18n`目录配置以及文件格式都是支持的：
+例如，以下的`i18n`目录结构以及文件格式都是支持的：
 ```
 ├── i18n
 │   ├── en.toml
@@ -84,6 +64,13 @@ type Options
 其中`T`方法为`Translate`方法的简写，也是大多数时候我们推荐使用的方法名称。`T`方法可以给定关键字名称，也可以直接给定模板内容，将会被自动转译并返回转译后的字符串内容。
 
 此外，`T`方法可以通过第二个语言参数指定需要转译的目标语言名称，该名称需要和配置文件/路径中的名称一致，往往是标准化的国际化语言缩写名称如：`en/ja/ru/zh-CN/zh-TW`等等。否则，将会自动使用`Manager`转译对象中设置的语言进行转译。
+
+方法定义：
+```go
+// Translate translates <content> with configured language and returns the translated content.
+// The parameter <language> specifies custom translation language ignoring configured language.
+func Translate(content string, language ...string) string
+```
 
 ### 关键字转译
 
@@ -147,6 +134,112 @@ type Options
 	你好
 	GF says: 你好世界!
 	```
+
+## `Tf/TranslateFormat`方法
+
+`Tf/TranslateFormat`方法支持格式化转译内容，字符串格式化语法参考标准库`fmt`包的`Sprintf`方法。
+
+方法定义：
+```go
+// TranslateFormat translates, formats and returns the <format> with configured language
+// and given <values>.
+func TranslateFormat(format string, values ...interface{}) string 
+```
+
+1. 转译文件
+	- `en.toml`
+		```toml
+		OrderPaid = "You have successfully complete order #%d payment, paid amount: ￥%0.2f."
+		```
+	- `zh-CN.toml`
+		```toml
+		OrderPaid = "您已成功完成订单号 #%d 支付，支付金额￥%.2f。"
+		```
+1. 示例代码
+	```go
+	package main
+
+	import (
+		"fmt"
+
+		"github.com/gogf/gf/i18n/gi18n"
+	)
+
+	func main() {
+		var (
+			orderId     = 865271654
+			orderAmount = 99.8
+		)
+
+		t := gi18n.New()
+		t.SetLanguage("en")
+		fmt.Println(t.Tf(`{#OrderPaid}`, orderId, orderAmount))
+
+		t.SetLanguage("zh-CN")
+		fmt.Println(t.Tf(`{#OrderPaid}`, orderId, orderAmount))
+	}
+	```
+	执行后，终端输出为：
+	```html
+	You have successfully complete order #865271654 payment, paid amount: ￥99.80.
+	您已成功完成订单号 #865271654 支付，支付金额￥99.80。
+	```
+
+> 为方便演示，该示例中对支付金额的处理比较简单，在实际项目中往往需要在业务代码中对支付金额的单位按照区域做自动转换，再渲染`i18n`显示内容。
+	
+
+## `Tfl/TranslateFormatLang`方法
+
+`Tfl/TranslateFormatLang`方法支持格式化转译内容，并可指定转译的语言，字符串格式化语法参考标准库`fmt`包的`Sprintf`方法。
+
+方法定义：
+```go
+// TranslateFormatLang translates, formats and returns the <format> with configured language
+// and given <values>. The parameter <language> specifies custom translation language ignoring
+// configured language. If <language> is given empty string, it uses the default configured
+// language for the translation.
+func TranslateFormatLang(language string, format string, values ...interface{}) string
+```
+
+我们将上面的示例做些改动来演示。
+
+
+
+1. 转译文件
+	- `en.toml`
+		```toml
+		OrderPaid = "You have successfully complete order #%d payment, paid amount: ￥%0.2f."
+		```
+	- `zh-CN.toml`
+		```toml
+		OrderPaid = "您已成功完成订单号 #%d 支付，支付金额￥%.2f。"
+		```
+1. 示例代码
+	```go
+	package main
+
+	import (
+		"fmt"
+		"github.com/gogf/gf/frame/g"
+	)
+
+	func main() {
+		var (
+			orderId     = 865271654
+			orderAmount = 99.8
+		)
+		fmt.Println(g.I18n().Tfl(`en`, `{#OrderPaid}`, orderId, orderAmount))
+		fmt.Println(g.I18n().Tfl(`zh-CN`, `{#OrderPaid}`, orderId, orderAmount))
+	}
+	```
+	执行后，终端输出为：
+	```html
+	You have successfully complete order #865271654 payment, paid amount: ￥99.80.
+	您已成功完成订单号 #865271654 支付，支付金额￥99.80。
+	```
+
+> 为方便演示，该示例中对支付金额的处理比较简单，在实际项目中往往需要在业务代码中对支付金额的单位按照区域做自动转换，再渲染`i18n`显示内容。
+	
 
 ## `I18N`与视图引擎
 
