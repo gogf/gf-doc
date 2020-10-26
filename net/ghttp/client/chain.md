@@ -13,6 +13,9 @@ func (c *Client) ContentType(contentType string) *Client
 func (c *Client) ContentJson() *Client
 func (c *Client) ContentXml() *Client
 func (c *Client) BasicAuth(user, pass string) *Client
+func (c *Client) Retry(retryCount int, retryInterval time.Duration) *Client
+func (c *Client) Proxy(proxyURL string) *Client
+func (c *Client) RedirectLimit(redirectLimit int) *Client
 ```
 
 简要说明：
@@ -22,6 +25,9 @@ func (c *Client) BasicAuth(user, pass string) *Client
 1. `Header*`方法用于设置当前请求的自定义`Header`信息。
 1. `Content*`方法用于设置当前请求的`Content-Type`信息，并且支持根据该信息自动检查提交参数并自动编码。
 1. `BasicAuth`方法用于设置`HTTP Basic Auth`校验信息。
+1. `Retry`方法用于设置请求失败时重连次数和重连间隔。
+1. `Proxy`方法用于设置http访问代理。
+1. `RedirectLimit`方法用于限制重定向跳转次数。
 
 # 使用示例
 

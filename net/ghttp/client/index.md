@@ -67,6 +67,7 @@ type Client
     func (c *Client) SetPrefix(prefix string) *Client
     func (c *Client) SetRetry(retryCount int, retryInterval int) *Client
     func (c *Client) SetTimeout(t time.Duration) *Client
+    func (c *Client) SetProxy(proxyURL string)
 ```
 
 简要说明：
