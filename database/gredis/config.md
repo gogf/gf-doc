@@ -27,7 +27,7 @@
 | maxActive       | 否 | 100  | 最大连接数量限制(0表示不限制)
 | idleTimeout     | 否 | 10 | 连接最大空闲时间(单位秒,不允许设置为0)
 | maxConnLifetime | 否 | 30 | 连接最长存活时间(单位秒,不允许设置为0)
-| tls             | 否 | false | 是否应使用TLS
+| tls             | 否 | false | 是否使用TLS认证
 | skipVerify      | 否 | false | 通过TLS连接时，是否禁用服务器名称验证
 
 使用示例：

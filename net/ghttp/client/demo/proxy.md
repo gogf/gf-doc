@@ -16,44 +16,26 @@ func (c *Client) Proxy(proxyURL string) *Client
 
 ## 普通调用示例
     
-1. 使用`SetProxy`方法
+使用`SetProxy`配置方法。
 ```go
-package main
-
-import (
-   "fmt"
-   "github.com/gogf/gf/net/ghttp"
-)
-
-func main() {
-    client := ghttp.NewClient()
-    client.SetProxy("http://127.0.0.1:1081")
-    client.SetTimeout(5 * time.Second) 
-    response, err := client.Get("https://api.ip.sb/ip")
-    if err != nil {
-        fmt.Println(err)
-    }
-    response.RawDump()
+client := g.Client()
+client.SetProxy("http://127.0.0.1:1081")
+client.SetTimeout(5 * time.Second) 
+response, err := client.Get("https://api.ip.sb/ip")
+if err != nil {
+    fmt.Println(err)
 }
+response.RawDump()
 ```
 
 
 ## 链式调用示例
-
+使用`Proxy`链式方法。
 ```go
-package main
-
-import (
-    "fmt"
-    "github.com/gogf/gf/net/ghttp"
-)
-
-func main() {
-    client := ghttp.NewClient()
-	response, err := client.Proxy("http://127.0.0.1:1081").Get("https://api.ip.sb/ip")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(response.RawResponse())
+client := g.Client()
+response, err := client.Proxy("http://127.0.0.1:1081").Get("https://api.ip.sb/ip")
+if err != nil {
+    fmt.Println(err)
 }
+fmt.Println(response.RawResponse())
 ```
