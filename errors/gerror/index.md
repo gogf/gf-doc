@@ -1,8 +1,8 @@
 [TOC]
 
-# gerror
+# 错误处理
 
-`gerror`模块提供了更丰富的错误处理功能。
+`gf`框架提供了强大、丰富的错误处理能力，由`gerror`模块实现。
 
 **使用方式**：
 ```go
@@ -13,23 +13,10 @@ import "github.com/gogf/gf/errors/gerror"
 
 https://godoc.org/github.com/gogf/gf/errors/gerror
 
-```go
-func New(value interface{}) error
-func NewText(text string) error
-func Cause(err error) error
-func Stack(err error) string
-func Wrap(err error, text string) error
-func Wrapf(err error, format string, args ...interface{}) error
-type Error
-    func (err *Error) Cause() error
-    func (err *Error) Error() string
-    func (err *Error) Format(s fmt.State, verb rune)
-    func (err *Error) Stack() string
-```
 
 ## 错误堆栈
 
-标准库的`error`错误实现比较简单，无法进行堆栈追溯，对于产生错误时的上层调用者来讲不是很友好，无法获得错误的调用链详细信息。`gerror`支持错误堆栈记录，通过`New*`/`Wrap*`均会自动记录当前错误产生时的堆栈信息。
+标准库的`error`错误实现比较简单，无法进行堆栈追溯，对于产生错误时的上层调用者来讲不是很友好，无法获得错误的调用链详细信息。`gerror`支持错误堆栈记录，通过`New/Newf`、`Wrap/Wrapf`均会自动记录当前错误产生时的堆栈信息。
 
 使用示例：
 ```go
@@ -170,6 +157,84 @@ func main() {
 3. sql error
 ```
 
+## `Current`方法
+
+```go
+func Current(err error) error
+```
+
+`Current`方法用于获取当前层级的错误信息，通过`error`接口对象返回。
+
+
+使用示例：
+```go
+package main
+
+import (
+	"errors"
+	"fmt"
+
+	"github.com/gogf/gf/errors/gerror"
+)
+
+func main() {
+	var err error
+	err = errors.New("sql error")
+	err = gerror.Wrap(err, "adding failed")
+	err = gerror.Wrap(err, "api calling failed")
+	fmt.Println(err)
+	fmt.Println(gerror.Current(err))
+}
+```
+执行后，终端输出：
+```html
+api calling failed: adding failed: sql error
+api calling failed
+```
+
+## `Next`方法
+
+```go
+func Next(err error) error
+```
+
+`Next`方法用于获取层级错误的下一级错误`error`接口对象。当下一层级不存在时，返回`nil`。
+
+
+使用示例：
+```go
+package main
+
+import (
+	"errors"
+	"fmt"
+
+	"github.com/gogf/gf/errors/gerror"
+)
+
+func main() {
+	var err error
+	err = errors.New("sql error")
+	err = gerror.Wrap(err, "adding failed")
+	err = gerror.Wrap(err, "api calling failed")
+
+	fmt.Println(err)
+
+	err = gerror.Next(err)
+	fmt.Println(err)
+
+	err = gerror.Next(err)
+	fmt.Println(err)
+}
+```
+执行后，终端输出：
+```html
+api calling failed: adding failed: sql error
+adding failed: sql error
+sql error
+```
+
+
 ## `Cause`方法
 
 ```go
@@ -209,6 +274,7 @@ func main() {
 ```html
 permission denied
 ```
+
 
 
 ## 日志输出支持
