@@ -294,7 +294,7 @@
     * [社区案例](cases/other.md)
 * [版本发布记录](#)
     * [版本发布说明](release/index.md)
-    * [v1.14 2020-10-28](release/v1.14.md)
+    * [v1.14 2020-10-27](release/v1.14.md)
     * [v1.13 2020-06-10](release/v1.13.md)
     * [v1.12 2020-03-31](release/v1.12.md)
     * [v1.11 2020-01-14](release/v1.11.md)
