@@ -6,7 +6,7 @@
     * [Go Module](prepare/gomodule.md)
     * [开发环境配置](prepare/develop.md)
     * [私有依赖管理](prepare/private.md)
-* [快速开始](#)
+* [快速开始(更新中)](#)
     * [新建项目](start/index.md)
     * [开发工作](#)
         * [包名设计](start/package.md)
