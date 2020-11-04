@@ -269,7 +269,7 @@ type User struct {
     Id     []int  `orm:"uid"`
     Gender int    `orm:"gender"`
 }
-// SELECT * FROM user WHERE uid IN(100,10000,90000) AND gender=1
+// SELECT * FROM `user` WHERE uid IN(100,10000,90000) AND gender=1
 r, err := db.Table("user").Where(User{
     "gender" : 1,
     "uid"    : []int{100, 10000, 90000},
@@ -278,28 +278,36 @@ r, err := db.Table("user").Where(User{
 
 ## 示例3, `like`查询
 ```go
-// SELECT * FROM user WHERE name like '%john%'
+// SELECT * FROM `user` WHERE name like '%john%'
 r, err := db.Table("user").Where("name like ?", "%john%").All()
-// SELECT * FROM user WHERE birthday like '1990-%'
+// SELECT * FROM `user` WHERE birthday like '1990-%'
 r, err := db.Table("user").Where("birthday like ?", "1990-%").All()
 ```
 
 ## 示例4, `sum`查询
 ```go
-// SELECT SUM(score) FROM user WHERE uid=1
+// SELECT SUM(score) FROM `user` WHERE `uid`=1
 r, err := db.Table("user").Fields("SUM(score)").Where("uid", 1).Value()
 ```
 
 ## 示例5, `count`查询
 ```go
-// SELECT COUNT(1) FROM user WHERE `birthday`='1990-10-01'
+// SELECT COUNT(1) FROM `user` WHERE `birthday`='1990-10-01'
 r, err := db.Table("user").Where("birthday", "1990-10-01").Count()
-// SELECT COUNT(uid) FROM user WHERE `birthday`='1990-10-01'
+// SELECT COUNT(uid) FROM `user` WHERE `birthday`='1990-10-01'
 r, err := db.Table("user").Fields("uid").Where("birthday", "1990-10-01").Count()
 ```
 
 ## 示例6, `distinct`查询
 ```go
-// SELECT DISTINCT uid,name FROM user 
+// SELECT DISTINCT uid,name FROM `user `
 r, err := db.Table("user").Fields("DISTINCT uid,name").All()
+// SELECT COUNT(DISTINCT uid,name) FROM `user `
+r, err := db.Table("user").Fields("DISTINCT uid,name").Count()
+```
+
+## 示例7, `between`查询
+```go
+// SELECT * FROM `user ` WHERE age between 18 and 20
+r, err := db.Table("user").Where("age between ? and ?", 18, 20).All()
 ```
