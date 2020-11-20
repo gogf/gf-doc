@@ -73,7 +73,7 @@ func main() {
 ```
 可以看到，整个代码中除了`import`中额外增加了一个 `_ "github.com/gogf/gf/os/gres/testdata/example/boot"` 的包引入外，没有其他任何设置。这也是`GF`框架的资源管理比较便捷的地方，资源管理并不需要开发阶段对代码做任何特殊设置，在应用程序部署之前打包好资源文件，并通过`import`增加资源文件的引入即可。
 
-运行后，终端输出：
+运行后（这里的运行需要使用的`gf run main.go`命令，使用`go run main.go`将不会使用打包资源），终端输出：
 ```html
 2020-03-28 21:36:19.828 75892: http server started listening on [:8888]
 
