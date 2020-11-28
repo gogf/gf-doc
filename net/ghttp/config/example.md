@@ -27,7 +27,7 @@ https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 	FileServerEnabled   = false                        # 静态文件服务总开关。默认false
 	
     # Cookie配置
-	CookieMaxAge        = "365s"             # Cookie有效期。默认为365天
+	CookieMaxAge        = "365d"             # Cookie有效期。默认为365天
 	CookiePath          = "/"                # Cookie有效路径。默认为"/"表示全站所有路径下有效
 	CookieDomain        = ""                 # Cookie有效域名。默认为当前配置Cookie时的域名
 
