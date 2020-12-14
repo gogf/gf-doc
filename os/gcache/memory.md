@@ -116,34 +116,34 @@ map[k2:v2]
 ```go
 // 根据关键字进行markdown文档搜索，返回文档path列表
 func SearchMdByKey(key string) ([]string, error) {
-    v, err := cache.GetOrSetFunc("doc_search_result_" + key, func() interface{} {
-        // 当该key的检索缓存不存在时，执行检索
-        array      := garray.NewStringArray(0, 0, false)
-        docPath    := g.Cfg().GetString("doc.path")
-        paths, err := cache.GetOrSetFunc("doc_files_recursive", func() interface{} {
-            // 当目录列表不存在时，执行检索
-            return gfile.ScanDir(docPath, "*.md", true)
-        }, 0)
-        if err != nil {
-            return nil, err
-        }
-        // 遍历markdown文件列表，执行字符串搜索
-        for _, path := range gconv.Strings(paths) {
-            content := gfcache.GetContents(path)
-            if len(content) > 0 {
-                if strings.Index(content, key) != -1 {
-                    index := gstr.Replace(path, ".md", "")
-                    index  = gstr.Replace(index, docPath, "")
-                    array.Append(index)
-                }
-            }
-        }
-        return array.Slice(), nil
-    }, 0)
-    if err != nil {
-        return nil, err
-    }
-    return gconv.Strings(v), nil
+	v, err := gcache.GetOrSetFunc("doc_search_result_"+key, func() (interface{}, error) {
+		// 当该key的检索缓存不存在时，执行检索
+		array := garray.NewStrArray()
+		docPath := g.Cfg().GetString("doc.path")
+		paths, err := gcache.GetOrSetFunc("doc_files_recursive", func() (interface{}, error) {
+			// 当目录列表不存在时，执行检索
+			return gfile.ScanDir(docPath, "*.md", true)
+		}, 0)
+		if err != nil {
+			return nil, err
+		}
+		// 遍历markdown文件列表，执行字符串搜索
+		for _, path := range gconv.Strings(paths) {
+			content := gfile.GetContents(path)
+			if len(content) > 0 {
+				if strings.Index(content, key) != -1 {
+					index := gstr.Replace(path, ".md", "")
+					index = gstr.Replace(index, docPath, "")
+					array.Append(index)
+				}
+			}
+		}
+		return array.Slice(), nil
+	}, 0)
+	if err != nil {
+		return nil, err
+	}
+	return gconv.Strings(v), nil
 }
 ```
 
