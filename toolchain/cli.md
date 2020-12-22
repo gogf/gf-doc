@@ -89,7 +89,7 @@ Built Detail:
 1. 当前编译时间。
 1. 当前`Git Commit`（如果存在）。
 
-编译配置文件选项示例（默认读取`config.toml`）：
+gf-cli version低于v1编译配置示例（默认读取`config.toml`）：
 ```toml
 [compiler]
     name     = "my-app"
@@ -103,6 +103,18 @@ Built Detail:
     [compiler.VarMap]
         author = "john"
         email  = "john@goframe.org"
+```
+gf-cli version高于v1编译配置示例（默认读取`config.toml`）：
+```toml
+[gfcli]
+    [gfcli.build]
+        name     = "gf"
+        arch     = "amd64"
+        system   = "linux"
+        mod      = "none"
+        cgo      = 0
+        path     = "./bin"
+        extra    = "-ldflags \"-s -w\""
 ```
 配置选项的释义同命令行同名选项。
 
