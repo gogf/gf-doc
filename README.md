@@ -1,2 +1,1 @@
-# GoFrame
-Please refer to: [https://goframe.org](https://goframe.org)
+# This repo. is deprecated, please refer to: https://itician.org/pages/viewpage.action?pageId=1114119
