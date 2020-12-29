@@ -166,7 +166,7 @@ func main () {
         p.Start()
         for {
             msg := gproc.Receive()
-            fmt.Printf("receive from %d, data: %s\n", msg.Pid, string(msg.Data))
+            fmt.Printf("receive from %d, data: %s\n", msg.SendPid, string(msg.Data))
         }
     }
 }
